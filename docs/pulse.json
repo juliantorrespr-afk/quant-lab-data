@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-10 20:24 UTC",
+ "generated": "2026-09-10 22:55 UTC",
  "quotes": {
   "QQQ": {
    "price": 708.69,
@@ -9,10 +9,10 @@
    "src": "tradingview"
   },
   "SPY": {
-   "price": 757.89,
-   "chg": -0.5915529905561373,
-   "sma200": 713.7079500000001,
-   "rsi": 44.14128166195576,
+   "price": 757.83,
+   "chg": -0.5994228751311564,
+   "sma200": 713.7076500000002,
+   "rsi": 44.093678916097225,
    "src": "tradingview"
   },
   "GLD": {
@@ -23,33 +23,37 @@
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 77257.0,
-   "chg": -1.32,
+   "price": 76840.5,
+   "chg": -1.85,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 4364.2,
-   "chg": -1.48,
+   "price": 4357.0,
+   "chg": -1.64,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 29156.25,
-   "chg": -1.38,
+   "price": 29104.5,
+   "chg": -1.56,
    "src": "yahoo"
   }
  },
  "signals": {
   "as_of": "2026-09-09",
-  "run": "2026-09-10T20:18+00:00",
+  "run": "2026-09-10T21:17+00:00",
   "reconcile": {
    "source": "broker",
-   "broker_equity": 99820.71,
+   "broker_equity": 99792.2,
    "qty_drift": {
-    "QQQ": 0.0,
-    "BTC": 0.0,
-    "GLD": 0.0
+    "QQQ": 16.964385,
+    "BTC": -0.002417,
+    "GLD": 16.864651
    },
-   "cash_drift": 0.0
+   "cash_drift": -18833.03,
+   "pending_orders": [
+    "GLD",
+    "QQQ"
+   ]
   },
   "QQQ": {
    "close": 716.31,
@@ -82,39 +86,44 @@
    "size_in_use": 0.5532925913490641
   },
   "book": {
-   "equity": 99820.71,
-   "marked_at_close": 100879.99,
+   "equity": 99792.2,
+   "marked_at_close": 100787.88,
    "hwm": 100000.0,
-   "dd_pct": -0.18,
+   "dd_pct": -0.21,
    "mode": "ALPACA"
   },
   "eval": {
    "attempt": 1,
    "failed": false,
    "passed": false,
-   "day_pl_pct": 0.0,
-   "total_pl_pct": -0.18,
-   "trailing_pl_pct": -0.18,
-   "daily_budget_used_pct": 0,
-   "total_budget_used_pct": 1.8,
-   "worst_daily_pct": 0.0,
-   "worst_total_pct": -0.18,
-   "days_traded": 0,
+   "day_pl_pct": -0.03,
+   "total_pl_pct": -0.21,
+   "trailing_pl_pct": -0.21,
+   "daily_budget_used_pct": 0.6,
+   "total_budget_used_pct": 2.1,
+   "worst_daily_pct": -0.03,
+   "worst_total_pct": -0.21,
+   "days_traded": 1,
    "min_days": 4,
    "target_pct": 10.0,
    "limits": {
     "daily": -5.0,
     "total": -10.0
    },
+   "exposure": 0.7,
    "breaches": []
-  }
+  },
+  "notes": [
+   "QQQ: an order is already working at the broker \u2014 skipped this run",
+   "GLD: an order is already working at the broker \u2014 skipped this run"
+  ]
  },
  "state": {
   "hwm": 100000.0,
-  "cash": 18364.8,
+  "cash": 24024.9,
   "pos": {
    "QQQ": 56.397589002,
-   "BTC": 0.251456237,
+   "BTC": 0.177981787,
    "GLD": 55.611453124
   },
   "sizes": {
@@ -123,7 +132,7 @@
    "GLD": 0.5532925913490641
   },
   "halted": false,
-  "equity": 100879.99,
+  "equity": 100787.88,
   "as_of": "2026-09-09",
   "entry": {
    "QQQ": 709.25,
@@ -134,13 +143,14 @@
    "day": "2026-09-10",
    "day_start": 99820.71,
    "attempt": 1,
-   "days_traded": 0,
-   "worst_daily": 0.0,
-   "worst_total": -0.0017928999999999862,
-   "worst_trailing": -0.0017928999999999862,
+   "days_traded": 1,
+   "worst_daily": -0.00028561207388733134,
+   "worst_total": -0.0020780000000000243,
+   "worst_trailing": -0.0020780000000000243,
    "breaches": [],
    "failed": false,
-   "passed": false
+   "passed": false,
+   "last_trade_day": "2026-09-10"
   }
  },
  "ledger": [
@@ -223,6 +233,36 @@
    "reason": "drift-correction",
    "mode": "ALPACA",
    "broker_id": "7233c427-37a4-4ccc-9641-0dfe6c8c6622"
+  },
+  {
+   "as_of": "2026-09-09",
+   "symbol": "QQQ",
+   "side": "sell",
+   "dollars": "12151.76",
+   "price": "716.31",
+   "reason": "drift-correction",
+   "mode": "ALPACA",
+   "broker_id": "f69e3e29-f0aa-47ac-8330-c31c3fbf3a8e"
+  },
+  {
+   "as_of": "2026-09-09",
+   "symbol": "BTC",
+   "side": "sell",
+   "dollars": "5562.96",
+   "price": "78288.6",
+   "reason": "drift-correction",
+   "mode": "ALPACA",
+   "broker_id": "224b133a-73f4-488b-b2a7-812fd9f0823e"
+  },
+  {
+   "as_of": "2026-09-09",
+   "symbol": "GLD",
+   "side": "sell",
+   "dollars": "6802.36",
+   "price": "403.35",
+   "reason": "drift-correction",
+   "mode": "ALPACA",
+   "broker_id": "bd680983-fb3c-4fe1-a986-6f9b7285bc8e"
   }
  ],
  "scorecard": {
@@ -243,11 +283,11 @@
   "last30": 53.3,
   "open_calls": 3
  },
- "live_equity": 99802.12,
+ "live_equity": 99711.67,
  "health": {
   "signal_age_days": 1,
   "signals_ok": true,
-  "bot_run": "2026-09-10T20:18+00:00",
+  "bot_run": "2026-09-10T21:17+00:00",
   "halted": false
  }
 }
