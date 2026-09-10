@@ -18,5 +18,17 @@
   "QQQ": 709.25,
   "BTC": 77114.32714399,
   "GLD": 397.97
+ },
+ "eval": {
+  "day": "2026-09-10",
+  "day_start": 99820.71,
+  "attempt": 1,
+  "days_traded": 0,
+  "worst_daily": 0.0,
+  "worst_total": -0.0017928999999999862,
+  "worst_trailing": -0.0017928999999999862,
+  "breaches": [],
+  "failed": false,
+  "passed": false
  }
 }
