@@ -37,6 +37,44 @@ def series(s):
 # ---------- 2. signals + sizes ----------
 sig = {"as_of": last_date, "run": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes")}
 state = json.load(open(STATE)) if os.path.exists(STATE) else {"hwm": BOOK, "cash": BOOK, "pos": {s: 0.0 for s in W}, "sizes": {}, "halted": False}
+
+# ---------- 2a. THE BROKER IS THE TRUTH ----------
+# Our ledger models a fill at yesterday's close. The broker fills at the live market price.
+# Those two numbers are never identical, and left alone the gap compounds until the bot is
+# sizing a book it does not actually own — the most dangerous failure mode in this system.
+# So in ALPACA/LIVE, before deciding anything, replace our memory with what the broker holds.
+def _alpaca_get(path):
+    base = "https://api.alpaca.markets" if os.environ.get("APCA_LIVE") == "1" else "https://paper-api.alpaca.markets"
+    req = urllib.request.Request(base + path, headers={
+        "APCA-API-KEY-ID": os.environ["APCA_API_KEY_ID"],
+        "APCA-API-SECRET-KEY": os.environ["APCA_API_SECRET_KEY"]})
+    return json.load(urllib.request.urlopen(req, timeout=30))
+
+BROKER_OK = MODE == "DRY"          # DRY needs no broker
+if MODE in ("ALPACA", "LIVE"):
+    try:
+        acct = _alpaca_get("/v2/account")
+        held = {p["symbol"]: p for p in _alpaca_get("/v2/positions")}
+        was_pos, was_cash = dict(state["pos"]), state["cash"]
+        entry = dict(state.get("entry") or {})
+        for s in W:
+            p = held.get(ALPACA_SYM[s])
+            state["pos"][s] = float(p["qty"]) if p else 0.0
+            entry[s] = float(p["avg_entry_price"]) if p else None
+        state["entry"] = entry
+        state["cash"] = float(acct["cash"])
+        state["hwm"] = max(state.get("hwm", BOOK), float(acct["equity"]))
+        sig["reconcile"] = {
+            "source": "broker", "broker_equity": round(float(acct["equity"]), 2),
+            "qty_drift": {s: round(state["pos"][s] - was_pos.get(s, 0.0), 6) for s in W},
+            "cash_drift": round(state["cash"] - was_cash, 2)}
+        BROKER_OK = True
+    except Exception as e:
+        # A broker we cannot read is a broker we must not trade against. Publish signals, send nothing.
+        sig["reconcile"] = {"source": "FAILED", "error": str(e)[:200],
+                            "note": "could not read positions — orders suppressed for this run"}
+        BROKER_OK = False
+
 d = dt.date.fromisoformat(last_date)
 monday = d.weekday() == 0
 first3 = sum(1 for i in range(1, d.day + 1) if dt.date(d.year, d.month, i).weekday() < 5) <= 3 and d.weekday() < 5
@@ -96,7 +134,7 @@ with open(LEDGER, "a", newline="") as f:
         reason = sig[s]["state"] if (sig[s]["state"] == "FLAT" or state["pos"][s] == 0) else ("rebalance" if first3 else "resize")
         if sig["book"].get("note", "").startswith("KILL"): reason = "kill-switch"
         bid = ""
-        if MODE in ("ALPACA", "LIVE"):
+        if MODE in ("ALPACA", "LIVE") and BROKER_OK:
             body = {"symbol": ALPACA_SYM[s], "notional": f"{abs(delta):.2f}", "side": side, "type": "market", "time_in_force": "gtc" if s == "BTC" else "day"}
             if side == "sell" and s != "BTC":   # equities: close by qty to avoid fractional-short rejections
                 q = min(state["pos"][s], abs(delta) / price); body = {"symbol": ALPACA_SYM[s], "qty": f"{q:.4f}", "side": "sell", "type": "market", "time_in_force": "day"}
