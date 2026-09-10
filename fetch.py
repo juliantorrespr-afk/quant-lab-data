@@ -10,10 +10,10 @@ def get(url):
 today=dt.datetime.now(dt.timezone.utc).date()
 
 # ---- first run: seed full history if data/daily.csv is missing (QQQ, GLD adjusted; BTC-USD from Yahoo as history, Kraken from here on) ----
-if not os.path.exists(OUT) or os.path.getsize(OUT) < 1000:
+if not os.path.exists(OUT) or sum(1 for _ in open(OUT)) < 5000:   # missing or not daily -> re-seed
     os.makedirs("data", exist_ok=True); seeded={}
     for tk,sym in [("QQQ","QQQ"),("GLD","GLD"),("BTC-USD","BTC")]:
-        j=get(f"https://query1.finance.yahoo.com/v8/finance/chart/{tk}?range=max&interval=1d")
+        j=get(f"https://query1.finance.yahoo.com/v8/finance/chart/{tk}?period1=1420070400&period2={int(time.time())}&interval=1d")
         r=j["chart"]["result"][0]; ts=r["timestamp"]; adj=r["indicators"]["adjclose"][0]["adjclose"]
         for t,a in zip(ts,adj):
             if a is None: continue
