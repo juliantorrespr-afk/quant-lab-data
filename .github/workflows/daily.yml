@@ -17,6 +17,7 @@ jobs:
       - name: 2. run the bot (DRY = paper ledger; ALPACA = paper broker)
         env:
           MODE: ${{ vars.MODE || 'DRY' }}
+          EXPOSURE: ${{ vars.EXPOSURE || '1.0' }}
           APCA_API_KEY_ID: ${{ secrets.APCA_API_KEY_ID }}
           APCA_API_SECRET_KEY: ${{ secrets.APCA_API_SECRET_KEY }}
         run: python bot.py
