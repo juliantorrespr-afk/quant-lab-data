@@ -12,7 +12,10 @@ and every order it sends is appended to data/ledger.csv with mode=MCP.
 Run:  python quantlab_mcp.py   (stdio)   — from the quant-lab-data repo folder.
 """
 import os, json, csv, subprocess, sys, datetime as dt, urllib.request
-from mcp.server.fastmcp import FastMCP
+try:
+    from mcp.server.fastmcp import FastMCP            # mcp 1.x
+except ModuleNotFoundError:
+    from mcp.server.mcpserver import MCPServer as FastMCP   # mcp 2.x renamed it
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(ROOT, "data")
