@@ -51,6 +51,7 @@ def _alpaca_get(path):
     return json.load(urllib.request.urlopen(req, timeout=30))
 
 BROKER_OK = MODE == "DRY"          # DRY needs no broker
+BROKER_EQUITY = None               # set only when the broker actually answered
 if MODE in ("ALPACA", "LIVE"):
     try:
         acct = _alpaca_get("/v2/account")
@@ -66,7 +67,8 @@ if MODE in ("ALPACA", "LIVE"):
             entry[s] = float(p["avg_entry_price"]) if p else None
         state["entry"] = entry
         state["cash"] = float(acct["cash"])
-        state["hwm"] = max(state.get("hwm", BOOK), float(acct["equity"]))
+        BROKER_EQUITY = float(acct["equity"])
+        state["hwm"] = max(state.get("hwm", BOOK), BROKER_EQUITY)
         sig["reconcile"] = {
             "source": "broker", "broker_equity": round(float(acct["equity"]), 2),
             "qty_drift": {s: round(state["pos"][s] - was_pos.get(s, 0.0), 6) for s in W},
@@ -97,8 +99,15 @@ for s in W:
 
 # ---------- 3. mark book, kill switch ----------
 def mtm(): return state["cash"] + sum(state["pos"][s] * sig[s]["close"] for s in W)
-equity = mtm(); state["hwm"] = max(state["hwm"], equity); dd = equity / state["hwm"] - 1
-sig["book"] = {"equity": round(equity, 2), "hwm": round(state["hwm"], 2), "dd_pct": round(dd * 100, 2), "mode": MODE}
+equity = mtm()
+# The kill switch must measure the REAL account. mtm() marks positions at yesterday's close, which
+# runs a percent or two away from the broker's live mark — enough to invent a drawdown that is not
+# there, or hide one that is. When the broker answered, its equity is the number that governs.
+mark = BROKER_EQUITY if BROKER_EQUITY is not None else equity
+state["hwm"] = max(state["hwm"], mark)
+dd = mark / state["hwm"] - 1
+sig["book"] = {"equity": round(mark, 2), "marked_at_close": round(equity, 2),
+               "hwm": round(state["hwm"], 2), "dd_pct": round(dd * 100, 2), "mode": MODE}
 if state.get("halted"):
     sig["book"]["note"] = "HALTED by kill switch — human review required"; json.dump(sig, open(SIGNALS, "w"), indent=1); print(json.dumps(sig, indent=1)); sys.exit(0)
 
