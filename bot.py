@@ -54,11 +54,14 @@ BROKER_OK = MODE == "DRY"          # DRY needs no broker
 if MODE in ("ALPACA", "LIVE"):
     try:
         acct = _alpaca_get("/v2/account")
-        held = {p["symbol"]: p for p in _alpaca_get("/v2/positions")}
+        # Alpaca reports crypto positions as "BTCUSD" but accepts orders as "BTC/USD".
+        # Normalising both sides is the difference between reading the book and believing it is empty.
+        _norm = lambda x: x.replace("/", "").upper()
+        held = {_norm(p["symbol"]): p for p in _alpaca_get("/v2/positions")}
         was_pos, was_cash = dict(state["pos"]), state["cash"]
         entry = dict(state.get("entry") or {})
         for s in W:
-            p = held.get(ALPACA_SYM[s])
+            p = held.get(_norm(ALPACA_SYM[s]))
             state["pos"][s] = float(p["qty"]) if p else 0.0
             entry[s] = float(p["avg_entry_price"]) if p else None
         state["entry"] = entry
@@ -106,7 +109,11 @@ for s in W:
     target_dollars = equity * W[s] * state["sizes"][s] if on else 0.0
     have = state["pos"][s] * sig[s]["close"]
     flip = (on and have == 0) or (not on and have > 0)
-    if flip or first3 or (monday and abs(target_dollars - have) > 0.02 * equity):
+    # DRIFT RAIL (added 2026-09-10, after a symbol-mapping bug left the book far over target in BTC):
+    # a sleeve more than 5% of the book away from its target is breakage, not a market view.
+    # Correct it on any day — otherwise a bad read compounds until the next calendar slot comes round.
+    drift = abs(target_dollars - have) > 0.05 * equity
+    if flip or first3 or drift or (monday and abs(target_dollars - have) > 0.02 * equity):
         delta = target_dollars - have
         if abs(delta) > 0.005 * equity: orders.append((s, delta))
 if dd <= KILL and not state.get("halted"):
@@ -132,6 +139,8 @@ with open(LEDGER, "a", newline="") as f:
     for s, delta in orders:
         side = "buy" if delta > 0 else "sell"; price = sig[s]["close"]
         reason = sig[s]["state"] if (sig[s]["state"] == "FLAT" or state["pos"][s] == 0) else ("rebalance" if first3 else "resize")
+        _tgt = equity * W[s] * state["sizes"][s] if sig[s]["state"] != "FLAT" else 0.0
+        if abs(_tgt - state["pos"][s] * price) > 0.05 * equity: reason = "drift-correction"
         if sig["book"].get("note", "").startswith("KILL"): reason = "kill-switch"
         bid = ""
         if MODE in ("ALPACA", "LIVE") and BROKER_OK:
