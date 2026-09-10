@@ -1,9 +1,9 @@
 {
  "as_of": "2026-09-09",
- "run": "2026-09-10T20:18+00:00",
+ "run": "2026-09-10T20:27+00:00",
  "reconcile": {
   "source": "broker",
-  "broker_equity": 99820.71,
+  "broker_equity": 99792.28,
   "qty_drift": {
    "QQQ": 0.0,
    "BTC": 0.0,
@@ -42,30 +42,31 @@
   "size_in_use": 0.5532925913490641
  },
  "book": {
-  "equity": 99820.71,
+  "equity": 99792.28,
   "marked_at_close": 100879.99,
   "hwm": 100000.0,
-  "dd_pct": -0.18,
+  "dd_pct": -0.21,
   "mode": "ALPACA"
  },
  "eval": {
   "attempt": 1,
   "failed": false,
   "passed": false,
-  "day_pl_pct": 0.0,
-  "total_pl_pct": -0.18,
-  "trailing_pl_pct": -0.18,
-  "daily_budget_used_pct": 0,
-  "total_budget_used_pct": 1.8,
-  "worst_daily_pct": 0.0,
-  "worst_total_pct": -0.18,
-  "days_traded": 0,
+  "day_pl_pct": -0.03,
+  "total_pl_pct": -0.21,
+  "trailing_pl_pct": -0.21,
+  "daily_budget_used_pct": 0.6,
+  "total_budget_used_pct": 2.1,
+  "worst_daily_pct": -0.03,
+  "worst_total_pct": -0.21,
+  "days_traded": 1,
   "min_days": 4,
   "target_pct": 10.0,
   "limits": {
    "daily": -5.0,
    "total": -10.0
   },
+  "exposure": 0.7,
   "breaches": []
  }
 }

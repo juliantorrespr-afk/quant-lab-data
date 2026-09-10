@@ -7,3 +7,6 @@ as_of,symbol,side,dollars,price,reason,mode,broker_id
 2026-09-09,GLD,buy,22131.7,403.35,HELD,ALPACA,5ad3c862-1bd7-4ca2-817b-6420237e6db3
 2026-09-09,BTC,buy,16215.55,78288.6,LONG,ALPACA,64d463c6-92e1-4e8a-b45a-99111c4b4f98
 2026-09-09,BTC,sell,15744.45,78288.6,drift-correction,ALPACA,7233c427-37a4-4ccc-9641-0dfe6c8c6622
+2026-09-09,QQQ,sell,12151.76,716.31,drift-correction,ALPACA,f69e3e29-f0aa-47ac-8330-c31c3fbf3a8e
+2026-09-09,BTC,sell,5562.96,78288.6,drift-correction,ALPACA,224b133a-73f4-488b-b2a7-812fd9f0823e
+2026-09-09,GLD,sell,6802.36,403.35,drift-correction,ALPACA,bd680983-fb3c-4fe1-a986-6f9b7285bc8e
