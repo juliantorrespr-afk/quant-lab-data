@@ -37,9 +37,21 @@ def _stooq(sym):
     c = float(rows[0]["Close"]); o = float(rows[0]["Open"])
     return {"price": c, "chg": round((c / o - 1) * 100, 2), "src": "stooq"}
 
+def _yahoo(sym):
+    """Free Yahoo chart endpoint, no key."""
+    import urllib.request
+    u = ("https://query1.finance.yahoo.com/v8/finance/chart/%s?range=5d&interval=1d" % sym)
+    req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=15) as r:
+        d = json.load(r)
+    m = d["chart"]["result"][0]["meta"]
+    last = m.get("regularMarketPrice"); prev = m.get("chartPreviousClose") or m.get("previousClose")
+    return {"price": last, "chg": round((last / prev - 1) * 100, 2) if (last and prev) else None,
+            "src": "yahoo"}
+
 FALLBACK = {"BTCUSD": lambda: _kraken("XBTUSD"),
-            "XAUUSD": lambda: _stooq("xauusd"),
-            "NQ1!":   lambda: _stooq("nq.f")}
+            "XAUUSD": lambda: _yahoo("GC%3DF"),
+            "NQ1!":   lambda: _yahoo("NQ%3DF")}
 
 def quotes():
     out = {}
