@@ -1,0 +1,132 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QUANT_LAB desk</title>
+<style>
+:root{--bg:#0b0f14;--pn:#111823;--ln:#1e293b;--tx:#e2e8f0;--mu:#7c8ba1;--g:#22c55e;--r:#ef4444;--y:#eab308;--a:#38bdf8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);
+font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px}
+h1{font-size:16px;margin:0;letter-spacing:.14em;text-transform:uppercase}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+header{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;justify-content:space-between;
+border-bottom:1px solid var(--ln);padding-bottom:10px;margin-bottom:14px}
+.sub{color:var(--mu);font-size:12px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--pn);border:1px solid var(--ln);border-radius:10px;padding:12px 14px}
+.card h2{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin:0 0 10px}
+.big{font-size:26px;font-weight:600}
+.g{color:var(--g)}.r{color:var(--r)}.y{color:var(--y)}.mu{color:var(--mu)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;color:var(--mu);font-weight:500;padding:3px 6px 3px 0;border-bottom:1px solid var(--ln)}
+td{padding:4px 6px 4px 0;border-bottom:1px solid rgba(30,41,59,.5)}
+.num{text-align:right}
+.track{position:relative;height:8px;background:#1a2433;border-radius:4px;margin-top:6px;overflow:hidden}
+.track:after{content:"";position:absolute;left:50%;top:0;width:1px;height:100%;background:#475569}
+.fill{position:absolute;top:0;height:100%;border-radius:4px}
+.pill{display:inline-block;padding:1px 7px;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:.05em}
+.pill.on{background:rgba(34,197,94,.16);color:var(--g)}.pill.off{background:rgba(234,179,8,.16);color:var(--y)}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.hb{display:flex;flex-direction:column;gap:5px;font-size:12.5px}
+.wide{grid-column:1/-1}
+footer{color:var(--mu);font-size:11.5px;margin-top:16px;border-top:1px solid var(--ln);padding-top:10px}
+.sleeve{margin-bottom:12px}.sleeve:last-child{margin-bottom:0}
+.srow{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.hm{display:grid;grid-template-columns:36px repeat(12,1fr);gap:2px;font-size:9.5px}
+.hm div{padding:2px 0;text-align:center;border-radius:2px}
+</style></head><body>
+<header>
+  <div><h1>QUANT_LAB desk</h1>
+  <div class="sub">P7-VT3 · QQQ 40 / BTC 20 / gold 40 · SMA150 long-flat · vol-target 15/40/15 · paper</div></div>
+  <div class="sub mono" id="stamp">loading…</div>
+</header>
+<div class="grid">
+  <div class="card"><h2>Book</h2>
+    <div class="big mono" id="eq">—</div>
+    <div class="mono" id="pnl">—</div>
+    <div class="sub" style="margin-top:8px" id="ddline">—</div></div>
+  <div class="card"><h2>Heartbeat</h2><div class="hb" id="hb">—</div></div>
+  <div class="card"><h2>Call hit rate</h2>
+    <div class="big mono" id="hit">—</div>
+    <div class="sub" id="hitsub">the desk publishes a read per sleeve each day and scores it the next session</div>
+    <table style="margin-top:8px"><tbody id="hitrows"></tbody></table></div>
+  <div class="card wide"><h2>Sleeves — price vs the 150-day line</h2><div id="sleeves"></div></div>
+  <div class="card wide"><h2>Growth of $1 · 2015 → today</h2>
+    <div id="chart"></div>
+    <div class="sub mono" id="legend" style="margin-top:6px"></div></div>
+  <div class="card"><h2>Positions</h2><table><thead><tr><th>sleeve</th><th class="num">units</th><th class="num">entry</th><th class="num">−15% stop</th></tr></thead><tbody id="pos"></tbody></table></div>
+  <div class="card"><h2>Ledger</h2><table><thead><tr><th>date</th><th>sym</th><th>side</th><th class="num">$</th><th class="num">price</th></tr></thead><tbody id="led"></tbody></table></div>
+  <div class="card wide"><h2>Monthly return · book</h2><div class="hm" id="heat"></div></div>
+</div>
+<footer>Display only. This page never trades. The bot runs 00:10 UTC, the desk reads it 00:20 UTC, this page refreshes hourly.
+Rails: −15% disaster stop per sleeve · −25% book kill switch · no order &gt; 45% of book · no live orders before Jae's written approval.</footer>
+<script>
+const $=id=>document.getElementById(id), fmt=(n,d=2)=>n==null?"—":n.toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d});
+const sgn=n=>(n>=0?"+":"")+fmt(n);
+function col(v){return v>0?"g":v<0?"r":"mu"}
+async function j(p){try{const r=await fetch(p+"?t="+Date.now());return r.ok?await r.json():null}catch(e){return null}}
+function gauge(k,s){
+  const d=s.dist_pct, w=Math.min(Math.abs(d),10)/10*50, on=s.state!=="FLAT";
+  return `<div class="sleeve">
+   <div class="srow"><div><span class="pill ${on?'on':'off'}">${s.state}</span>
+     <b style="margin-left:8px">${k}</b> <span class="mono mu">${fmt(s.close)}</span>
+     <span class="mono mu"> vs ${fmt(s.sma150)}</span></div>
+   <div class="mono ${col(d)}"><b>${sgn(d)}%</b> <span class="mu">· size ${fmt(s.size_in_use,2)}</span></div></div>
+   <div class="track"><div class="fill" style="background:var(--${d>0?'g':'r'});
+     left:${d>0?50:50-w}%;width:${w}%"></div></div></div>`;
+}
+function chart(h){
+  const c=h.curve,W=900,H=200,P=4;
+  const xs=i=>P+i/(c.length-1)*(W-2*P);
+  const mx=Math.max(...c.map(r=>Math.max(r[1],r[2],r[3])));
+  const ys=v=>H-P-(Math.log(v)/Math.log(mx))*(H-2*P);
+  const path=k=>c.map((r,i)=>(i?"L":"M")+xs(i).toFixed(1)+" "+ys(r[k]).toFixed(1)).join(" ");
+  $("chart").innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block">
+    <path d="${path(3)}" fill="none" stroke="#475569" stroke-width="1.6"/>
+    <path d="${path(2)}" fill="none" stroke="#7c8ba1" stroke-width="1.6"/>
+    <path d="${path(1)}" fill="none" stroke="#22c55e" stroke-width="2.2"/></svg>`;
+  const l=c[c.length-1];
+  $("legend").innerHTML=`<span class="g">■ book ${fmt(l[1])}×</span> &nbsp; <span class="mu">■ QQQ ${fmt(l[2])}×</span>
+    &nbsp; <span style="color:#475569">■ 60/40 QQQ-gold ${fmt(l[3])}×</span> &nbsp; <span class="mu">log scale · ${h.start} → ${h.end}</span>`;
+  const m=h.monthly,yrs={};
+  Object.entries(m).forEach(([k,v])=>{if(v==null)return;const[y,mo]=k.split("-");(yrs[y]=yrs[y]||{})[+mo]=v});
+  let html=`<div class="mu"></div>`+["J","F","M","A","M","J","J","A","S","O","N","D"].map(x=>`<div class="mu">${x}</div>`).join("");
+  Object.keys(yrs).sort().forEach(y=>{html+=`<div class="mu mono">${y.slice(2)}</div>`+
+    Array.from({length:12},(_,i)=>{const v=yrs[y][i+1];
+      if(v==null)return `<div></div>`;
+      const a=Math.min(Math.abs(v)/8,1)*.75+.1;
+      return `<div class="mono" style="background:rgba(${v>=0?'34,197,94':'239,68,68'},${a})" title="${y}-${i+1}: ${fmt(v)}%">${v.toFixed(0)}</div>`}).join("")});
+  $("heat").innerHTML=html;
+}
+(async()=>{
+  const p=await j("pulse.json"), h=await j("history.json");
+  if(h)chart(h);
+  if(!p){$("stamp").textContent="pulse.json not published yet";return}
+  $("stamp").textContent="updated "+p.generated;
+  const eq=p.live_equity||(p.state&&p.state.equity);
+  $("eq").textContent="$"+fmt(eq);
+  const pnl=eq-100000; $("pnl").innerHTML=`<span class="${col(pnl)}">${sgn(pnl)}</span> <span class="mu">since ${p.ledger&&p.ledger[0]?p.ledger[0].as_of:"start"}</span>`;
+  const dd=100*(eq/((p.state&&p.state.hwm)||100000)-1);
+  $("ddline").innerHTML=`from high-water <span class="mono ${col(dd)}">${sgn(dd)}%</span> · kill switch at −25% · cash $${fmt(p.state&&p.state.cash)}`;
+  $("sleeves").innerHTML=["QQQ","BTC","GLD"].map(k=>p.signals&&p.signals[k]?gauge(k,p.signals[k]):"").join("");
+  const H=p.health||{}, ok=v=>`<span class="dot" style="background:var(--${v?'g':'r'})"></span>`;
+  const q=p.quotes||{}, qok=Object.values(q).some(v=>v&&v.price);
+  $("hb").innerHTML=[
+   `${ok(H.signals_ok)}bot run <span class="mono mu">${H.bot_run||"—"}</span>`,
+   `${ok(H.signals_ok)}signals ${H.signal_age_days==null?"—":H.signal_age_days+"d old"} <span class="mu">(stale &gt; 4d)</span>`,
+   `${ok(qok)}quotes ${qok?"live":"unavailable"} <span class="mono mu">${q.NQ1_||""}</span>`,
+   `${ok(!H.halted)}kill switch ${H.halted?"<b class='r'>HALTED</b>":"armed, not fired"}`].join("");
+  const s=p.scorecard||{};
+  $("hit").innerHTML=s.hit_rate==null?"—":`${fmt(s.hit_rate,1)}%`;
+  $("hitsub").innerHTML=`${s.n_scored||0} scored calls · ${s.open_calls||0} awaiting tomorrow's close`;
+  $("hitrows").innerHTML=Object.entries(s.by_sleeve||{}).map(([k,v])=>
+    `<tr><td class="mu">${k}</td><td class="num mono">${v==null?"—":fmt(v,1)+"%"}</td></tr>`).join("")+
+    Object.entries(s.by_conf||{}).map(([k,v])=>
+    `<tr><td class="mu">conf ${k}</td><td class="num mono">${v==null?"—":fmt(v,1)+"%"}</td></tr>`).join("");
+  const st=p.state||{},e=st.entry||{};
+  $("pos").innerHTML=Object.entries(st.pos||{}).map(([k,v])=>
+    `<tr><td>${k}</td><td class="num mono">${fmt(v,4)}</td><td class="num mono">${fmt(e[k])}</td><td class="num mono r">${fmt((e[k]||0)*0.85)}</td></tr>`).join("");
+  $("led").innerHTML=(p.ledger||[]).slice().reverse().map(r=>
+    `<tr><td class="mono">${r.as_of}</td><td>${r.symbol}</td><td class="${r.side==='buy'?'g':'r'}">${r.side}</td>
+     <td class="num mono">${fmt(+r.dollars,0)}</td><td class="num mono">${fmt(+r.price)}</td></tr>`).join("")||`<tr><td class="mu">no fills yet</td></tr>`;
+})();
+setTimeout(()=>location.reload(),15*60*1000);
+</script></body></html>
