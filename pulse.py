@@ -15,21 +15,59 @@ DATA = os.path.join(ROOT, "data"); DOCS = os.path.join(ROOT, "docs")
 SYMS = {"QQQ": ("NASDAQ", "QQQ"), "SPY": ("AMEX", "SPY"), "GLD": ("AMEX", "GLD"),
         "BTCUSD": ("KRAKEN", "XBTUSD"), "XAUUSD": ("OANDA", "XAUUSD"), "NQ1!": ("CME_MINI", "NQ1!")}
 
+def _kraken(pair):
+    """Free public Kraken ticker - no key, works from any runner."""
+    import urllib.request
+    u = "https://api.kraken.com/0/public/Ticker?pair=" + pair
+    with urllib.request.urlopen(u, timeout=15) as r:
+        d = json.load(r)
+    k = list(d["result"].keys())[0]
+    t = d["result"][k]
+    last = float(t["c"][0]); op = float(t["o"])
+    return {"price": last, "chg": round((last / op - 1) * 100, 2), "src": "kraken"}
+
+def _stooq(sym):
+    """Free daily CSV, no key. sym e.g. xauusd, nq.f"""
+    import urllib.request, csv as _csv, io
+    u = "https://stooq.com/q/l/?s=%s&f=sd2t2ohlcv&h&e=csv" % sym
+    with urllib.request.urlopen(u, timeout=15) as r:
+        rows = list(_csv.DictReader(io.StringIO(r.read().decode())))
+    if not rows or rows[0].get("Close") in (None, "N/D", ""):
+        raise ValueError("stooq no data")
+    c = float(rows[0]["Close"]); o = float(rows[0]["Open"])
+    return {"price": c, "chg": round((c / o - 1) * 100, 2), "src": "stooq"}
+
+FALLBACK = {"BTCUSD": lambda: _kraken("XBTUSD"),
+            "XAUUSD": lambda: _stooq("xauusd"),
+            "NQ1!":   lambda: _stooq("nq.f")}
+
 def quotes():
     out = {}
     try:
         from tradingview_ta import TA_Handler, Interval
+        have_tv = True
     except Exception as e:
-        return {"_error": str(e)}
+        out["_tv_error"] = str(e)[:120]; have_tv = False
     for name, (ex, tk) in SYMS.items():
-        try:
-            h = TA_Handler(symbol=tk, exchange=ex, screener="crypto" if ex == "KRAKEN" else
-                           ("forex" if ex == "OANDA" else "america"), interval=Interval.INTERVAL_1_DAY)
-            a = h.get_analysis()
-            out[name] = {"price": a.indicators.get("close"), "chg": a.indicators.get("change"),
-                         "sma200": a.indicators.get("SMA200"), "rsi": a.indicators.get("RSI")}
-        except Exception as e:
-            out[name] = {"error": str(e)[:120]}
+        got = None
+        if have_tv:
+            try:
+                h = TA_Handler(symbol=tk, exchange=ex, screener="crypto" if ex == "KRAKEN" else
+                               ("forex" if ex == "OANDA" else "america"), interval=Interval.INTERVAL_1_DAY)
+                a = h.get_analysis()
+                if a.indicators.get("close"):
+                    got = {"price": a.indicators.get("close"), "chg": a.indicators.get("change"),
+                           "sma200": a.indicators.get("SMA200"), "rsi": a.indicators.get("RSI"),
+                           "src": "tradingview"}
+            except Exception as e:
+                got = None
+                err = str(e)[:120]
+        if got is None and name in FALLBACK:
+            try:
+                got = FALLBACK[name]()
+            except Exception as e2:
+                got = {"error": str(e2)[:120]}
+        out[name] = got if got is not None else {"error": "no source"}
     return out
 
 def load_json(p, d=None):
