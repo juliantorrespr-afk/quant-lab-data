@@ -283,11 +283,20 @@ function render(p,h,tape){
 
   /* ---- chips ---- */
   const mode = (sig.book||{}).mode || "DRY";
+  const rec = sig.reconcile;
+  let recChip = "";
+  if (rec && rec.source === "broker"){
+    const drift = Object.values(rec.qty_drift||{}).some(v=>Math.abs(v)>1e-6);
+    recChip = `<span class="chip ok" title="${esc(JSON.stringify(rec.qty_drift||{}))}">BOOK MATCHES BROKER${drift?" · resynced":""}</span>`;
+  } else if (rec && rec.source === "FAILED"){
+    recChip = `<span class="chip bad">BROKER UNREADABLE · ORDERS SUPPRESSED</span>`;
+  }
   $("chips").innerHTML = [
     `<span class="chip ${hl.signals_ok?"ok":"bad"}">DATA ${hl.signals_ok?"FRESH":"STALE"} · ${hl.signal_age_days??"?"}d</span>`,
     `<span class="chip ${hl.halted?"bad":"ok"}">KILL SWITCH ${hl.halted?"FIRED":"ARMED"}</span>`,
-    `<span class="chip ${mode==="DRY"?"hold":"ok"}">MODE ${esc(mode)}</span>`
-  ].join("");
+    `<span class="chip ${mode==="DRY"?"hold":"ok"}">MODE ${esc(mode)}</span>`,
+    recChip
+  ].filter(Boolean).join("");
 
   /* ---- verdict ---- */
   const acts = [];
@@ -321,7 +330,7 @@ function render(p,h,tape){
   $("book").innerHTML = `
     <div class="m"><span class="k">Book value</span>
       <span class="v">${usd(eq)}</span>
-      <span class="n">high-water ${usd(hwm)}</span></div>
+      <span class="n">high-water ${usd(hwm)}${(sig.reconcile&&sig.reconcile.broker_equity)?" · broker says "+usd(sig.reconcile.broker_equity):""}</span></div>
     <div class="m"><span class="k">Drawdown</span>
       <span class="v ${cls(dd)}">${pct(dd)}</span>
       <span class="n">${killRoom==null?"":n(killRoom,1)+" pts of room before the kill switch"}</span>
