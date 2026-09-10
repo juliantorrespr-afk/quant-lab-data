@@ -1,32 +1,37 @@
 {
- "generated": "2026-09-10 17:47 UTC",
+ "generated": "2026-09-10 17:49 UTC",
  "quotes": {
   "QQQ": {
-   "price": 710.37,
-   "chg": -0.8292499057670479,
-   "sma200": 659.5232500000001,
-   "rsi": 47.39387597627148
+   "price": 710.2928,
+   "chg": -0.8400273624547877,
+   "sma200": 659.5228640000001,
+   "rsi": 47.34312141509215,
+   "src": "tradingview"
   },
   "SPY": {
-   "price": 758.52,
-   "chg": -0.5089192025183624,
-   "sma200": 713.7111000000001,
-   "rsi": 44.64738711471724
+   "price": 758.47,
+   "chg": -0.5154774396642117,
+   "sma200": 713.7108500000002,
+   "rsi": 44.606796412338724,
+   "src": "tradingview"
   },
   "GLD": {
-   "price": 400.2,
-   "chg": -0.780959464484947,
-   "sma200": 415.8311999999998,
-   "rsi": 48.06836118168592
+   "price": 399.95,
+   "chg": -0.842940374364704,
+   "sma200": 415.8299499999998,
+   "rsi": 47.90765988435503,
+   "src": "tradingview"
   },
   "BTCUSD": {
-   "error": "Exchange or symbol not found."
+   "price": 77352.6,
+   "chg": -1.2,
+   "src": "kraken"
   },
   "XAUUSD": {
-   "error": "Exchange or symbol not found."
+   "error": "HTTP Error 404: Not Found"
   },
   "NQ1!": {
-   "error": "Exchange or symbol not found."
+   "error": "HTTP Error 404: Not Found"
   }
  },
  "signals": {
@@ -141,7 +146,7 @@
   "last30": 53.3,
   "open_calls": 3
  },
- "live_equity": null,
+ "live_equity": 98547.97,
  "health": {
   "signal_age_days": 1,
   "signals_ok": true,
