@@ -23,6 +23,7 @@ HELD = {"GLD"}
 KILL = -0.25
 DISASTER = -0.15                      # hard stop 15% below entry on every sleeve: never fired 2015-26, pure gap insurance
 MAX_ORDER_FRAC = 0.45                 # no single order may exceed 45% of the book (rail against bad data)
+EVAL_START = 100_000.0                # the balance an evaluation would be measured from
 DATA, LEDGER, STATE, SIGNALS = "data/daily.csv", "data/ledger.csv", "data/state.json", "data/signals.json"
 ALPACA_SYM = {"QQQ": "QQQ", "GLD": "GLD", "BTC": "BTC/USD"}
 
@@ -108,8 +109,57 @@ state["hwm"] = max(state["hwm"], mark)
 dd = mark / state["hwm"] - 1
 sig["book"] = {"equity": round(mark, 2), "marked_at_close": round(equity, 2),
                "hwm": round(state["hwm"], 2), "dd_pct": round(dd * 100, 2), "mode": MODE}
-if state.get("halted"):
-    sig["book"]["note"] = "HALTED by kill switch — human review required"; json.dump(sig, open(SIGNALS, "w"), indent=1); print(json.dumps(sig, indent=1)); sys.exit(0)
+# ---------- 3a. EVALUATION RULES — this paper account is run as if it were funded ----------
+# Our own kill switch is -25%. No evaluation firm is anywhere near that generous. Running the paper
+# book under the FIRM's limits is the only way to learn, before any fee is at risk, whether this
+# strategy can survive them. These lines are TIGHTER than our rails and therefore always bind first.
+EV = {"start": EVAL_START, "daily": 0.05, "total": 0.10, "trailing": 0.10,
+      "target": 0.10, "min_days": 4}
+today = dt.datetime.now(dt.timezone.utc).date().isoformat()
+ev = state.setdefault("eval", {"day": today, "day_start": mark, "attempt": 1, "days_traded": 0,
+                               "worst_daily": 0.0, "worst_total": 0.0, "worst_trailing": 0.0,
+                               "breaches": [], "failed": False, "passed": False})
+if ev.get("day") != today:                       # a new UTC day resets the daily loss budget
+    ev["day"], ev["day_start"] = today, mark
+day_pl   = mark / ev["day_start"] - 1            # today's P&L, the daily-loss rule
+total_pl = mark / EV["start"] - 1                # from the starting balance, the static max-loss rule
+trail_pl = mark / state["hwm"] - 1               # from the high-water mark, the trailing rule
+ev["worst_daily"]    = min(ev["worst_daily"], day_pl)
+ev["worst_total"]    = min(ev["worst_total"], total_pl)
+ev["worst_trailing"] = min(ev["worst_trailing"], trail_pl)
+
+breach = None
+if day_pl   <= -EV["daily"]:    breach = f"DAILY LOSS {day_pl*100:.2f}% (limit -{EV['daily']*100:.0f}%)"
+elif total_pl <= -EV["total"]:  breach = f"MAX LOSS {total_pl*100:.2f}% from start (limit -{EV['total']*100:.0f}%)"
+elif trail_pl <= -EV["trailing"]: breach = f"TRAILING DD {trail_pl*100:.2f}% from high-water (limit -{EV['trailing']*100:.0f}%)"
+if breach and not ev["failed"]:
+    ev["failed"] = True
+    ev["breaches"].append({"date": today, "attempt": ev["attempt"], "why": breach})
+if total_pl >= EV["target"] and not ev["passed"]:
+    ev["passed"] = True
+    ev["breaches"].append({"date": today, "attempt": ev["attempt"], "why": f"TARGET HIT +{total_pl*100:.2f}%"})
+
+sig["eval"] = {
+    "attempt": ev["attempt"], "failed": ev["failed"], "passed": ev["passed"],
+    "day_pl_pct": round(day_pl * 100, 2), "total_pl_pct": round(total_pl * 100, 2),
+    "trailing_pl_pct": round(trail_pl * 100, 2),
+    "daily_budget_used_pct": round(min(100, max(0, -day_pl / EV["daily"] * 100)), 1),
+    "total_budget_used_pct": round(min(100, max(0, -total_pl / EV["total"] * 100)), 1),
+    "worst_daily_pct": round(ev["worst_daily"] * 100, 2),
+    "worst_total_pct": round(ev["worst_total"] * 100, 2),
+    "days_traded": ev["days_traded"], "min_days": EV["min_days"],
+    "target_pct": EV["target"] * 100, "limits": {"daily": -EV["daily"] * 100, "total": -EV["total"] * 100},
+    "breaches": ev["breaches"][-5:]}
+
+# A funded account is closed the moment a line is crossed. Flatten on THIS run, then halt.
+EVAL_FLATTEN = bool(ev["failed"] and not state.get("halted"))
+if EVAL_FLATTEN:
+    sig["book"]["note"] = "EVALUATION FAILED — " + breach + " — flattening and halting"
+
+if state.get("halted") and not EVAL_FLATTEN:      # already halted on a previous run: do nothing at all
+    sig["book"].setdefault("note", "HALTED — human review required")
+    json.dump(sig, open(SIGNALS, "w"), indent=1); json.dump(state, open(STATE, "w"), indent=1)
+    print(json.dumps(sig, indent=1)); sys.exit(0)
 
 # ---------- 4. targets -> orders ----------
 orders = []
@@ -125,7 +175,10 @@ for s in W:
     if flip or first3 or drift or (monday and abs(target_dollars - have) > 0.02 * equity):
         delta = target_dollars - have
         if abs(delta) > 0.005 * equity: orders.append((s, delta))
-if dd <= KILL and not state.get("halted"):
+if EVAL_FLATTEN:                                  # the evaluation line binds before our own kill switch
+    orders = [(s, -state["pos"][s] * sig[s]["close"]) for s in W if state["pos"][s] > 0]
+    state["halted"] = True
+elif dd <= KILL and not state.get("halted"):
     orders = [(s, -state["pos"][s] * sig[s]["close"]) for s in W if state["pos"][s] > 0]; state["halted"] = True
     sig["book"]["note"] = f"KILL SWITCH: book {dd*100:.1f}% below high-water mark -> all to cash, bot halted"
 for s, delta in orders:
@@ -141,6 +194,11 @@ def alpaca(path, method="GET", body=None):
 if MODE == "LIVE" and not (os.path.exists("data/LIVE_APPROVED_BY_JAE.txt") and os.environ.get("APCA_LIVE") == "1"):
     raise SystemExit("LIVE refused: needs data/LIVE_APPROVED_BY_JAE.txt (written by Jae, by hand) and APCA_LIVE=1")
 
+if orders and ev.get("last_trade_day") != today:  # evaluation firms count DAYS that traded, not trades
+    ev["days_traded"] = ev.get("days_traded", 0) + 1
+    ev["last_trade_day"] = today
+    sig["eval"]["days_traded"] = ev["days_traded"]
+
 new = not os.path.exists(LEDGER)
 with open(LEDGER, "a", newline="") as f:
     w = csv.writer(f)
@@ -151,6 +209,7 @@ with open(LEDGER, "a", newline="") as f:
         _tgt = equity * W[s] * state["sizes"][s] if sig[s]["state"] != "FLAT" else 0.0
         if abs(_tgt - state["pos"][s] * price) > 0.05 * equity: reason = "drift-correction"
         if sig["book"].get("note", "").startswith("KILL"): reason = "kill-switch"
+        if sig["book"].get("note", "").startswith("EVALUATION FAILED"): reason = "eval-breach-flatten"
         bid = ""
         if MODE in ("ALPACA", "LIVE") and BROKER_OK:
             body = {"symbol": ALPACA_SYM[s], "notional": f"{abs(delta):.2f}", "side": side, "type": "market", "time_in_force": "gtc" if s == "BTC" else "day"}
