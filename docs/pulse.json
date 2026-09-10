@@ -1,37 +1,41 @@
 {
- "generated": "2026-09-10 17:49 UTC",
+ "generated": "2026-09-10 17:59 UTC",
  "quotes": {
   "QQQ": {
-   "price": 710.2928,
-   "chg": -0.8400273624547877,
-   "sma200": 659.5228640000001,
-   "rsi": 47.34312141509215,
+   "price": 710.26,
+   "chg": -0.8446063855034769,
+   "sma200": 659.5227,
+   "rsi": 47.3215901908965,
    "src": "tradingview"
   },
   "SPY": {
-   "price": 758.47,
-   "chg": -0.5154774396642117,
-   "sma200": 713.7108500000002,
-   "rsi": 44.606796412338724,
+   "price": 758.43,
+   "chg": -0.520724029380906,
+   "sma200": 713.7106500000002,
+   "rsi": 44.574376951573335,
    "src": "tradingview"
   },
   "GLD": {
-   "price": 399.95,
-   "chg": -0.842940374364704,
-   "sma200": 415.8299499999998,
-   "rsi": 47.90765988435503,
+   "price": 399.59,
+   "chg": -0.9321928845915576,
+   "sma200": 415.8281499999998,
+   "rsi": 47.678128666782904,
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 77352.6,
-   "chg": -1.2,
+   "price": 77300.4,
+   "chg": -1.26,
    "src": "kraken"
   },
   "XAUUSD": {
-   "error": "HTTP Error 404: Not Found"
+   "price": 4399.2,
+   "chg": -0.69,
+   "src": "yahoo"
   },
   "NQ1!": {
-   "error": "HTTP Error 404: Not Found"
+   "price": 29191.0,
+   "chg": -1.27,
+   "src": "yahoo"
   }
  },
  "signals": {
@@ -146,7 +150,7 @@
   "last30": 53.3,
   "open_calls": 3
  },
- "live_equity": 98547.97,
+ "live_equity": 98514.55,
  "health": {
   "signal_age_days": 1,
   "signals_ok": true,
