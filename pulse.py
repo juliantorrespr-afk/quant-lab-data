@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+"""
+QUANT_LAB pulse — DISPLAY ONLY. Never calls bot.py, never places an order,
+never touches strategy constants. Runs hourly on GitHub Actions.
+
+Does three things:
+  1. quotes QQQ / NQ1! / SPY / BTCUSD / XAUUSD / GLD from TradingView (tradingview-ta)
+  2. scores yesterday's published call and publishes today's  -> data/scorecard.csv
+  3. writes docs/pulse.json for the dashboard
+"""
+import csv, json, os, datetime as dt
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+DATA = os.path.join(ROOT, "data"); DOCS = os.path.join(ROOT, "docs")
+SYMS = {"QQQ": ("NASDAQ", "QQQ"), "SPY": ("AMEX", "SPY"), "GLD": ("AMEX", "GLD"),
+        "BTCUSD": ("KRAKEN", "XBTUSD"), "XAUUSD": ("OANDA", "XAUUSD"), "NQ1!": ("CME_MINI", "NQ1!")}
+
+def quotes():
+    out = {}
+    try:
+        from tradingview_ta import TA_Handler, Interval
+    except Exception as e:
+        return {"_error": str(e)}
+    for name, (ex, tk) in SYMS.items():
+        try:
+            h = TA_Handler(symbol=tk, exchange=ex, screener="crypto" if ex == "KRAKEN" else
+                           ("forex" if ex == "OANDA" else "america"), interval=Interval.INTERVAL_1_DAY)
+            a = h.get_analysis()
+            out[name] = {"price": a.indicators.get("close"), "chg": a.indicators.get("change"),
+                         "sma200": a.indicators.get("SMA200"), "rsi": a.indicators.get("RSI")}
+        except Exception as e:
+            out[name] = {"error": str(e)[:120]}
+    return out
+
+def load_json(p, d=None):
+    try:
+        with open(p) as f: return json.load(f)
+    except Exception: return d
+
+# ---------------------------------------------------------------- scorecard
+# A "call" is the desk's published read for a sleeve: LONG / FLAT / HELD plus a
+# confidence taken from how far price sits from the 150-day line. It is scored
+# the next session: the call was RIGHT if the sleeve's next-day move went the
+# way the call implied (LONG/HELD -> up, FLAT -> the sleeve avoided a down day).
+# This is the win rate that is honest to watch daily. It never affects trading.
+def confidence(dist):
+    a = abs(dist)
+    return "HIGH" if a >= 5 else ("MEDIUM" if a >= 2 else "LOW")
+
+def closes():
+    px = {}
+    try:
+        with open(os.path.join(DATA, "daily.csv")) as f:
+            for r in csv.DictReader(f):
+                px.setdefault(r["symbol"], {})[r["date"]] = float(r["close"])
+    except Exception: pass
+    return px
+
+def scorecard(sig):
+    path = os.path.join(DATA, "scorecard.csv")
+    hdr = ["as_of", "sleeve", "call", "dist_pct", "confidence", "close",
+           "next_close", "next_ret_pct", "result", "scored_on", "source"]
+    rows = []
+    if os.path.exists(path):
+        with open(path) as f: rows = list(csv.DictReader(f))
+    px = closes()
+    # score any open rows whose next close now exists
+    for r in rows:
+        if r["result"]: continue
+        sym = {"QQQ": "QQQ", "BTC": "BTC", "GLD": "GLD"}[r["sleeve"]]
+        later = sorted(d for d in px.get(sym, {}) if d > r["as_of"])
+        if not later: continue
+        nc = px[sym][later[0]]; ret = 100 * (nc / float(r["close"]) - 1)
+        if r["call"] in ("LONG", "HELD"): res = "RIGHT" if ret > 0 else "WRONG"
+        else: res = "RIGHT" if ret <= 0 else "WRONG"
+        r.update(next_close=round(nc, 2), next_ret_pct=round(ret, 3),
+                 result=res, scored_on=later[0])
+    # publish today's call
+    have = {(r["as_of"], r["sleeve"]) for r in rows}
+    for sleeve in ("QQQ", "BTC", "GLD"):
+        s = sig.get(sleeve)
+        if not s or (sig["as_of"], sleeve) in have: continue
+        rows.append({"as_of": sig["as_of"], "sleeve": sleeve, "call": s["state"],
+                     "dist_pct": round(s["dist_pct"], 2), "confidence": confidence(s["dist_pct"]),
+                     "close": s["close"], "next_close": "", "next_ret_pct": "",
+                     "result": "", "scored_on": "", "source": "LIVE"})
+    rows.sort(key=lambda r: (r["as_of"], r["sleeve"]))
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, hdr); w.writeheader()
+        for r in rows: w.writerow({k: r.get(k, "") for k in hdr})
+    done = [r for r in rows if r["result"]]
+    def hit(sub):
+        return round(100 * sum(1 for r in sub if r["result"] == "RIGHT") / len(sub), 1) if sub else None
+    liv = [r for r in done if r.get("source") == "LIVE"]
+    return {"n_scored": len(done), "hit_rate": hit(done), "n_live": len(liv),
+            "live_hit_rate": hit(liv),
+            "by_sleeve": {s: hit([r for r in done if r["sleeve"] == s]) for s in ("QQQ", "BTC", "GLD")},
+            "by_conf": {c: hit([r for r in done if r["confidence"] == c]) for c in ("HIGH", "MEDIUM", "LOW")},
+            "last30": hit(done[-90:]), "open_calls": len(rows) - len(done)}
+
+def main():
+    sig = load_json(os.path.join(DATA, "signals.json"), {}) or {}
+    state = load_json(os.path.join(DATA, "state.json"), {}) or {}
+    ledger = []
+    try:
+        with open(os.path.join(DATA, "ledger.csv")) as f: ledger = list(csv.DictReader(f))
+    except Exception: pass
+    q = quotes()
+    sc = scorecard(sig) if sig.get("as_of") else {}
+    # live mark-to-market from the quotes we just pulled
+    live = None
+    m = {"QQQ": "QQQ", "GLD": "GLD", "BTC": "BTCUSD"}
+    if state.get("pos") and all(isinstance(q.get(m[k]), dict) and q[m[k]].get("price") for k in m):
+        live = state.get("cash", 0) + sum(state["pos"].get(k, 0) * q[m[k]]["price"] for k in m)
+    now = dt.datetime.now(dt.timezone.utc)
+    stale = None
+    if sig.get("as_of"):
+        stale = (now.date() - dt.date.fromisoformat(sig["as_of"])).days
+    out = {"generated": now.strftime("%Y-%m-%d %H:%M UTC"), "quotes": q, "signals": sig,
+           "state": state, "ledger": ledger[-40:], "scorecard": sc,
+           "live_equity": round(live, 2) if live else None,
+           "health": {"signal_age_days": stale, "signals_ok": stale is not None and stale <= 4,
+                      "bot_run": sig.get("run"), "halted": bool(state.get("halted"))}}
+    os.makedirs(DOCS, exist_ok=True)
+    with open(os.path.join(DOCS, "pulse.json"), "w") as f: json.dump(out, f, indent=1)
+    print(json.dumps({"generated": out["generated"], "live_equity": out["live_equity"],
+                      "scorecard": sc, "health": out["health"]}, indent=1))
+
+if __name__ == "__main__":
+    main()
