@@ -1,55 +1,55 @@
 {
- "generated": "2026-09-10 19:05 UTC",
+ "generated": "2026-09-10 20:24 UTC",
  "quotes": {
   "QQQ": {
-   "price": 709.275,
-   "chg": -0.9821166813251202,
-   "sma200": 659.5177750000001,
-   "rsi": 46.68399905138842,
+   "price": 708.69,
+   "chg": -1.0637852326506527,
+   "sma200": 659.5148500000001,
+   "rsi": 46.313395817842114,
    "src": "tradingview"
   },
   "SPY": {
-   "price": 757.59,
-   "chg": -0.6309024134312625,
-   "sma200": 713.7064500000001,
-   "rsi": 43.904290235795514,
+   "price": 757.89,
+   "chg": -0.5915529905561373,
+   "sma200": 713.7079500000001,
+   "rsi": 44.14128166195576,
    "src": "tradingview"
   },
   "GLD": {
-   "price": 396.93,
-   "chg": -1.5916697657121646,
-   "sma200": 415.8148499999998,
-   "rsi": 46.047982504474476,
+   "price": 396.36,
+   "chg": -1.732986240238009,
+   "sma200": 415.8119999999997,
+   "rsi": 45.71306265872556,
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 77158.9,
-   "chg": -1.44,
+   "price": 77257.0,
+   "chg": -1.32,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 4374.7,
-   "chg": -1.24,
+   "price": 4364.2,
+   "chg": -1.48,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 29183.0,
-   "chg": -1.29,
+   "price": 29156.25,
+   "chg": -1.38,
    "src": "yahoo"
   }
  },
  "signals": {
   "as_of": "2026-09-09",
-  "run": "2026-09-10T19:03+00:00",
+  "run": "2026-09-10T20:18+00:00",
   "reconcile": {
    "source": "broker",
-   "broker_equity": 99772.25,
+   "broker_equity": 99820.71,
    "qty_drift": {
     "QQQ": 0.0,
-    "BTC": -0.006942,
+    "BTC": 0.0,
     "GLD": 0.0
    },
-   "cash_drift": 316.26
+   "cash_drift": 0.0
   },
   "QQQ": {
    "close": 716.31,
@@ -82,11 +82,31 @@
    "size_in_use": 0.5532925913490641
   },
   "book": {
-   "equity": 99772.25,
+   "equity": 99820.71,
    "marked_at_close": 100879.99,
    "hwm": 100000.0,
-   "dd_pct": -0.23,
+   "dd_pct": -0.18,
    "mode": "ALPACA"
+  },
+  "eval": {
+   "attempt": 1,
+   "failed": false,
+   "passed": false,
+   "day_pl_pct": 0.0,
+   "total_pl_pct": -0.18,
+   "trailing_pl_pct": -0.18,
+   "daily_budget_used_pct": 0,
+   "total_budget_used_pct": 1.8,
+   "worst_daily_pct": 0.0,
+   "worst_total_pct": -0.18,
+   "days_traded": 0,
+   "min_days": 4,
+   "target_pct": 10.0,
+   "limits": {
+    "daily": -5.0,
+    "total": -10.0
+   },
+   "breaches": []
   }
  },
  "state": {
@@ -109,6 +129,18 @@
    "QQQ": 709.25,
    "BTC": 77114.32714399,
    "GLD": 397.97
+  },
+  "eval": {
+   "day": "2026-09-10",
+   "day_start": 99820.71,
+   "attempt": 1,
+   "days_traded": 0,
+   "worst_daily": 0.0,
+   "worst_total": -0.0017928999999999862,
+   "worst_trailing": -0.0017928999999999862,
+   "breaches": [],
+   "failed": false,
+   "passed": false
   }
  },
  "ledger": [
@@ -211,11 +243,11 @@
   "last30": 53.3,
   "open_calls": 3
  },
- "live_equity": 99842.14,
+ "live_equity": 99802.12,
  "health": {
   "signal_age_days": 1,
   "signals_ok": true,
-  "bot_run": "2026-09-10T19:03+00:00",
+  "bot_run": "2026-09-10T20:18+00:00",
   "halted": false
  }
 }
