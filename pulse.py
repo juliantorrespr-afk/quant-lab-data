@@ -173,6 +173,20 @@ def main():
                       "bot_run": sig.get("run"), "halted": bool(state.get("halted"))}}
     os.makedirs(DOCS, exist_ok=True)
     with open(os.path.join(DOCS, "pulse.json"), "w") as f: json.dump(out, f, indent=1)
+    # --- live equity tape: one point per pulse, this is the REAL traded curve ---
+    tape_p = os.path.join(DOCS, "equity.json")
+    try:
+        tape = json.load(open(tape_p))
+    except Exception:
+        tape = []
+    if live:
+        stamp = now.strftime("%Y-%m-%dT%H:00Z")
+        if not tape or tape[-1][0] != stamp:
+            tape.append([stamp, round(live, 2),
+                         round(q.get("QQQ", {}).get("price") or 0, 2),
+                         round(q.get("BTCUSD", {}).get("price") or 0, 2),
+                         round(q.get("GLD", {}).get("price") or 0, 2)])
+        with open(tape_p, "w") as f: json.dump(tape[-4000:], f)
     print(json.dumps({"generated": out["generated"], "live_equity": out["live_equity"],
                       "scorecard": sc, "health": out["health"]}, indent=1))
 
