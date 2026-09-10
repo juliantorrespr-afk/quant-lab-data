@@ -24,6 +24,15 @@ KILL = -0.25
 DISASTER = -0.15                      # hard stop 15% below entry on every sleeve: never fired 2015-26, pure gap insurance
 MAX_ORDER_FRAC = 0.45                 # no single order may exceed 45% of the book (rail against bad data)
 EVAL_START = 100_000.0                # the balance an evaluation would be measured from
+# EXPOSURE — how much of the lab's full size this venue may run. Set per venue, never tuned for return.
+#   1.00  paper lab      — no external drawdown floor, so the book runs at full size
+#   0.70  evaluation     — ends when the target is hit, so the 180-day result governs: 0 failures / 548
+#   0.60  once funded    — never ends, so the LIFETIME drawdown governs: -9.3% against a -10% floor
+# survive.py 2026-09-10: at 0.70 the 11-year drawdown is still -11.1%; only 0.60 clears the floor.
+# Sharpe is flat (1.35-1.38) from 0.85 down to 0.35 — sizing down costs speed, not quality.
+EXPOSURE = float(os.environ.get("EXPOSURE", "1.0"))
+if not 0.1 <= EXPOSURE <= 1.0:
+    raise SystemExit(f"REFUSED: EXPOSURE={EXPOSURE} outside 0.1-1.0")
 DATA, LEDGER, STATE, SIGNALS = "data/daily.csv", "data/ledger.csv", "data/state.json", "data/signals.json"
 ALPACA_SYM = {"QQQ": "QQQ", "GLD": "GLD", "BTC": "BTC/USD"}
 
@@ -149,6 +158,7 @@ sig["eval"] = {
     "worst_total_pct": round(ev["worst_total"] * 100, 2),
     "days_traded": ev["days_traded"], "min_days": EV["min_days"],
     "target_pct": EV["target"] * 100, "limits": {"daily": -EV["daily"] * 100, "total": -EV["total"] * 100},
+    "exposure": EXPOSURE,
     "breaches": ev["breaches"][-5:]}
 
 # A funded account is closed the moment a line is crossed. Flatten on THIS run, then halt.
@@ -165,7 +175,7 @@ if state.get("halted") and not EVAL_FLATTEN:      # already halted on a previous
 orders = []
 for s in W:
     on = sig[s]["state"] != "FLAT"
-    target_dollars = equity * W[s] * state["sizes"][s] if on else 0.0
+    target_dollars = equity * W[s] * state["sizes"][s] * EXPOSURE if on else 0.0
     have = state["pos"][s] * sig[s]["close"]
     flip = (on and have == 0) or (not on and have > 0)
     # DRIFT RAIL (added 2026-09-10, after a symbol-mapping bug left the book far over target in BTC):
@@ -206,7 +216,7 @@ with open(LEDGER, "a", newline="") as f:
     for s, delta in orders:
         side = "buy" if delta > 0 else "sell"; price = sig[s]["close"]
         reason = sig[s]["state"] if (sig[s]["state"] == "FLAT" or state["pos"][s] == 0) else ("rebalance" if first3 else "resize")
-        _tgt = equity * W[s] * state["sizes"][s] if sig[s]["state"] != "FLAT" else 0.0
+        _tgt = equity * W[s] * state["sizes"][s] * EXPOSURE if sig[s]["state"] != "FLAT" else 0.0
         if abs(_tgt - state["pos"][s] * price) > 0.05 * equity: reason = "drift-correction"
         if sig["book"].get("note", "").startswith("KILL"): reason = "kill-switch"
         if sig["book"].get("note", "").startswith("EVALUATION FAILED"): reason = "eval-breach-flatten"
