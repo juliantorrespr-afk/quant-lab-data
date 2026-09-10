@@ -62,6 +62,7 @@ def _alpaca_get(path):
 
 BROKER_OK = MODE == "DRY"          # DRY needs no broker
 BROKER_EQUITY = None               # set only when the broker actually answered
+PENDING = set()                    # sleeves with an order already working at the broker
 if MODE in ("ALPACA", "LIVE"):
     try:
         acct = _alpaca_get("/v2/account")
@@ -79,10 +80,23 @@ if MODE in ("ALPACA", "LIVE"):
         state["cash"] = float(acct["cash"])
         BROKER_EQUITY = float(acct["equity"])
         state["hwm"] = max(state.get("hwm", BOOK), BROKER_EQUITY)
+        # IN-FLIGHT ORDERS. Equity orders sent after the close sit "accepted" until the next open,
+        # so the position we just read has NOT moved yet. Without this check a second run would see
+        # the un-reduced position, decide it still needs to sell, and send the order twice.
+        # Same class of bug as the BTC double-buy on 2026-09-10, wearing a different costume.
+        try:
+            for _o in _alpaca_get("/v2/orders?status=open&limit=100"):
+                for _s in W:
+                    if _norm(_o.get("symbol", "")) == _norm(ALPACA_SYM[_s]):
+                        PENDING.add(_s)
+        except Exception as _e:
+            sig.setdefault("notes", []).append(f"open-order check failed ({str(_e)[:80]}) — trading suppressed")
+            raise
         sig["reconcile"] = {
             "source": "broker", "broker_equity": round(float(acct["equity"]), 2),
             "qty_drift": {s: round(state["pos"][s] - was_pos.get(s, 0.0), 6) for s in W},
-            "cash_drift": round(state["cash"] - was_cash, 2)}
+            "cash_drift": round(state["cash"] - was_cash, 2),
+            "pending_orders": sorted(PENDING)}
         BROKER_OK = True
     except Exception as e:
         # A broker we cannot read is a broker we must not trade against. Publish signals, send nothing.
@@ -174,6 +188,9 @@ if state.get("halted") and not EVAL_FLATTEN:      # already halted on a previous
 # ---------- 4. targets -> orders ----------
 orders = []
 for s in W:
+    if s in PENDING:
+        sig.setdefault("notes", []).append(f"{s}: an order is already working at the broker — skipped this run")
+        continue
     on = sig[s]["state"] != "FLAT"
     target_dollars = equity * W[s] * state["sizes"][s] * EXPOSURE if on else 0.0
     have = state["pos"][s] * sig[s]["close"]
@@ -186,10 +203,10 @@ for s in W:
         delta = target_dollars - have
         if abs(delta) > 0.005 * equity: orders.append((s, delta))
 if EVAL_FLATTEN:                                  # the evaluation line binds before our own kill switch
-    orders = [(s, -state["pos"][s] * sig[s]["close"]) for s in W if state["pos"][s] > 0]
+    orders = [(s, -state["pos"][s] * sig[s]["close"]) for s in W if state["pos"][s] > 0 and s not in PENDING]
     state["halted"] = True
 elif dd <= KILL and not state.get("halted"):
-    orders = [(s, -state["pos"][s] * sig[s]["close"]) for s in W if state["pos"][s] > 0]; state["halted"] = True
+    orders = [(s, -state["pos"][s] * sig[s]["close"]) for s in W if state["pos"][s] > 0 and s not in PENDING]; state["halted"] = True
     sig["book"]["note"] = f"KILL SWITCH: book {dd*100:.1f}% below high-water mark -> all to cash, bot halted"
 for s, delta in orders:
     if abs(delta) > MAX_ORDER_FRAC * equity: raise SystemExit(f"REFUSED: order {s} {delta:.0f} exceeds {MAX_ORDER_FRAC:.0%} of book — check data")
