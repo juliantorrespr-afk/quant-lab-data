@@ -1,15 +1,15 @@
 {
  "as_of": "2026-09-09",
- "run": "2026-09-10T18:55+00:00",
+ "run": "2026-09-10T19:03+00:00",
  "reconcile": {
   "source": "broker",
-  "broker_equity": 99956.42,
+  "broker_equity": 99772.25,
   "qty_drift": {
    "QQQ": 0.0,
-   "BTC": 0.252381,
+   "BTC": -0.006942,
    "GLD": 0.0
   },
-  "cash_drift": 354.01
+  "cash_drift": 316.26
  },
  "QQQ": {
   "close": 716.31,
@@ -42,9 +42,10 @@
   "size_in_use": 0.5532925913490641
  },
  "book": {
-  "equity": 101148.13,
-  "hwm": 101148.13,
-  "dd_pct": 0.0,
+  "equity": 99772.25,
+  "marked_at_close": 100879.99,
+  "hwm": 100000.0,
+  "dd_pct": -0.23,
   "mode": "ALPACA"
  }
 }
