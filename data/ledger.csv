@@ -1,0 +1,4 @@
+as_of,symbol,side,dollars,price,reason,mode,broker_id
+2026-09-04,QQQ,buy,40000.0,718.96,LONG,DRY,
+2026-09-04,BTC,buy,17564.21,79676.4,LONG,DRY,
+2026-09-04,GLD,buy,22696.59,406.77,HELD,DRY,
