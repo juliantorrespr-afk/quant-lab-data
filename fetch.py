@@ -8,6 +8,21 @@ def get(url):
     req=urllib.request.Request(url,headers=UA)
     return json.load(urllib.request.urlopen(req,timeout=30))
 today=dt.datetime.now(dt.timezone.utc).date()
+
+# ---- first run: seed full history if data/daily.csv is missing (QQQ, GLD adjusted; BTC-USD from Yahoo as history, Kraken from here on) ----
+if not os.path.exists(OUT) or os.path.getsize(OUT) < 1000:
+    os.makedirs("data", exist_ok=True); seeded={}
+    for tk,sym in [("QQQ","QQQ"),("GLD","GLD"),("BTC-USD","BTC")]:
+        j=get(f"https://query1.finance.yahoo.com/v8/finance/chart/{tk}?range=max&interval=1d")
+        r=j["chart"]["result"][0]; ts=r["timestamp"]; adj=r["indicators"]["adjclose"][0]["adjclose"]
+        for t,a in zip(ts,adj):
+            if a is None: continue
+            d=dt.datetime.fromtimestamp(t,dt.timezone.utc).date()
+            if d>=dt.date(2015,1,1) and d<today: seeded[(d.isoformat(),sym)]=f"{a:.2f}"
+    with open(OUT,"w",newline="") as f:
+        w=csv.writer(f); w.writerow(["date","symbol","close"])
+        for (d,s) in sorted(seeded): w.writerow([d,s,seeded[(d,s)]])
+    print("seeded",len(seeded),"rows")
 rows={}
 # Kraken: candle open time (UTC midnight) = the day the close belongs to; last candle is live -> drop
 for pair,sym in [("XBTUSD","BTC"),("PAXGUSD","PAXG")]:
