@@ -157,6 +157,14 @@ td.hi{color:var(--up);font-weight:700}
 .pulse{width:6px;height:6px;border-radius:50%;background:var(--up);flex:0 0 auto;align-self:center}
 .pulse.off{background:var(--ink3)}
 
+.budget{display:flex;flex-direction:column;gap:6px}
+.budget .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px}
+.budget .top b{font-family:"JetBrains Mono",monospace;font-size:15px}
+.bar{height:8px;background:var(--sunk);border-radius:2px;overflow:hidden;position:relative}
+.bar i{display:block;height:100%}
+.bar span{position:absolute;top:-2px;width:1px;height:12px;background:var(--ink3)}
+.evalgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px}
+.verdictline{font-family:Chivo,sans-serif;font-weight:900;font-size:22px;letter-spacing:-.02em}
 .caveat{border-left:2px solid var(--warn);padding-left:14px;font-size:12.5px;color:var(--ink2)}
 footer{border-top:1px solid var(--rule);padding-top:16px;font-size:11.5px;color:var(--ink3);
   font-family:"JetBrains Mono",monospace;display:flex;flex-wrap:wrap;gap:6px 20px}
@@ -192,6 +200,11 @@ footer{border-top:1px solid var(--rule);padding-top:16px;font-size:11.5px;color:
 </section>
 
 <section class="strip" id="book"></section>
+
+<section>
+  <h2 style="margin-bottom:10px">Run as if it were funded &middot; would this account still be alive?</h2>
+  <div class="panel" id="evalPanel"><p class="tiny">waiting for the next signal run&hellip;</p></div>
+</section>
 
 <section>
   <h2 style="margin-bottom:10px">Sleeves &middot; where each price sits between its stop and its line</h2>
@@ -486,6 +499,41 @@ function render(p,h,tape){
       const cb=w.COMBINED;
       if (cb) $("payoffNote").innerHTML = `Only <b>${n(cb.wr,1)}%</b> of completed round trips make money. They survive because the average winner is <b>${n(cb.payoff,0)}×</b> the average loser: losses are cut at the line, winners are held for as long as the trend lasts. Break-even needs just <b>${n(100/(1+cb.payoff),1)}%</b>.`;
     }
+  }
+
+  /* ---- evaluation ---- */
+  const ev = sig.eval;
+  if (ev){
+    const bar = (usedPct, label, detail, danger) => {
+      const w = Math.max(0, Math.min(100, usedPct));
+      const col = w >= 100 ? "var(--down)" : w >= 70 ? "var(--warn)" : danger ? "var(--down)" : "var(--up)";
+      return `<div class="budget">
+        <div class="top"><span>${label}</span><b class="${w>=70?"warn":""}">${n(w,0)}%<span class="tiny" style="font-weight:400"> used</span></b></div>
+        <div class="bar"><i style="width:${w}%;background:${col}"></i></div>
+        <div class="tiny">${detail}</div></div>`;
+    };
+    const status = ev.failed ? ["FAILED", "down"] : ev.passed ? ["TARGET HIT", "up"] : ["still alive", "teal"];
+    const tgtPct = Math.max(0, ev.total_pl_pct / ev.target_pct * 100);
+    $("evalPanel").innerHTML = `
+      <div class="head">
+        <span class="verdictline ${status[1]}">Attempt ${ev.attempt} — ${status[0]}</span>
+        <span class="tiny">FTMO-style limits: −5% in a day, −10% total, +10% to pass</span>
+      </div>
+      <div class="evalgrid">
+        ${bar(ev.daily_budget_used_pct, "Daily loss budget",
+             `today ${pct(ev.day_pl_pct)} of a ${n(ev.limits.daily,0)}% allowance · worst day so far ${pct(ev.worst_daily_pct)}`)}
+        ${bar(ev.total_budget_used_pct, "Total loss budget",
+             `${pct(ev.total_pl_pct)} from the $100,000 start · limit ${n(ev.limits.total,0)}% · worst ${pct(ev.worst_total_pct)}`)}
+        ${bar(tgtPct, "Progress to the profit target",
+             `needs +${n(ev.target_pct,0)}% to pass phase one`)}
+        <div class="budget">
+          <div class="top"><span>Days traded</span><b>${ev.days_traded} <span class="tiny" style="font-weight:400">/ ${ev.min_days} min</span></b></div>
+          <div class="bar"><i style="width:${Math.min(100, ev.days_traded/ev.min_days*100)}%;background:var(--teal)"></i></div>
+          <div class="tiny">${ev.days_traded >= ev.min_days ? "minimum met" : "a firm with a minimum-days rule would not pay out yet"}</div>
+        </div>
+      </div>
+      ${ev.breaches && ev.breaches.length ? `<p class="caveat">${ev.breaches.map(b=>esc(b.date+" · attempt "+b.attempt+" · "+b.why)).join("<br>")}</p>` : ""}
+      <p class="tiny">These limits are tighter than our own −25% kill switch, so they always bind first. If one breaks, the bot flattens and halts exactly as a funded account would be closed — and the attempt counter goes up.</p>`;
   }
 
   /* ---- machine ---- */
