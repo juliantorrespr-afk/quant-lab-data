@@ -342,8 +342,8 @@ function renderPills(p,extra){
   pill("pl-mt5",extra.mt5Pill||"warn",extra.mt5Txt||"mt5 demo · not on vps");
 }
 (async()=>{
-  const [p,h,sv,dp,tp]=await Promise.all([j("pulse.json"),j("history.json"),j("sleeves.json"),j("depth.json"),j("equity.json")]);
-  const P=p||SNAP.pulse,HH=h||SNAP.history,SV=sv||SNAP.sleeves,DP=dp||SNAP.depth,TP=tp||SNAP.equity,X=SNAP.extra||{};
+  const [p,h,sv,dp,tp,op]=await Promise.all([j("pulse.json"),j("history.json"),j("sleeves.json"),j("depth.json"),j("equity.json"),j("ops.json")]);
+  const P=p||SNAP.pulse,HH=h||SNAP.history,SV=sv||SNAP.sleeves,DP=dp||SNAP.depth,TP=tp||SNAP.equity,X=op||SNAP.extra||{};
   if(!P){document.body.insertAdjacentHTML("afterbegin",'<div class="p" style="margin-bottom:10px">pulse.json not published yet — run the pulse workflow once.</div>');return}
   renderPills(P,X);renderTape(P);renderSleeves(P,SV);renderMoney(P,TP);renderDepth(DP);renderScore(P,HH);renderSystem(P,X);renderLadder(P);renderLog(P);renderHeat(HH);
 })();
