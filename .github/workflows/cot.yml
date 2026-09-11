@@ -1,0 +1,29 @@
+name: cot
+# Weekly COT study. Research only — never runs bot.py, never places an order.
+on:
+  schedule:
+    - cron: "30 22 * * 5"   # Fridays 22:30 UTC, after the 15:30 ET CFTC release
+  workflow_dispatch:
+concurrency:
+  group: quantlab-cot
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  cot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas numpy
+      - run: python cot_study.py
+      - name: commit
+        run: |
+          git config user.name quantlab-cot
+          git config user.email quantlab-cot@users.noreply.github.com
+          git add data/cot_study.json docs/cot.json
+          git commit -m "cot study $(date -u +%Y-%m-%dT%H:%MZ)" || echo "nothing to commit"
+          git pull --rebase || true
+          git push || echo "push failed"
