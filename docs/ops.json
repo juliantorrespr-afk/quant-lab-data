@@ -1,1 +1,9 @@
-{"updated": "2026-09-11", "vpsPill": "ok", "vpsTxt": "vps quantlab-mt5 \u00b7 live", "mt5Pill": "warn", "mt5Txt": "mt5 \u00b7 installing on vps", "vps": "<span class=\"g\">\u25cf running \u00b7 Win Server 2025 \u00b7 100.25.77.0 \u00b7 1 GB ($14/mo, credits)</span>", "mt5": "<span class=\"y\">\u25cf next: install MT5 + compile P7VT3 on the VPS</span>"}
+{
+ "updated": "2026-09-11",
+ "vpsPill": "ok",
+ "vpsTxt": "vps quantlab-mt5 \u00b7 live",
+ "mt5Pill": "warn",
+ "mt5Txt": "mt5 \u00b7 installed \u00b7 EA on disk \u00b7 awaiting RAM",
+ "vps": "<span class=\"g\">\u25cf running \u00b7 Win Server 2025 \u00b7 100.25.77.0 \u00b7 1 GB ($14/mo, credits)</span>",
+ "mt5": "<span class=\"y\">\u25cf MT5 installed, P7VT3.mq5 in Experts, terminal running \u00b7 demo attach blocked by 1 GB RAM \u2192 2 GB upgrade pending</span>"
+}
