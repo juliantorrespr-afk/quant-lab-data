@@ -3,6 +3,12 @@
 QUANT_LAB pulse — DISPLAY ONLY. Never calls bot.py, never places an order,
 never touches strategy constants. Runs hourly on GitHub Actions.
 
+v4 (2026-09-11 night, information layer — records only, the rule never reads it):
+  7. data/flow/kraken_xbtusd_hourly.csv  (every trade in the last hour, aggregated: buy/sell notional,
+     VWAP, largest print, whale prints >= $250k)  + data/flow/whale_prints.csv (each whale print)
+  8. data/flow/cot_weekly.csv  (CFTC Commitments of Traders, legacy futures-only: gold / Nasdaq mini /
+     bitcoin — big-player positioning, released Fridays for Tuesday)
+  9. docs/flow.json  (last 48 h of the tape + latest COT, for the command center)
 v3 (2026-09-11, command center):
   1. quotes QQQ / NQ1! / SPY / BTCUSD / XAUUSD / GLD (TradingView -> Kraken/Yahoo fallback)
   2. scores yesterday's published call and publishes today's  -> data/scorecard.csv
@@ -83,6 +89,100 @@ def depth():
                 "bid_vol": round(sum(v for _, v in bids), 3), "ask_vol": round(sum(v for _, v in asks), 3)}
     except Exception as e:
         return {"error": str(e)[:120]}
+
+# ---------------------------------------------------------------- information layer
+WHALE_USD = 250_000.0
+FLOW = os.path.join(DATA, "flow")
+COT_URL = "https://www.cftc.gov/dea/newcot/deafut.txt"
+COT_MARKETS = {"GOLD - COMMODITY EXCHANGE": "GOLD",            # prefix match on the legacy name
+               "NASDAQ MINI - CHICAGO MERCANTILE": "NQ",
+               "BITCOIN - CHICAGO MERCANTILE": "BTC"}
+
+def _cot_market(name):
+    n = name.strip().upper()
+    for k, v in COT_MARKETS.items():
+        if n.startswith(k): return v
+    return None
+
+def _append_csv(path, hdr, rows):
+    new = not os.path.exists(path)
+    with open(path, "a", newline="") as f:
+        w = csv.writer(f)
+        if new: w.writerow(hdr)
+        for r in rows: w.writerow(r)
+
+def flow_kraken(now):
+    """Every XBTUSD trade in the last hour -> one aggregate row + one row per whale print."""
+    since = int((now - dt.timedelta(hours=1)).timestamp())
+    trades, cursor = [], since * 10**9
+    for _ in range(12):
+        d = _get("https://api.kraken.com/0/public/Trades?pair=XBTUSD&since=%d" % cursor)
+        k = [x for x in d["result"] if x != "last"][0]
+        batch = d["result"][k]; trades += batch
+        nxt = int(d["result"]["last"])
+        if not batch or nxt == cursor or len(batch) < 1000: break
+        cursor = nxt
+    trades = [t for t in trades if float(t[2]) >= since]
+    if not trades: return None
+    buy = sum(float(p) * float(v) for p, v, _, s, *_ in trades if s == "b")
+    sell = sum(float(p) * float(v) for p, v, _, s, *_ in trades if s == "s")
+    vol = sum(float(v) for _, v, *_ in trades)
+    vwap = (buy + sell) / vol if vol else None
+    whales = [(dt.datetime.fromtimestamp(float(t[2]), dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+               float(t[0]), round(float(t[1]), 4), round(float(t[0]) * float(t[1]), 0), "buy" if t[3] == "b" else "sell")
+              for t in trades if float(t[0]) * float(t[1]) >= WHALE_USD]
+    largest = max(float(t[0]) * float(t[1]) for t in trades)
+    row = [now.strftime("%Y-%m-%dT%H:00Z"), len(trades), round(buy), round(sell),
+           round((buy - sell) / (buy + sell), 4) if buy + sell else 0, round(vwap, 2) if vwap else "",
+           round(largest), len(whales), round(sum(w[3] for w in whales if w[4] == "buy")),
+           round(sum(w[3] for w in whales if w[4] == "sell"))]
+    os.makedirs(FLOW, exist_ok=True)
+    _append_csv(os.path.join(FLOW, "kraken_xbtusd_hourly.csv"),
+                ["hour", "trades", "buy_usd", "sell_usd", "imbalance", "vwap", "largest_usd",
+                 "whales", "whale_buy_usd", "whale_sell_usd"], [row])
+    if whales:
+        _append_csv(os.path.join(FLOW, "whale_prints.csv"), ["time", "price", "btc", "usd", "side"], whales)
+    return {"hour": row[0], "trades": row[1], "buy_usd": row[2], "sell_usd": row[3], "imbalance": row[4],
+            "vwap": row[5], "largest_usd": row[6], "whales": row[7], "whale_buy_usd": row[8], "whale_sell_usd": row[9]}
+
+def flow_cot():
+    """CFTC legacy futures-only, current week. Net non-commercial (speculators) and commercial (hedgers)."""
+    import urllib.request
+    req = urllib.request.Request(COT_URL, headers={"User-Agent": "Mozilla/5.0 quantlab-pulse"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        txt = r.read().decode("latin-1")
+    out = []
+    for rec in csv.reader(txt.splitlines()):
+        mk = _cot_market(rec[0]) if rec else None
+        if not mk: continue
+        try:
+            oi = int(rec[7]); ncl, ncs = int(rec[8]), int(rec[9]); cl, cs = int(rec[11]), int(rec[12])
+        except (ValueError, IndexError): continue
+        out.append([rec[2].strip(), mk, oi, ncl, ncs, ncl - ncs, cl, cs, cl - cs])
+    if not out: return []
+    path = os.path.join(FLOW, "cot_weekly.csv"); have = set()
+    if os.path.exists(path):
+        with open(path) as f: have = {(r["date"], r["market"]) for r in csv.DictReader(f)}
+    fresh = [r for r in out if (r[0], r[1]) not in have]
+    os.makedirs(FLOW, exist_ok=True)
+    if fresh: _append_csv(path, ["date", "market", "open_interest", "spec_long", "spec_short", "spec_net",
+                                 "hedger_long", "hedger_short", "hedger_net"], fresh)
+    return out
+
+def flow(now):
+    res = {"generated": now.strftime("%Y-%m-%d %H:%M UTC"), "note": "context only — the trading rule never reads this file"}
+    try: res["kraken_last_hour"] = flow_kraken(now)
+    except Exception as e: res["kraken_error"] = str(e)[:160]
+    try:
+        res["cot"] = flow_cot()
+    except Exception as e: res["cot_error"] = str(e)[:160]
+    try:
+        with open(os.path.join(FLOW, "kraken_xbtusd_hourly.csv")) as f: res["tape_48h"] = list(csv.DictReader(f))[-48:]
+    except Exception: res["tape_48h"] = []
+    try:
+        with open(os.path.join(FLOW, "whale_prints.csv")) as f: res["whales_recent"] = list(csv.DictReader(f))[-30:]
+    except Exception: res["whales_recent"] = []
+    return res
 
 def load_json(p, d=None):
     try:
@@ -191,6 +291,8 @@ def main():
     with open(os.path.join(DOCS, "sleeves.json"), "w") as f: json.dump(sleeves(px), f)
     with open(os.path.join(DOCS, "depth.json"), "w") as f:
         json.dump({"generated": out["generated"], **depth()}, f)
+    with open(os.path.join(DOCS, "flow.json"), "w") as f:
+        json.dump(flow(now), f)
     tape_p = os.path.join(DOCS, "equity.json")
     tape = load_json(tape_p, []) or []
     if live:
