@@ -1,7 +1,6 @@
-; P7VT3 inputs for FTMO US (OANDA) — symbols as FTMO US names them
-SymUS100=US100_current.sim
-SymBTC=BTCUSD.sim
-SymGold=XAUUSD.sim
+SymUS100=ND100m
+SymBTC=BTC
+SymGold=XAUUSD
 Exposure=0.55
 LiveTrading=true
 ImmediateFlips=true
