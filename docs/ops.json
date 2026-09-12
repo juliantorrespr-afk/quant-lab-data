@@ -2,9 +2,9 @@
  "updated": "2026-09-12",
  "vpsPill": "warn",
  "vpsTxt": "vps quantlab-mt5 · 1 GB + 4 GB pagefile",
- "mt5Pill": "warn",
- "mt5Txt": "mt5 · v1.02 pushed · awaiting compile",
- "vps": "<span class=\"y\">● quantlab-mt5 · Win Server 2025 · 1 GB (AWS refused the 2 GB plan — Support limit request pending) · pagefile 4 GB · logon task QL auto-starts MT5 with p7_ftmo.ini · 44.222.86.150 (no static IP)</span>",
- "mt5": "<span class=\"y\">● FTMO US free trial 1600189053 @ OANDA-Demo-1 · HEDGING · proof of life 02:12: authorized + equity 100,000 · live symbols US100.sim / BTCUSD.sim / XAUUSD.sim · EA v1.02 (2 Astra audits) pushed to repo, compile blocked on AWS console sign-in · terminal currently idle on scratch account, no EA, no positions</span>",
- "note": "Weekend: first real orders at the Mon/Tue open. Monday sign-off: authorized on OANDA-Demo-1 · Init OK (armed). InitialBalance 100000.00 · CET offset +2 · daily floor 96000.00 · one EA instance."
+ "mt5Pill": "ok",
+ "mt5Txt": "mt5 · v1.02 compiled + armed on FTMO",
+ "vps": "<span class=\"y\">● quantlab-mt5 · Win Server 2025 · 1 GB (AWS refused 2 GB — Support limit request pending) · pagefile 4 GB · self-healing boot ql_heal.ps1 (closes MT5 → compiles → relaunches) · 44.222.86.150</span>",
+ "mt5": "<span class=\"g\">● FTMO US free trial 1600189053 @ OANDA-Demo-1 · authorized (ping 6.71 ms, build 5830) · HEDGING · equity 100,000 · 0 positions · P7VT3 v1.02 compiled + Init OK (armed): InitialBalance 100000 · daily floor 96000 · static halt 92000 · CET offset +2 · symbols US100.sim / BTCUSD.sim / XAUUSD.sim · Algo Trading ON</span>",
+ "note": "All five Monday sign-off strings green as of 04:41 server time. Weekend: first orders at the Mon/Tue open (MONDAY_RESIZE), none before."
 }
