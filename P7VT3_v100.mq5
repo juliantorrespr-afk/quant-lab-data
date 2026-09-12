@@ -29,11 +29,7 @@
 //|  symbols itself.  Runs on a 30-second timer, not on ticks.       |
 //+------------------------------------------------------------------+
 #property copyright   "QUANT_LAB"
-#property version     "1.01"
-// v1.01-SAFETY (2026-09-12): FTMO-correct daily floor (day-start balance/equity at 00:00 CE(S)T minus 4% of
-// InitialBalance), CE(S)T day key from GMT, connectivity gate + late init, persisted pending intents that
-// store TARGET lots and recompute the delta against real holdings at execution (double-order defense),
-// flattens execute even while halted, fail-closed session check, hedging-mode required, heartbeat file.
+#property version     "1.00"
 
 #include <Trade\Trade.mqh>
 
@@ -73,9 +69,6 @@ input int     SlippagePts   = 50;          // max deviation in points for market
 #define GV_HALT_PERM       "P7VT3_HaltPermanent"  // 1 = halted until YOU delete this variable
 #define LOG_FILE           "P7VT3_log.csv"
 #define STATE_FILE         "P7VT3_state.csv"
-#define HEART_FILE         "P7VT3_heartbeat.txt"
-#define GV_DAYSTART_BAL    "P7VT3_DayStartBalance"
-#define MAX_PENDING_TRIES  40      // 40 x 30 s = 20 min of retries, then log loudly and keep the intent
 
 //=================================================================
 // PER-SLEEVE STATE
@@ -97,11 +90,9 @@ struct Sleeve
    bool     sigFresh;       // close > sma today
    bool     sigInUse;       // signal currently driving the position
    bool     pendingFlip;    // flip observed, waiting for execution (ImmediateFlips=false: waits for Monday)
-   // pending intent (queued until market open). v1.01: stores the TARGET lots, not a delta.
-   bool     pendingActive;
-   double   pendingTarget;  // desired held lots after execution
+   // pending order (queued until market open)
+   double   pendingLots;    // signed: +buy, -sell; 0 = nothing queued
    string   pendingReason;
-   int      pendingTries;
    // dry-run virtual position
    double   virtLots;
 };
@@ -111,7 +102,6 @@ CTrade   trade;
 
 datetime g_lastServerDay = 0;
 bool     g_initialised   = false;
-bool     g_armed         = false;   // v1.01: rails anchored on a live, connected account
 
 //=================================================================
 // UTILITIES
@@ -162,7 +152,7 @@ void SaveState()
    if(h == INVALID_HANDLE) return;
    for(int i = 0; i < N_SLEEVES; i++)
       FileWrite(h, S[i].sym, (long)S[i].lastBar, S[i].scalarInUse, S[i].sigInUse ? 1 : 0,
-                S[i].pendingFlip ? 1 : 0, S[i].virtLots, S[i].pendingActive ? 1 : 0, S[i].pendingTarget, S[i].pendingReason);
+                S[i].pendingFlip ? 1 : 0, S[i].virtLots);
    FileClose(h);
 }
 
@@ -178,15 +168,11 @@ void LoadState()
       int    sg  = (int)FileReadNumber(h);
       int    pf  = (int)FileReadNumber(h);
       double vl  = FileReadNumber(h);
-      int    pa  = 0; double pt = 0; string pr = "";
-      if(!FileIsLineEnding(h) && !FileIsEnding(h)) { pa = (int)FileReadNumber(h); pt = FileReadNumber(h); pr = FileReadString(h); }
       for(int i = 0; i < N_SLEEVES; i++)
          if(S[i].sym == sym)
          {
             S[i].lastBar = (datetime)lb; S[i].scalarInUse = sc;
             S[i].sigInUse = (sg == 1); S[i].pendingFlip = (pf == 1); S[i].virtLots = vl;
-            S[i].pendingActive = (pa == 1); S[i].pendingTarget = pt; S[i].pendingReason = pr; S[i].pendingTries = 0;
-            if(S[i].pendingActive) Log("restored pending intent " + sym + " target " + DoubleToString(pt, 2) + " [" + pr + "]");
          }
    }
    FileClose(h);
@@ -213,12 +199,7 @@ bool IsMarketOpen(string sym)
       any = true;
       if(secs >= (long)from && secs < (long)to) return true;
    }
-   if(!any)   // v1.01: no session table -> fail CLOSED unless the symbol is fully tradable and the quote is fresh
-   {
-      long mode = SymbolInfoInteger(sym, SYMBOL_TRADE_MODE);
-      datetime qt = (datetime)SymbolInfoInteger(sym, SYMBOL_TIME);
-      return (mode == SYMBOL_TRADE_MODE_FULL && (TimeCurrent() - qt) < 300);
-   }
+   if(!any) return true;
    // also allow a session from the previous day that spills past midnight
    ENUM_DAY_OF_WEEK ywd = (ENUM_DAY_OF_WEEK)((Weekday(now) + 6) % 7);
    for(int i = 0; SymbolInfoSessionTrade(sym, ywd, i, from, to); i++)
@@ -330,9 +311,8 @@ bool OpenLong(int i, double lots, string reason)
       return true;
    }
    trade.SetTypeFillingBySymbol(sym);
-   bool sent = trade.Buy(lots, sym, 0.0, sl, 0.0, "P7VT3 " + reason);
+   bool ok = trade.Buy(lots, sym, 0.0, sl, 0.0, "P7VT3 " + reason);
    uint rc = trade.ResultRetcode();
-   bool ok = sent && (rc == TRADE_RETCODE_DONE || rc == TRADE_RETCODE_PLACED || rc == TRADE_RETCODE_DONE_PARTIAL);
    Log(StringFormat("LIVE BUY %s %.2f lots (~%.0f) SL %.2f [%s] -> retcode %u %s",
                     sym, lots, notional, sl, reason, rc, trade.ResultRetcodeDescription()));
    LogCSV(sym, S[i].close1, S[i].sma, S[i].vol, S[i].scalarInUse, lots,
@@ -372,9 +352,8 @@ bool ReduceLong(int i, double lots, string reason)
       if(PositionGetInteger(POSITION_TYPE) != POSITION_TYPE_BUY) continue;
       double pv = PositionGetDouble(POSITION_VOLUME);
       bool ok;
-      if(pv <= remaining + step/2) { ok = trade.PositionClose(tk, SlippagePts); if(ok) remaining -= pv; }
-      else { ok = trade.PositionClosePartial(tk, NormalizeDouble(remaining, 8), SlippagePts); if(ok) remaining = 0; }
-      { uint rc2 = trade.ResultRetcode(); ok = ok && (rc2 == TRADE_RETCODE_DONE || rc2 == TRADE_RETCODE_PLACED || rc2 == TRADE_RETCODE_DONE_PARTIAL); }
+      if(pv <= remaining + step/2) { ok = trade.PositionClose(tk, SlippagePts); remaining -= pv; }
+      else { ok = trade.PositionClosePartial(tk, NormalizeDouble(remaining, 8), SlippagePts); remaining = 0; }
       Log(StringFormat("LIVE SELL %s ticket %I64u -> retcode %u %s", sym, tk, trade.ResultRetcode(), trade.ResultRetcodeDescription()));
       allok = allok && ok;
    }
@@ -389,13 +368,12 @@ void FlattenAll(string why)
    for(int i = 0; i < N_SLEEVES; i++)
    {
       double held = HeldLots(S[i].sym);
-      S[i].pendingActive = false; S[i].pendingTarget = 0; S[i].pendingReason = ""; S[i].pendingTries = 0;
+      S[i].pendingLots = 0; S[i].pendingReason = "";
       if(held > 0)
       {
-         bool done = false;
-         if(IsMarketOpen(S[i].sym)) done = ReduceLong(i, held, "FLATTEN:" + why);
-         if(!done) { S[i].pendingActive = true; S[i].pendingTarget = 0; S[i].pendingReason = "FLATTEN:" + why;
-                     Log("  " + S[i].sym + " flatten queued (market closed or order failed) - will retry every timer tick, halt or not"); }
+         if(IsMarketOpen(S[i].sym)) ReduceLong(i, held, "FLATTEN:" + why);
+         else { S[i].pendingLots = -held; S[i].pendingReason = "FLATTEN:" + why;
+                Log("  " + S[i].sym + " market closed - flatten queued"); }
       }
    }
    SaveState();
@@ -404,44 +382,12 @@ void FlattenAll(string why)
 //=================================================================
 // RAILS
 //=================================================================
-//=================================================================
-// FTMO DAY KEY.  FTMO's daily-loss window resets at 00:00 CE(S)T, not at broker midnight.
-// v1.01: derive the day from GMT (TimeGMT uses the VPS clock, NTP-synced) plus the CET/CEST offset.
-//=================================================================
-datetime LastSundayUTC(int year, int month)
-{
-   MqlDateTime x; x.year = year; x.mon = month; x.day = 31; x.hour = 0; x.min = 0; x.sec = 0;
-   datetime t = StructToTime(x); MqlDateTime z; TimeToStruct(t, z);
-   return t - z.day_of_week * 86400;
-}
-int CETOffsetHours(datetime gmt)
-{
-   MqlDateTime d; TimeToStruct(gmt, d);
-   datetime start = LastSundayUTC(d.year, 3) + 3600;    // CEST starts last Sunday of March 01:00 UTC
-   datetime stop  = LastSundayUTC(d.year, 10) + 3600;   // ends last Sunday of October 01:00 UTC
-   return (gmt >= start && gmt < stop) ? 2 : 1;
-}
-datetime FtmoDayKey() { datetime g = TimeGMT(); return DayFloor(g + CETOffsetHours(g) * 3600); }
-
-bool Connected() { return TerminalInfoInteger(TERMINAL_CONNECTED) && AccountInfoDouble(ACCOUNT_BALANCE) > 0 && AccountInfoDouble(ACCOUNT_EQUITY) > 0; }
-
 bool PermHalted() { return GlobalVariableCheck(GV_HALT_PERM) && GlobalVariableGet(GV_HALT_PERM) > 0.5; }
 
 bool DayHalted()
 {
    if(!GlobalVariableCheck(GV_HALT_DAY)) return false;
-   return (long)GlobalVariableGet(GV_HALT_DAY) == (long)FtmoDayKey();
-}
-
-// FTMO daily floor: reference = the HIGHER of balance and equity at the FTMO day start (conservative under
-// either reading of the rule), minus DAILY_LOSS_HALT x InitialBalance (4% of initial = $1,000 buffer under
-// FTMO's 5%-of-initial limit on a $100k account).
-double DailyFloor()
-{
-   double ref = MathMax(GlobalVariableGet(GV_DAYSTART_BAL), GlobalVariableGet(GV_DAYSTART_EQ));
-   double initBal = GlobalVariableGet(GV_INITBAL);
-   if(ref <= 0 || initBal <= 0) return 0;
-   return ref - DAILY_LOSS_HALT * initBal;
+   return (long)GlobalVariableGet(GV_HALT_DAY) == (long)DayFloor(TimeTradeServer());
 }
 
 void CheckRails()
@@ -460,12 +406,12 @@ void CheckRails()
       return;
    }
    // --- daily-loss (halt for the server day) ---
-   double floor = DailyFloor();
-   if(floor > 0 && eq <= floor && !DayHalted())
+   double dayEq = GlobalVariableGet(GV_DAYSTART_EQ);
+   if(dayEq > 0 && eq <= dayEq * (1.0 - DAILY_LOSS_HALT) && !DayHalted())
    {
-      GlobalVariableSet(GV_HALT_DAY, (double)(long)FtmoDayKey());
-      Log(StringFormat("!!!!! DAILY-LOSS GUARD: equity %.2f <= floor %.2f (day-start ref %.2f - %.1f%% of initial %.2f). Flattening, halted until next FTMO day.",
-                       eq, floor, MathMax(GlobalVariableGet(GV_DAYSTART_BAL), GlobalVariableGet(GV_DAYSTART_EQ)), DAILY_LOSS_HALT*100, GlobalVariableGet(GV_INITBAL)));
+      GlobalVariableSet(GV_HALT_DAY, (double)(long)DayFloor(TimeTradeServer()));
+      Log(StringFormat("!!!!! DAILY-LOSS GUARD: equity %.2f <= %.2f (day start %.2f x %.3f). Flattening, halted until next server day.",
+                       eq, dayEq*(1-DAILY_LOSS_HALT), dayEq, 1-DAILY_LOSS_HALT));
       LogCSV("BOOK", 0, 0, 0, 0, 0, "DAILY_LOSS_HALT", eq);
       FlattenAll("daily-loss guard");
       Alert("P7VT3: DAILY-LOSS HALT. Flattened for today.");
@@ -474,27 +420,26 @@ void CheckRails()
 
 void RollServerDay()
 {
-   if(!Connected()) return;                       // v1.01: never anchor on a disconnected terminal
-   datetime today = FtmoDayKey();
+   datetime today = DayFloor(TimeTradeServer());
    if(today == g_lastServerDay) return;
+   g_lastServerDay = today;
    // Restart mid-day: keep the anchor already recorded for today.  Re-anchoring to
    // current equity after a loss would silently loosen the daily guard.
    if(GlobalVariableCheck(GV_DAYSTART_DATE) && (long)GlobalVariableGet(GV_DAYSTART_DATE) == (long)today
-      && GlobalVariableGet(GV_DAYSTART_EQ) > 0 && GlobalVariableGet(GV_DAYSTART_BAL) > 0)
+      && GlobalVariableGet(GV_DAYSTART_EQ) > 0)
    {
-      g_lastServerDay = today;
-      Log(StringFormat("Restart within FTMO day %s: keeping day-start anchors bal %.2f eq %.2f (floor %.2f)",
-                       TimeToString(today, TIME_DATE), GlobalVariableGet(GV_DAYSTART_BAL), GlobalVariableGet(GV_DAYSTART_EQ), DailyFloor()));
+      Log(StringFormat("Restart within server day %s: keeping day-start equity anchor %.2f",
+                       TimeToString(today, TIME_DATE), GlobalVariableGet(GV_DAYSTART_EQ)));
       return;
    }
-   double eq  = AccountInfoDouble(ACCOUNT_EQUITY);
-   double bal = AccountInfoDouble(ACCOUNT_BALANCE);
+   double eq = AccountInfoDouble(ACCOUNT_EQUITY);
+   // Day-start equity anchor for the daily-loss guard.
+   // ASSUMPTION: FTMO's daily-loss window resets at midnight CE(S)T and FTMO's MT5
+   // server clock is CE(S)T, so server-day == firm-day.  VERIFY on your account.
    GlobalVariableSet(GV_DAYSTART_EQ, eq);
-   GlobalVariableSet(GV_DAYSTART_BAL, bal);
    GlobalVariableSet(GV_DAYSTART_DATE, (double)(long)today);
-   g_lastServerDay = today;
-   Log(StringFormat("New FTMO day %s (CE(S)T)  day-start balance %.2f equity %.2f  -> daily floor %.2f",
-                    TimeToString(today, TIME_DATE), bal, eq, DailyFloor()));
+   Log(StringFormat("New server day %s  day-start equity %.2f  (daily halt at %.2f)",
+                    TimeToString(today, TIME_DATE), eq, eq*(1-DAILY_LOSS_HALT)));
 }
 
 //=================================================================
@@ -580,34 +525,20 @@ void OnNewBar(int i)
        step, SymbolInfoDouble(sym, SYMBOL_VOLUME_MIN)));
    LogCSV(sym, S[i].close1, S[i].sma, S[i].vol, S[i].scalarInUse, tgtLots, act ? why : "HOLD", eq);
 
-   if(act) { S[i].pendingActive = true; S[i].pendingTarget = tgtLots; S[i].pendingReason = why; S[i].pendingTries = 0; }
+   S[i].pendingLots = act ? deltaLots : 0.0;
+   S[i].pendingReason = why;
    S[i].lastBar = iTime(sym, PERIOD_D1, 1);
    SaveState();
 }
 
-// v1.01: the intent is a TARGET.  At execution time we re-read real holdings and trade only the delta,
-// so a retry after a partial fill / failed order / restart can never double-order.  The intent is
-// cleared only after the order was accepted; while halted only reductions are allowed.
 void ProcessPending(int i)
 {
-   if(!S[i].pendingActive) return;
-   if(!Connected()) return;
-   bool halted = PermHalted() || DayHalted();
-   double held  = HeldLots(S[i].sym);
-   double step  = SymbolInfoDouble(S[i].sym, SYMBOL_VOLUME_STEP); if(step <= 0) step = 0.01;
-   double delta = S[i].pendingTarget - held;
-   if(MathAbs(delta) < step/2) { S[i].pendingActive = false; S[i].pendingReason = ""; SaveState(); return; }   // already there
-   if(halted && delta > 0) { Log(S[i].sym + ": halted, dropping BUY intent"); S[i].pendingActive = false; SaveState(); return; }
-   if(!IsMarketOpen(S[i].sym)) return;          // retry on the next timer tick, intent kept
-   string why = S[i].pendingReason;
-   bool ok = (delta > 0) ? OpenLong(i, delta, why) : ReduceLong(i, -delta, why);
-   if(ok) { S[i].pendingActive = false; S[i].pendingReason = ""; S[i].pendingTries = 0; }
-   else
-   {
-      S[i].pendingTries++;
-      if(S[i].pendingTries == MAX_PENDING_TRIES) Alert("P7VT3: " + S[i].sym + " intent [" + why + "] failed " + IntegerToString(MAX_PENDING_TRIES) + " times - check the terminal");
-      Log(StringFormat("%s intent [%s] not filled (try %d) - kept for retry", S[i].sym, why, S[i].pendingTries));
-   }
+   if(MathAbs(S[i].pendingLots) < 1e-9) return;
+   if(PermHalted() || DayHalted()) { S[i].pendingLots = 0; return; }
+   if(!IsMarketOpen(S[i].sym)) return;          // retry on the next timer tick
+   double d = S[i].pendingLots; string why = S[i].pendingReason;
+   S[i].pendingLots = 0; S[i].pendingReason = "";
+   if(d > 0) OpenLong(i, d, why); else ReduceLong(i, -d, why);
    SaveState();
 }
 
@@ -622,33 +553,17 @@ int OnInit()
    for(int i = 0; i < N_SLEEVES; i++)
    {
       S[i].lastBar = 0; S[i].scalarInUse = 0; S[i].sigInUse = false; S[i].pendingFlip = false;
-      S[i].pendingActive = false; S[i].pendingTarget = 0; S[i].pendingReason = ""; S[i].pendingTries = 0; S[i].virtLots = 0;
+      S[i].pendingLots = 0; S[i].virtLots = 0;
       if(!SymbolSelect(S[i].sym, true))
       { Log("SYMBOL NOT FOUND: " + S[i].sym + " - fix the input name."); return INIT_FAILED; }
       if(SymbolInfoString(S[i].sym, SYMBOL_CURRENCY_PROFIT) != AccountInfoString(ACCOUNT_CURRENCY))
          Log("NOTE " + S[i].sym + " profit currency " + SymbolInfoString(S[i].sym, SYMBOL_CURRENCY_PROFIT) +
              " != account currency " + AccountInfoString(ACCOUNT_CURRENCY) + ": lot math uses tick value (handles this), verify once by hand.");
    }
-   if(AccountInfoInteger(ACCOUNT_MARGIN_MODE) != ACCOUNT_MARGIN_MODE_RETAIL_HEDGING)
-   { Log("ACCOUNT IS NOT IN HEDGING MODE - v1.01 supports hedging accounts only. Not starting."); return INIT_FAILED; }
    LoadState();
    trade.SetExpertMagicNumber(MagicNumber);
    trade.SetDeviationInPoints(SlippagePts);
-   EventSetTimer(TIMER_SEC);
-   g_armed = false;
-   if(!LiveTrading) Log("DRY RUN: nothing will be sent. Read the log for two weeks, then set LiveTrading=true yourself.");
-   Log(StringFormat("v1.01-SAFETY loaded. Exposure %.2f  LiveTrading=%s  ImmediateFlips=%s  Magic %I64d  MarginMode HEDGING  -> waiting for a live connection to arm",
-       Exposure, LiveTrading ? "TRUE" : "false", ImmediateFlips ? "true" : "false", MagicNumber));
-   Arm();
-   return INIT_SUCCEEDED;
-}
 
-// v1.01: anchors are recorded only on a connected terminal with a real balance.  Called from OnInit and
-// from every timer tick until it succeeds (the disconnected-boot case).
-void Arm()
-{
-   if(g_armed) return;
-   if(!Connected()) { static datetime lastWarn = 0; if(TimeCurrent() - lastWarn > 300) { Log("not connected / balance 0 - rails NOT armed, no trading"); lastWarn = TimeCurrent(); } return; }
    if(!GlobalVariableCheck(GV_INITBAL) || GlobalVariableGet(GV_INITBAL) <= 0)
    {
       double bal = AccountInfoDouble(ACCOUNT_BALANCE);
@@ -656,47 +571,31 @@ void Arm()
       Log(StringFormat("InitialBalance recorded = %.2f (static max-loss halt at %.2f). "
                        "NOTE: MT5 global variables expire after 4 weeks without access; this EA touches it daily.", bal, bal*(1-STATIC_LOSS_HALT)));
    }
-   RollServerDay();
-   g_armed = true; g_initialised = true;
-   Log(StringFormat("Init OK (armed). InitialBalance %.2f  static halt %.2f  daily floor %.2f  FTMO day %s  CET offset +%d",
-       GlobalVariableGet(GV_INITBAL), GlobalVariableGet(GV_INITBAL)*(1-STATIC_LOSS_HALT), DailyFloor(),
-       TimeToString(FtmoDayKey(), TIME_DATE), CETOffsetHours(TimeGMT())));
-   if(PermHalted()) Log("!!!!! PERMANENT HALT FLAG IS SET. EA will not open positions until " + GV_HALT_PERM + " is deleted.");
-}
-
-void Heartbeat()
-{
-   int h = FileOpen(HEART_FILE, FILE_WRITE|FILE_TXT|FILE_ANSI);
-   if(h == INVALID_HANDLE) return;
-   FileWrite(h, StringFormat("gmt=%s connected=%d armed=%d balance=%.2f equity=%.2f floor=%.2f permhalt=%d dayhalt=%d",
-             TimeToString(TimeGMT(), TIME_DATE|TIME_SECONDS), (int)TerminalInfoInteger(TERMINAL_CONNECTED), (int)g_armed,
-             AccountInfoDouble(ACCOUNT_BALANCE), AccountInfoDouble(ACCOUNT_EQUITY), DailyFloor(), (int)PermHalted(), (int)DayHalted()));
-   for(int i = 0; i < N_SLEEVES; i++)
-      FileWrite(h, StringFormat("%s held=%.2f pending=%d target=%.2f quote_age_s=%d", S[i].sym, HeldLots(S[i].sym), (int)S[i].pendingActive,
-                S[i].pendingTarget, (int)(TimeCurrent() - (datetime)SymbolInfoInteger(S[i].sym, SYMBOL_TIME))));
-   FileClose(h);
+   Log(StringFormat("Init OK. Exposure %.2f  LiveTrading=%s  ImmediateFlips=%s  Magic %I64d  InitialBalance %.2f  MarginMode %s",
+       Exposure, LiveTrading ? "TRUE" : "false", ImmediateFlips ? "true" : "false", MagicNumber, GlobalVariableGet(GV_INITBAL),
+       AccountInfoInteger(ACCOUNT_MARGIN_MODE) == ACCOUNT_MARGIN_MODE_RETAIL_HEDGING ? "HEDGING" : "NETTING"));
+   if(PermHalted()) Log("!!!!! PERMANENT HALT FLAG IS SET. EA will not trade until " + GV_HALT_PERM + " is deleted.");
+   if(!LiveTrading) Log("DRY RUN: nothing will be sent. Read the log for two weeks, then set LiveTrading=true yourself.");
+   EventSetTimer(TIMER_SEC);
+   g_initialised = true;
+   return INIT_SUCCEEDED;
 }
 
 void OnDeinit(const int reason) { EventKillTimer(); SaveState(); }
 
-void OnTick() { if(g_armed && Connected()) CheckRails(); }   // faster rail reaction on the chart symbol's ticks
+void OnTick() { if(g_initialised) CheckRails(); }   // faster rail reaction on the chart symbol's ticks
 
 void OnTimer()
 {
-   Arm();
-   Heartbeat();
-   if(!g_armed || !Connected()) return;          // v1.01: nothing runs on a disconnected terminal
+   if(!g_initialised) return;
    RollServerDay();
    CheckRails();
-   bool halted = PermHalted() || DayHalted();
+   if(PermHalted() || DayHalted()) return;
    for(int i = 0; i < N_SLEEVES; i++)
    {
-      if(!halted)
-      {
-         datetime b1 = iTime(S[i].sym, PERIOD_D1, 1);
-         if(b1 > 0 && b1 != S[i].lastBar) OnNewBar(i);   // this symbol has a NEW closed bar
-      }
-      ProcessPending(i);                               // runs halted or not: flattens must always execute
+      datetime b1 = iTime(S[i].sym, PERIOD_D1, 1);
+      if(b1 > 0 && b1 != S[i].lastBar) OnNewBar(i);   // this symbol has a NEW closed bar
+      ProcessPending(i);
    }
 }
 //+------------------------------------------------------------------+
