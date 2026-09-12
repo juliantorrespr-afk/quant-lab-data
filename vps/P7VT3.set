@@ -1,6 +1,6 @@
-SymUS100=ND100m
-SymBTC=BTC
-SymGold=XAUUSD
+SymUS100=US100.sim
+SymBTC=BTCUSD.sim
+SymGold=XAUUSD.sim
 Exposure=0.55
 LiveTrading=true
 ImmediateFlips=true
