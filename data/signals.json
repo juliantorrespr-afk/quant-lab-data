@@ -1,55 +1,52 @@
 {
- "as_of": "2026-09-10",
- "run": "2026-09-11T04:26+00:00",
+ "as_of": "2026-09-11",
+ "run": "2026-09-12T04:24+00:00",
  "reconcile": {
   "source": "broker",
-  "broker_equity": 99762.77,
+  "broker_equity": 100324.78,
   "qty_drift": {
-   "QQQ": 0.0,
+   "QQQ": -16.9644,
    "BTC": 0.0,
-   "GLD": 0.0
+   "GLD": -16.8647
   },
-  "cash_drift": 0.0,
-  "pending_orders": [
-   "GLD",
-   "QQQ"
-  ]
+  "cash_drift": 18910.12,
+  "pending_orders": []
  },
  "QQQ": {
-  "close": 708.69,
-  "sma150": 672.38,
-  "dist_pct": 5.4,
+  "close": 714.88,
+  "sma150": 673.17,
+  "dist_pct": 6.2,
   "state": "LONG",
-  "vol20_pct": 12.7,
+  "vol20_pct": 12.4,
   "size": 1.0,
   "weight": 0.4,
   "size_in_use": 1.0
  },
  "BTC": {
-  "close": 76542.0,
-  "sma150": 70190.19,
-  "dist_pct": 9.05,
+  "close": 77210.9,
+  "sma150": 70210.38,
+  "dist_pct": 9.97,
   "state": "LONG",
-  "vol20_pct": 27.7,
+  "vol20_pct": 27.3,
   "size": 1.0,
   "weight": 0.2,
   "size_in_use": 1.0
  },
  "GLD": {
-  "close": 396.36,
-  "sma150": 416.43,
-  "dist_pct": -4.82,
+  "close": 398.77,
+  "sma150": 416.14,
+  "dist_pct": -4.17,
   "state": "HELD",
-  "vol20_pct": 27.5,
-  "size": 0.545,
+  "vol20_pct": 27.2,
+  "size": 0.552,
   "weight": 0.4,
   "size_in_use": 0.5532925913490641
  },
  "book": {
-  "equity": 99762.77,
-  "marked_at_close": 99658.54,
-  "hwm": 100000.0,
-  "dd_pct": -0.24,
+  "equity": 100324.78,
+  "marked_at_close": 100318.19,
+  "hwm": 100324.78,
+  "dd_pct": 0.0,
   "mode": "ALPACA"
  },
  "eval": {
@@ -57,10 +54,10 @@
   "failed": false,
   "passed": false,
   "day_pl_pct": 0.0,
-  "total_pl_pct": -0.24,
-  "trailing_pl_pct": -0.24,
+  "total_pl_pct": 0.32,
+  "trailing_pl_pct": 0.0,
   "daily_budget_used_pct": 0,
-  "total_budget_used_pct": 2.4,
+  "total_budget_used_pct": 0,
   "worst_daily_pct": -0.03,
   "worst_total_pct": -0.24,
   "days_traded": 1,
@@ -72,9 +69,5 @@
   },
   "exposure": 0.7,
   "breaches": []
- },
- "notes": [
-  "QQQ: an order is already working at the broker \u2014 skipped this run",
-  "GLD: an order is already working at the broker \u2014 skipped this run"
- ]
+ }
 }
