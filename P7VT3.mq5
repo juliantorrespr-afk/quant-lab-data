@@ -29,7 +29,9 @@
 //|  symbols itself.  Runs on a 30-second timer, not on ticks.       |
 //+------------------------------------------------------------------+
 #property copyright   "QUANT_LAB"
-#property version     "1.01"
+#property version     "1.02"
+// v1.02 (2026-09-12): missed-rollover handling (conservative anchor + no new exposure that day), first-ever
+// anchor never below InitialBalance, in-flight order check + send cooldown, partial fills keep the intent live.
 // v1.01-SAFETY (2026-09-12): FTMO-correct daily floor (day-start balance/equity at 00:00 CE(S)T minus 4% of
 // InitialBalance), CE(S)T day key from GMT, connectivity gate + late init, persisted pending intents that
 // store TARGET lots and recompute the delta against real holdings at execution (double-order defense),
@@ -75,6 +77,9 @@ input int     SlippagePts   = 50;          // max deviation in points for market
 #define STATE_FILE         "P7VT3_state.csv"
 #define HEART_FILE         "P7VT3_heartbeat.txt"
 #define GV_DAYSTART_BAL    "P7VT3_DayStartBalance"
+#define GV_DAY_UNVERIFIED  "P7VT3_DayUnverified"   // = FTMO day key when the rollover was missed: reductions only that day
+#define ROLLOVER_GRACE_S   120                     // anchor must be taken within this many seconds of 00:00 CE(S)T
+#define SEND_COOLDOWN_S    90                      // after any accepted send, wait before the next send on that sleeve
 #define MAX_PENDING_TRIES  40      // 40 x 30 s = 20 min of retries, then log loudly and keep the intent
 
 //=================================================================
@@ -102,6 +107,7 @@ struct Sleeve
    double   pendingTarget;  // desired held lots after execution
    string   pendingReason;
    int      pendingTries;
+   datetime lastSendAt;     // v1.02: cooldown after an accepted send
    // dry-run virtual position
    double   virtLots;
 };
@@ -489,12 +495,47 @@ void RollServerDay()
    }
    double eq  = AccountInfoDouble(ACCOUNT_EQUITY);
    double bal = AccountInfoDouble(ACCOUNT_BALANCE);
+   datetime g = TimeGMT();
+   long sinceRoll = (long)(g + CETOffsetHours(g) * 3600) - (long)today;     // seconds since 00:00 CE(S)T
+   bool firstEver = !(GlobalVariableCheck(GV_DAYSTART_DATE) && GlobalVariableGet(GV_DAYSTART_BAL) > 0);
+   bool missed    = (!firstEver && sinceRoll > ROLLOVER_GRACE_S);
+   // v1.02: FTMO's floor uses the balance AT midnight.  If we were not running at midnight we cannot know it,
+   // so take the most conservative reference we have (yesterday's anchor, today's balance, today's equity) and
+   // allow no new exposure for the rest of this FTMO day.  On the very first anchor ever, FTMO uses the initial
+   // capital, so never anchor below InitialBalance.
+   if(missed)
+   {
+      double prevRef = MathMax(GlobalVariableGet(GV_DAYSTART_BAL), GlobalVariableGet(GV_DAYSTART_EQ));
+      bal = MathMax(bal, prevRef); eq = MathMax(eq, prevRef);
+      GlobalVariableSet(GV_DAY_UNVERIFIED, (double)(long)today);
+      Log(StringFormat("!!!!! MISSED MIDNIGHT ROLLOVER by %d s: anchoring to the higher of yesterday's ref / now (%.2f). "
+                       "DAY_ANCHOR_UNVERIFIED - no new exposure until the next FTMO day.", (int)sinceRoll, MathMax(bal, eq)));
+   }
+   if(firstEver) { double ib = GlobalVariableGet(GV_INITBAL); bal = MathMax(bal, ib); eq = MathMax(eq, ib); }
    GlobalVariableSet(GV_DAYSTART_EQ, eq);
    GlobalVariableSet(GV_DAYSTART_BAL, bal);
    GlobalVariableSet(GV_DAYSTART_DATE, (double)(long)today);
    g_lastServerDay = today;
-   Log(StringFormat("New FTMO day %s (CE(S)T)  day-start balance %.2f equity %.2f  -> daily floor %.2f",
-                    TimeToString(today, TIME_DATE), bal, eq, DailyFloor()));
+   Log(StringFormat("New FTMO day %s (CE(S)T)  day-start balance %.2f equity %.2f  -> daily floor %.2f%s",
+                    TimeToString(today, TIME_DATE), bal, eq, DailyFloor(), missed ? "  [UNVERIFIED]" : ""));
+}
+
+bool DayUnverified()
+{
+   if(!GlobalVariableCheck(GV_DAY_UNVERIFIED)) return false;
+   return (long)GlobalVariableGet(GV_DAY_UNVERIFIED) == (long)FtmoDayKey();
+}
+
+// v1.02: an order of ours still in flight on this symbol (market order queued / not yet executed)
+bool HasOpenOrder(string sym)
+{
+   for(int i = OrdersTotal() - 1; i >= 0; i--)
+   {
+      ulong tk = OrderGetTicket(i);
+      if(tk == 0 || !OrderSelect(tk)) continue;
+      if(OrderGetString(ORDER_SYMBOL) == sym && OrderGetInteger(ORDER_MAGIC) == MagicNumber) return true;
+   }
+   return false;
 }
 
 //=================================================================
@@ -570,6 +611,7 @@ void OnNewBar(int i)
    else if(month3 && deltaNot > MIN_TRADE_FRAC * eq)   { why = "MONTH_REBAL"; act = true; }
    else if(monday && deltaNot > DRIFT_BAND * eq)       { why = "MONDAY_RESIZE"; act = true; }
    if(MathAbs(deltaLots) < step/2) act = false;
+   if(act && deltaLots > 0 && DayUnverified()) { Log(sym + ": BUY suppressed - day anchor unverified"); act = false; }
 
    Log(StringFormat("%s bar %s | close %.2f sma %.2f -> %s | vol %.1f%% scalar %.3f (in use %.3f) | target %.2f lots (~%.0f) held %.2f | %s",
        sym, TimeToString(iTime(sym, PERIOD_D1, 1), TIME_DATE), S[i].close1, S[i].sma, on ? "LONG" : "FLAT",
@@ -587,7 +629,7 @@ void OnNewBar(int i)
 
 // v1.01: the intent is a TARGET.  At execution time we re-read real holdings and trade only the delta,
 // so a retry after a partial fill / failed order / restart can never double-order.  The intent is
-// cleared only after the order was accepted; while halted only reductions are allowed.
+// cleared only when real holdings equal the target; while halted or on an unverified day only reductions run.
 void ProcessPending(int i)
 {
    if(!S[i].pendingActive) return;
@@ -598,10 +640,17 @@ void ProcessPending(int i)
    double delta = S[i].pendingTarget - held;
    if(MathAbs(delta) < step/2) { S[i].pendingActive = false; S[i].pendingReason = ""; SaveState(); return; }   // already there
    if(halted && delta > 0) { Log(S[i].sym + ": halted, dropping BUY intent"); S[i].pendingActive = false; SaveState(); return; }
+   if(DayUnverified() && delta > 0) { Log(S[i].sym + ": day anchor unverified, dropping BUY intent"); S[i].pendingActive = false; SaveState(); return; }
    if(!IsMarketOpen(S[i].sym)) return;          // retry on the next timer tick, intent kept
+   if(HasOpenOrder(S[i].sym)) { Log(S[i].sym + ": order in flight - waiting"); return; }
+   if(TimeCurrent() - S[i].lastSendAt < SEND_COOLDOWN_S) return;   // let the last fill settle before re-evaluating
    string why = S[i].pendingReason;
    bool ok = (delta > 0) ? OpenLong(i, delta, why) : ReduceLong(i, -delta, why);
-   if(ok) { S[i].pendingActive = false; S[i].pendingReason = ""; S[i].pendingTries = 0; }
+   S[i].lastSendAt = TimeCurrent();             // cooldown after ANY send attempt (accepted or rejected)
+   // v1.02: never clear on a send.  The intent clears itself on a later tick when real holdings match the target
+   // (the |delta| < step/2 branch above).  A partial fill or a queued order therefore keeps the target alive
+   // without any possibility of resending the same delta twice inside the cooldown.
+   if(ok) { S[i].pendingTries = 0; }
    else
    {
       S[i].pendingTries++;
@@ -622,7 +671,7 @@ int OnInit()
    for(int i = 0; i < N_SLEEVES; i++)
    {
       S[i].lastBar = 0; S[i].scalarInUse = 0; S[i].sigInUse = false; S[i].pendingFlip = false;
-      S[i].pendingActive = false; S[i].pendingTarget = 0; S[i].pendingReason = ""; S[i].pendingTries = 0; S[i].virtLots = 0;
+      S[i].pendingActive = false; S[i].pendingTarget = 0; S[i].pendingReason = ""; S[i].pendingTries = 0; S[i].lastSendAt = 0; S[i].virtLots = 0;
       if(!SymbolSelect(S[i].sym, true))
       { Log("SYMBOL NOT FOUND: " + S[i].sym + " - fix the input name."); return INIT_FAILED; }
       if(SymbolInfoString(S[i].sym, SYMBOL_CURRENCY_PROFIT) != AccountInfoString(ACCOUNT_CURRENCY))
@@ -637,7 +686,7 @@ int OnInit()
    EventSetTimer(TIMER_SEC);
    g_armed = false;
    if(!LiveTrading) Log("DRY RUN: nothing will be sent. Read the log for two weeks, then set LiveTrading=true yourself.");
-   Log(StringFormat("v1.01-SAFETY loaded. Exposure %.2f  LiveTrading=%s  ImmediateFlips=%s  Magic %I64d  MarginMode HEDGING  -> waiting for a live connection to arm",
+   Log(StringFormat("v1.02 loaded. Exposure %.2f  LiveTrading=%s  ImmediateFlips=%s  Magic %I64d  MarginMode HEDGING  -> waiting for a live connection to arm",
        Exposure, LiveTrading ? "TRUE" : "false", ImmediateFlips ? "true" : "false", MagicNumber));
    Arm();
    return INIT_SUCCEEDED;
@@ -668,9 +717,9 @@ void Heartbeat()
 {
    int h = FileOpen(HEART_FILE, FILE_WRITE|FILE_TXT|FILE_ANSI);
    if(h == INVALID_HANDLE) return;
-   FileWrite(h, StringFormat("gmt=%s connected=%d armed=%d balance=%.2f equity=%.2f floor=%.2f permhalt=%d dayhalt=%d",
+   FileWrite(h, StringFormat("gmt=%s connected=%d armed=%d balance=%.2f equity=%.2f floor=%.2f permhalt=%d dayhalt=%d unverified=%d",
              TimeToString(TimeGMT(), TIME_DATE|TIME_SECONDS), (int)TerminalInfoInteger(TERMINAL_CONNECTED), (int)g_armed,
-             AccountInfoDouble(ACCOUNT_BALANCE), AccountInfoDouble(ACCOUNT_EQUITY), DailyFloor(), (int)PermHalted(), (int)DayHalted()));
+             AccountInfoDouble(ACCOUNT_BALANCE), AccountInfoDouble(ACCOUNT_EQUITY), DailyFloor(), (int)PermHalted(), (int)DayHalted(), (int)DayUnverified()));
    for(int i = 0; i < N_SLEEVES; i++)
       FileWrite(h, StringFormat("%s held=%.2f pending=%d target=%.2f quote_age_s=%d", S[i].sym, HeldLots(S[i].sym), (int)S[i].pendingActive,
                 S[i].pendingTarget, (int)(TimeCurrent() - (datetime)SymbolInfoInteger(S[i].sym, SYMBOL_TIME))));
