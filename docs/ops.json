@@ -1,10 +1,10 @@
 {
  "updated": "2026-09-12",
- "vpsPill": "ok",
- "vpsTxt": "vps quantlab-mt5-2g · 2 GB · live",
- "mt5Pill": "ok",
- "mt5Txt": "mt5 · EA live · [P7VT3] Init OK",
- "vps": "<span class=\"g\">● quantlab-mt5 · Win Server 2025 · 2 GB ($22/mo) · pagefile 4 GB · logon task auto-starts MT5 · 44.222.86.150</span>",
- "mt5": "<span class=\"g\">● P7VT3 LIVE on FTMO US demo 1600189053 @ OANDA-Demo-1 · [P7VT3] Init OK · Exposure 0.55 · LiveTrading=TRUE · symbols ND100m / BTC / XAUUSD · waiting for Mon market open (Sat now: indices/gold/FX closed, only BTC trades)</span>",
- "note": "InitialBalance anchored 0.00 (balance not synced at first init) → re-anchors on next restart after balance loads; verify Mon."
+ "vpsPill": "warn",
+ "vpsTxt": "vps quantlab-mt5 · 1 GB + 4 GB pagefile",
+ "mt5Pill": "warn",
+ "mt5Txt": "mt5 · v1.02 pushed · awaiting compile",
+ "vps": "<span class=\"y\">● quantlab-mt5 · Win Server 2025 · 1 GB (AWS refused the 2 GB plan — Support limit request pending) · pagefile 4 GB · logon task QL auto-starts MT5 with p7_ftmo.ini · 44.222.86.150 (no static IP)</span>",
+ "mt5": "<span class=\"y\">● FTMO US free trial 1600189053 @ OANDA-Demo-1 · HEDGING · proof of life 02:12: authorized + equity 100,000 · live symbols US100.sim / BTCUSD.sim / XAUUSD.sim · EA v1.02 (2 Astra audits) pushed to repo, compile blocked on AWS console sign-in · terminal currently idle on scratch account, no EA, no positions</span>",
+ "note": "Weekend: first real orders at the Mon/Tue open. Monday sign-off: authorized on OANDA-Demo-1 · Init OK (armed). InitialBalance 100000.00 · CET offset +2 · daily floor 96000.00 · one EA instance."
 }
