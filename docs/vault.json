@@ -1,0 +1,106 @@
+{
+ "generated": "2026-09-14 19:51 UTC",
+ "vault": "/srv/vault",
+ "datasets": [
+  {
+   "name": "NQ 1-min (Databento)",
+   "files": 1,
+   "size_mb": 79.5,
+   "first": "2010-06-06 20:00:00",
+   "last": "2026-09-13 19:59:00",
+   "rows": 4820057,
+   "public_ok": true,
+   "note": "futures, continuous, unadjusted"
+  },
+  {
+   "name": "ES 1-min (Databento)",
+   "files": 1,
+   "size_mb": 72.7,
+   "first": "2010-06-06 20:00:00",
+   "last": "2026-09-13 19:59:00",
+   "rows": 4932622,
+   "public_ok": true,
+   "note": "futures, continuous, unadjusted"
+  },
+  {
+   "name": "MNQ 1-min (Databento)",
+   "files": 1,
+   "size_mb": 44.8,
+   "first": "2019-05-05 20:00:00",
+   "last": "2026-09-13 19:59:00",
+   "rows": 2593927,
+   "public_ok": true,
+   "note": "futures, continuous, unadjusted"
+  },
+  {
+   "name": "MES 1-min (Databento)",
+   "files": 1,
+   "size_mb": 40.5,
+   "first": "2019-05-05 20:00:00",
+   "last": "2026-09-13 19:59:00",
+   "rows": 2592299,
+   "public_ok": true,
+   "note": "futures, continuous, unadjusted"
+  },
+  {
+   "name": "xauusd 5-min (Dukascopy)",
+   "files": 1,
+   "size_mb": 20.5,
+   "first": null,
+   "last": null,
+   "rows": null,
+   "public_ok": false,
+   "note": "unreadable: \"['volume'] not in index\""
+  },
+  {
+   "name": "usatechidxusd 5-min (Dukascopy)",
+   "files": 1,
+   "size_mb": 37.7,
+   "first": null,
+   "last": null,
+   "rows": null,
+   "public_ok": false,
+   "note": "unreadable: \"['volume'] not in index\""
+  },
+  {
+   "name": "usa500idxusd 5-min (Dukascopy)",
+   "files": 1,
+   "size_mb": 36.7,
+   "first": null,
+   "last": null,
+   "rows": null,
+   "public_ok": false,
+   "note": "unreadable: \"['volume'] not in index\""
+  },
+  {
+   "name": "BTCUSDT 1-min (Binance)",
+   "files": 109,
+   "size_mb": 232.9,
+   "first": "017-08.",
+   "last": "026-08.",
+   "rows": null,
+   "public_ok": false,
+   "note": "109 monthly zips"
+  },
+  {
+   "name": "daily OHLCV (Yahoo)",
+   "files": 25,
+   "size_mb": 14.7,
+   "first": null,
+   "last": null,
+   "rows": null,
+   "public_ok": false,
+   "note": "BTC_USD, DBC, EEM, EFA, ES_F, ETH_USD, GC_F, GLD, HYG, IEF, IWM, LQD, NQ_F, PAXG_USD, QQQ, SHY, SLV, SMH, SPY, TLT, USO, UUP, VNQ, XLE, XLK"
+  },
+  {
+   "name": "daily closes (repo daily.csv)",
+   "files": 1,
+   "size_mb": 0.2,
+   "first": "2015-01-02",
+   "last": "2026-09-13",
+   "rows": 4273,
+   "public_ok": true,
+   "note": "QQQ / BTC / GLD \u2014 the money desk's own file"
+  }
+ ]
+}
