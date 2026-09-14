@@ -8,11 +8,11 @@ $hb = Get-ChildItem "$mt5\MQL5\Files\*heart*" -ErrorAction SilentlyContinue | So
 $lines = @(); if ($hb) { $lines = @(Get-Content $hb.FullName -ErrorAction SilentlyContinue) }
 $kv = [ordered]@{}
 if ($lines.Count -gt 0) { foreach ($p in ($lines[0] -split ' ')) { $a = $p -split '=', 2; if ($a.Count -eq 2) { $kv[$a[0]] = $a[1] } } }
-$sleeves = @(); if ($lines.Count -gt 1) { $sleeves = $lines[1..($lines.Count - 1)] }
+$sleeves = @(); if ($lines.Count -gt 1) { $sleeves = [string[]]@($lines[1..($lines.Count - 1)]) }
 $exp = Get-ChildItem "$mt5\MQL5\Logs\*.log" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-$explines = @(); if ($exp) { $explines = @(Get-Content $exp.FullName -Tail 12 -ErrorAction SilentlyContinue) }
+$explines = @(); if ($exp) { $explines = [string[]]@(Get-Content $exp.FullName -Tail 12 -ErrorAction SilentlyContinue) }
 $jr = Get-ChildItem "$mt5\logs\*.log" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-$jrlines = @(); if ($jr) { $jrlines = @(Get-Content $jr.FullName -Tail 8 -ErrorAction SilentlyContinue) }
+$jrlines = @(); if ($jr) { $jrlines = [string[]]@(Get-Content $jr.FullName -Tail 8 -ErrorAction SilentlyContinue) }
 $obj = [ordered]@{
   updated          = (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm 'UTC'")
   terminal_running = [bool](Get-Process terminal64 -ErrorAction SilentlyContinue)
