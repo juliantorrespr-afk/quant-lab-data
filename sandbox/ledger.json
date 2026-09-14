@@ -1,0 +1,338 @@
+{
+ "tests": {
+  "01_opening_break": {
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 19:51 UTC",
+   "name": "Opening Break",
+   "family": "opening-breakout",
+   "queue": 1,
+   "key": {
+    "oos_trades": 929,
+    "oos_expectancy_R": 0.11972943184839026,
+    "oos_expectancy_R_gross": 0.15440741550973205,
+    "oos_cost_R": 0.034677983661341796,
+    "oos_profit_factor": 1.2094872739732396,
+    "oos_win_rate": 0.4101184068891281,
+    "oos_max_dd_usd": -9322.070178571434,
+    "oos_max_dd_R": -15.346474587048181,
+    "surviving_size": {
+     "risk_pct": 0.15,
+     "net_per_year_usd": 1352.3412037405371,
+     "return_per_year_pct": 2.7046824074810742,
+     "max_dd_usd": -1398.3105267857172,
+     "headroom_pct": 30.08447366071414,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -159.1211250000008
+    },
+    "is_trades": 1262,
+    "is_expectancy_R": 0.007195482323091299,
+    "trades_per_year": 166.49521589793915
+   },
+   "lesson": [
+    "The edge is real (+0.120R over 929 trades) but jagged: the worst stretch is 15R deep. The largest size that keeps a funded account alive is 0.15% risk per trade, and at that size it earns about 2.7% a year.",
+    "The lever is the drawdown, not the entry: a filter that removes the losing stretch (or the losing market) is the one declared fix worth trying."
+   ],
+   "fix_recommended": "filter",
+   "data_sha": [
+    "60fe775c53a38ad2",
+    "e8d4350a4e864753"
+   ]
+  },
+  "02_patient_break": {
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 19:51 UTC",
+   "name": "Patient Break",
+   "family": "opening-breakout",
+   "queue": 2,
+   "key": {
+    "oos_trades": 431,
+    "oos_expectancy_R": 0.13322137890025293,
+    "oos_expectancy_R_gross": 0.16669504475319805,
+    "oos_cost_R": 0.03347366585294512,
+    "oos_profit_factor": 1.246310200237474,
+    "oos_win_rate": 0.4361948955916473,
+    "oos_max_dd_usd": -9870.836250000051,
+    "oos_max_dd_R": -17.987914285143475,
+    "surviving_size": {
+     "risk_pct": 0.14,
+     "net_per_year_usd": 662.8782553148155,
+     "return_per_year_pct": 1.3257565106296312,
+     "max_dd_usd": -1381.9170750000121,
+     "headroom_pct": 30.9041462499994,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -148.51305000000076
+    },
+    "is_trades": 594,
+    "is_expectancy_R": 0.11545095658231164,
+    "trades_per_year": 77.73962962962963
+   },
+   "lesson": [
+    "The edge is real (+0.133R over 431 trades) but jagged: the worst stretch is 18R deep. The largest size that keeps a funded account alive is 0.14% risk per trade, and at that size it earns about 1.3% a year.",
+    "The lever is the drawdown, not the entry: a filter that removes the losing stretch (or the losing market) is the one declared fix worth trying."
+   ],
+   "fix_recommended": "filter",
+   "data_sha": [
+    "60fe775c53a38ad2",
+    "e8d4350a4e864753"
+   ]
+  },
+  "03_swing_pullback": {
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 18:56 UTC",
+   "name": "Swing Pullback",
+   "family": "swing-pullback-in-trend",
+   "queue": 3,
+   "key": {
+    "oos_trades": 608,
+    "oos_expectancy_R": 0.15081421865695957,
+    "oos_expectancy_R_gross": 0.21265519787543974,
+    "oos_cost_R": 0.06184097921848017,
+    "oos_profit_factor": 1.2225440662319162,
+    "oos_win_rate": 0.5115131578947368,
+    "oos_max_dd_usd": -33491.42752472838,
+    "oos_max_dd_R": -38.561082591180934,
+    "surviving_size": {
+     "risk_pct": 0.2,
+     "net_per_year_usd": 3231.2219166028294,
+     "return_per_year_pct": 3.2312219166028293,
+     "max_dd_usd": -6698.28550494567,
+     "headroom_pct": 33.0171449505433,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -1830.4432880673573
+    },
+    "is_trades": 608,
+    "is_expectancy_R": 0.19304821988480364,
+    "trades_per_year": 107.12590448625181
+   },
+   "lesson": [
+    "The edge is real (+0.151R over 608 trades) but jagged: the worst stretch is 39R deep. The largest size that keeps a funded account alive is 0.20% risk per trade, and at that size it earns about 3.2% a year.",
+    "The lever is the drawdown, not the entry: a filter that removes the losing stretch (or the losing market) is the one declared fix worth trying.",
+    "By market: works on GLD, QQQ, loses on BTC."
+   ],
+   "fix_recommended": "market",
+   "data_sha": [
+    "9877675cc50aa6da"
+   ]
+  },
+  "04_gold_after_the_news": {
+   "status": "blocked",
+   "blocker": "no news calendar yet (calendar_pull.py on the server)",
+   "checked": "2026-09-14 19:51 UTC",
+   "name": "Gold After the News",
+   "family": "gold-news-reaction",
+   "queue": 4
+  },
+  "05_gold_ride_the_run": {
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 18:53 UTC",
+   "name": "Gold Ride-the-Run",
+   "family": "gold-pyramid-overlay",
+   "queue": 5,
+   "key": {
+    "seat_ret_over_dd_candidate": 0.6593964070431338,
+    "seat_ret_over_dd_live": 0.6869121508290537,
+    "seat_cagr_candidate": 0.14176891123351387,
+    "seat_cagr_live": 0.18716625329773984,
+    "seat_maxdd_candidate": -0.21499800380962675,
+    "seat_maxdd_live": -0.2724748034691825,
+    "avg_size_held": 0.7577229113035339
+   },
+   "lesson": [
+    "Gold Ride-the-Run vs the live book out of sample: Sharpe -0.07, CAGR -4.5 pts, max drawdown +5.7 pts (positive = shallower).",
+    "Shallower hole, weaker return \u2014 it is a risk dial, not an edge; the vol target already does this job.",
+    "Average size held: overlay 0.76 of the vol target vs 1.00 \u2014 it holds less, so lower return is arithmetic, not a finding."
+   ],
+   "fix_recommended": "close",
+   "data_sha": [
+    "9877675cc50aa6da"
+   ]
+  },
+  "06_momentum_check": {
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 19:51 UTC",
+   "name": "Momentum Check",
+   "family": "intraday-momentum",
+   "queue": 6,
+   "key": {
+    "oos_trades": 1395,
+    "oos_expectancy_R": -0.0196872720157321,
+    "oos_expectancy_R_gross": -0.011443015262815947,
+    "oos_cost_R": 0.008244256752916151,
+    "oos_profit_factor": 0.811472722705526,
+    "oos_win_rate": 0.4659498207885305,
+    "oos_max_dd_usd": -13407.247142856853,
+    "oos_max_dd_R": -30.187793906442085,
+    "surviving_size": {
+     "risk_pct": 0.1,
+     "net_per_year_usd": -222.959086744674,
+     "return_per_year_pct": -0.445918173489348,
+     "max_dd_usd": -1340.724714285716,
+     "headroom_pct": 32.963764285714205,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -50.63207142857175
+    },
+    "is_trades": 2077,
+    "is_expectancy_R": -0.03486829324856485,
+    "trades_per_year": 249.15586797066015
+   },
+   "lesson": [
+    "No signal out of sample: gross expectancy -0.011R before any cost over 1395 trades. This is the rule, not the venue.",
+    "The only honest fix is a filter (one declared condition that removes the losing trades) \u2014 or close the family."
+   ],
+   "fix_recommended": "filter",
+   "data_sha": [
+    "e8d4350a4e864753"
+   ]
+  },
+  "07_volume_break": {
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 19:51 UTC",
+   "name": "Volume Break",
+   "family": "opening-breakout",
+   "queue": 7,
+   "key": {
+    "oos_trades": 358,
+    "oos_expectancy_R": 0.08868489968076276,
+    "oos_expectancy_R_gross": 0.12762526590573267,
+    "oos_cost_R": 0.03894036622496991,
+    "oos_profit_factor": 1.159235938156947,
+    "oos_win_rate": 0.3659217877094972,
+    "oos_max_dd_usd": -15069.74410714276,
+    "oos_max_dd_R": -32.9485280705754,
+    "surviving_size": {
+     "risk_pct": 0.09,
+     "net_per_year_usd": 265.14180471391177,
+     "return_per_year_pct": 0.5302836094278235,
+     "max_dd_usd": -1356.2769696428513,
+     "headroom_pct": 32.18615151785743,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -90.77231250000024
+    },
+    "is_trades": 614,
+    "is_expectancy_R": -0.014498555963876001,
+    "trades_per_year": 65.28182725911134
+   },
+   "lesson": [
+    "It works on ES and not on NQ \u2014 a market fix (drop the losers) is the declared next step."
+   ],
+   "fix_recommended": "market",
+   "data_sha": [
+    "60fe775c53a38ad2",
+    "e8d4350a4e864753"
+   ]
+  },
+  "08_two_speed_trend": {
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 18:53 UTC",
+   "name": "Two-Speed Trend",
+   "family": "trend-horizon-blend",
+   "queue": 8,
+   "key": {
+    "oos_sharpe_candidate": 1.0455657345566616,
+    "oos_sharpe_live": 1.2428827688073367,
+    "oos_cagr_candidate": 0.12339348686186402,
+    "oos_cagr_live": 0.15869979661476719,
+    "oos_maxdd_candidate": -0.18662301458779906,
+    "oos_maxdd_live": -0.15437993454974175,
+    "turnover_candidate": 13.326075637382916,
+    "turnover_live": 6.499401008226667
+   },
+   "lesson": [
+    "Two-Speed Trend vs the live book out of sample: Sharpe -0.20, CAGR -3.5 pts, max drawdown -3.2 pts (positive = shallower).",
+    "Worse on both quality and hole \u2014 the change removes nothing and adds nothing. Closed unless a declared fix names a mechanism.",
+    "Turnover out of sample: 13.3x a year vs the book's 6.5x."
+   ],
+   "fix_recommended": "close",
+   "data_sha": [
+    "9877675cc50aa6da"
+   ]
+  },
+  "09_swing_pullback_fix1": {
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 18:57 UTC",
+   "name": "Swing Pullback \u2014 fix 1 (trailing-edge market filter)",
+   "family": "swing-pullback-in-trend",
+   "queue": 9,
+   "key": {
+    "oos_trades": 513,
+    "oos_expectancy_R": 0.14881032757770637,
+    "oos_expectancy_R_gross": 0.19546962172026405,
+    "oos_cost_R": 0.04665929414255768,
+    "oos_profit_factor": 1.2163483843831646,
+    "oos_win_rate": 0.5087719298245614,
+    "oos_max_dd_usd": -33491.427524728395,
+    "oos_max_dd_R": -42.5387558563815,
+    "surviving_size": {
+     "risk_pct": 0.2,
+     "net_per_year_usd": 2690.118158398404,
+     "return_per_year_pct": 2.6901181583984037,
+     "max_dd_usd": -6698.285504945685,
+     "headroom_pct": 33.017144950543155,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -1830.4432880673573
+    },
+    "is_trades": 438,
+    "is_expectancy_R": 0.22084537474847682,
+    "trades_per_year": 90.38748191027497
+   },
+   "lesson": [
+    "The edge is real (+0.149R over 513 trades) but jagged: the worst stretch is 43R deep. The largest size that keeps a funded account alive is 0.20% risk per trade, and at that size it earns about 2.7% a year.",
+    "The lever is the drawdown, not the entry: a filter that removes the losing stretch (or the losing market) is the one declared fix worth trying.",
+    "By market: works on GLD, QQQ, loses on BTC."
+   ],
+   "fix_recommended": "market",
+   "data_sha": [
+    "9877675cc50aa6da"
+   ]
+  }
+ },
+ "families": {
+  "swing-pullback-in-trend": {
+   "status": "open",
+   "fixes_used": 1,
+   "tests": [
+    "03_swing_pullback",
+    "09_swing_pullback_fix1"
+   ]
+  },
+  "gold-pyramid-overlay": {
+   "status": "open",
+   "fixes_used": 0,
+   "tests": [
+    "05_gold_ride_the_run"
+   ]
+  },
+  "trend-horizon-blend": {
+   "status": "open",
+   "fixes_used": 0,
+   "tests": [
+    "08_two_speed_trend"
+   ]
+  },
+  "opening-breakout": {
+   "status": "open",
+   "fixes_used": 0,
+   "tests": [
+    "01_opening_break",
+    "02_patient_break",
+    "07_volume_break"
+   ]
+  },
+  "intraday-momentum": {
+   "status": "open",
+   "fixes_used": 0,
+   "tests": [
+    "06_momentum_check"
+   ]
+  }
+ },
+ "updated": "2026-09-14 19:51 UTC"
+}
