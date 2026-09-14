@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-09-14 21:40 UTC",
+    "updated":  "2026-09-14 21:55 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  30,
+    "heartbeat_age_s":  28,
     "heartbeat":  {
                       "gmt":  "2026.09.14",
                       "connected":  "1",
@@ -15,9 +15,9 @@
                       "unverified":  "0"
                   },
     "sleeves":  [
-                    "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=2487",
+                    "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=3388",
                     "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
-                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=2487"
+                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=3388"
                 ],
     "experts_tail":  [
                          "QP\t0\t21:20:58.123\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] v1.02 loaded. Exposure 0.55  LiveTrading=TRUE  ImmediateFlips=true  Magic 773003  MarginMode HEDGING  -\u003e waiting for a live connection to arm",
