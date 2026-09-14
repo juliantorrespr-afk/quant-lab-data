@@ -1,0 +1,123 @@
+{
+ "updated": "2026-09-14",
+ "rule": "A family here is dead: it is never retried under a new name. A test whose family is dead is refused by the runner. An open family may spawn up to three declared fixes (one filter, one cost/venue, one market) after a FAIL, then closes.",
+ "dead": {
+  "vol-band-breakout-cfd": {
+   "why": "720 configurations, 0 positive in-sample; the signal is real (+0.15R) but CFD/market-order cost is 0.13R",
+   "doc": "CHALLENGE_BACKTEST_V2.md",
+   "when": "2026-09-03"
+  },
+  "vwap-mean-reversion": {
+   "why": "256 configurations, 0 positive",
+   "doc": "CHALLENGE_BACKTEST_V2.md",
+   "when": "2026-09-03"
+  },
+  "compression-breakout": {
+   "why": "36 configurations, 0 positive",
+   "doc": "CHALLENGE_BACKTEST_V2.md",
+   "when": "2026-09-03"
+  },
+  "wide-stop-momentum": {
+   "why": "480 configurations, 0 positive",
+   "doc": "CHALLENGE_BACKTEST_V2.md",
+   "when": "2026-09-03"
+  },
+  "limit-order-entry": {
+   "why": "adverse selection: fills the retraces that fail, misses the runners; OOS SQN -0.3 to -0.4",
+   "doc": "LIMIT_FILL_REPORT.md",
+   "when": "2026-09-08"
+  },
+  "gold-session-breakout": {
+   "why": "32 variants on real 5-min bid/ask, all negative out of sample after spread",
+   "doc": "GOLD_ENGINE_REPORT.md",
+   "when": "2026-09-09"
+  },
+  "gold-vwap-fade": {
+   "why": "no mean-reversion signal to pay ~0.3R of friction with; SQN -12 to -14",
+   "doc": "GOLD_ENGINE_REPORT.md",
+   "when": "2026-09-09"
+  },
+  "gold-daily-timing": {
+   "why": "no daily/weekly timing rule beats holding gold on Sharpe AND drawdown",
+   "doc": "GOLD_ENGINE_REPORT.md",
+   "when": "2026-09-09"
+  },
+  "session-zones-tp-ladder": {
+   "why": "the OONEE/'RADAR' recipe is the gold session-breakout family under a new name",
+   "doc": "SOURCE_AUDIT_3_2026-09-14.md",
+   "when": "2026-09-14"
+  },
+  "fast-trend-crossover": {
+   "why": "SMA20/50 and crossovers lose to SMA150 out of sample on QQQ and SPY",
+   "doc": "FAST_TRADES_REPORT.md",
+   "when": "2026-09-10"
+  },
+  "dip-buy-as-book-signal": {
+   "why": "2-5 day dip buys and hybrids as the book's timing signal lose to SMA150; hybrid 80/20 costs 3 CAGR points",
+   "doc": "FAST_TRADES_REPORT.md",
+   "when": "2026-09-10"
+  },
+  "take-profit-levels": {
+   "why": "full and half take-profits at +10/20/30/50% all lose CAGR; some deepen the hole",
+   "doc": "STOPS_TP_ADDENDUM.md",
+   "when": "2026-09-09"
+  },
+  "fixed-pct-and-atr-trailing-stops": {
+   "why": "fixed stops never fire (the line is the stop); ATR trailing stops and de-gearing rejected OOS",
+   "doc": "STOPS_REPORT.md",
+   "when": "2026-09-09"
+  },
+  "short-below-the-line": {
+   "why": "shorting instead of cash loses on every market; book maxDD -11.6 \u2192 -23.9",
+   "doc": "LAB_STATUS.md (short_test)",
+   "when": "2026-09-09"
+  },
+  "sma-length-hunting": {
+   "why": "23 of 23 lengths 40-260 work; 150 is mid-pack \u2014 a plateau, nothing to hunt",
+   "doc": "ROBUSTNESS_REPORT.md",
+   "when": "2026-09-09"
+  },
+  "split-sma-qqq200-btc50": {
+   "why": "best-of-25 pick, drawdown -20.5 vs -15.7, rank correlation 0.41 \u2014 declined by standing rule",
+   "doc": "ROBUSTNESS_REPORT.md",
+   "when": "2026-09-09"
+  },
+  "ict-smc-concepts": {
+   "why": "~80% maps onto rejected families; no literature; two mechanical features untestable without OHLC \u2014 0 of 8 close-only features survive",
+   "doc": "ICT_SMC_AUDIT.md",
+   "when": "2026-09-10"
+  },
+  "cot-on-off-filter": {
+   "why": "lowers Sharpe on all three sleeves out of sample; context only",
+   "doc": "COT_STUDY.md",
+   "when": "2026-09-11"
+  }
+ },
+ "open": {
+  "opening-breakout": {
+   "since": "2026-09-14",
+   "fixes_used": 0,
+   "note": "the one open door: the proven vol-band break at micro-futures cost"
+  },
+  "swing-pullback-in-trend": {
+   "since": "2026-09-14",
+   "fixes_used": 0
+  },
+  "gold-news-reaction": {
+   "since": "2026-09-14",
+   "fixes_used": 0
+  },
+  "gold-pyramid-overlay": {
+   "since": "2026-09-14",
+   "fixes_used": 0
+  },
+  "intraday-momentum": {
+   "since": "2026-09-14",
+   "fixes_used": 0
+  },
+  "trend-horizon-blend": {
+   "since": "2026-09-14",
+   "fixes_used": 0
+  }
+ }
+}
