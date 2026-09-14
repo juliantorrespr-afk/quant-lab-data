@@ -1,0 +1,462 @@
+{
+ "updated": "2026-09-14 19:51 UTC",
+ "counts": {
+  "declared": 9,
+  "run": 8,
+  "passed": 0,
+  "failed": 8,
+  "insufficient": 0,
+  "blocked": 1
+ },
+ "queue": [
+  {
+   "id": "01_opening_break",
+   "queue": 1,
+   "name": "Opening Break",
+   "family": "opening-breakout",
+   "kind": "session_trades",
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 19:51 UTC",
+   "data_ready": true,
+   "blocker": "",
+   "expectation": "OOS 0.00 to +0.05R net at 1 tick per side. The lab's own SPX table put OOS at +0.018R (0.25 tick) and -0.032R (0.5 tick); NQ's wider point range may carry it. Honest odds of a pass: about 1 in 3.",
+   "plain_words": "The one signal that survived the 1,492: a break away from the session open by 0.45 of the 14-day range, confirmed by a 5-minute close on the right side of the day's VWAP, taken once per day before 11:00 ET, stop 0.25 of the range, target 0.60, flat by 15:50. Re-run on Nasdaq and S&P futures at micro-contract cost.",
+   "key": {
+    "oos_trades": 929,
+    "oos_expectancy_R": 0.11972943184839026,
+    "oos_expectancy_R_gross": 0.15440741550973205,
+    "oos_cost_R": 0.034677983661341796,
+    "oos_profit_factor": 1.2094872739732396,
+    "oos_win_rate": 0.4101184068891281,
+    "oos_max_dd_usd": -9322.070178571434,
+    "oos_max_dd_R": -15.346474587048181,
+    "surviving_size": {
+     "risk_pct": 0.15,
+     "net_per_year_usd": 1352.3412037405371,
+     "return_per_year_pct": 2.7046824074810742,
+     "max_dd_usd": -1398.3105267857172,
+     "headroom_pct": 30.08447366071414,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -159.1211250000008
+    },
+    "is_trades": 1262,
+    "is_expectancy_R": 0.007195482323091299,
+    "trades_per_year": 166.49521589793915
+   },
+   "lesson": [
+    "The edge is real (+0.120R over 929 trades) but jagged: the worst stretch is 15R deep. The largest size that keeps a funded account alive is 0.15% risk per trade, and at that size it earns about 2.7% a year.",
+    "The lever is the drawdown, not the entry: a filter that removes the losing stretch (or the losing market) is the one declared fix worth trying."
+   ],
+   "fix_recommended": "filter",
+   "fixes_used": 0
+  },
+  {
+   "id": "02_patient_break",
+   "queue": 2,
+   "name": "Patient Break",
+   "family": "opening-breakout",
+   "kind": "session_trades",
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 19:51 UTC",
+   "data_ready": true,
+   "blocker": "",
+   "expectation": "Fewer trades (maybe a third), higher expectancy per trade; may fall under 200 OOS trades and land INSUFFICIENT.",
+   "plain_words": "The Opening Break taken only on days the daily trend agrees (above the 150-day line for longs, below for shorts) and only when the first 30 minutes already moved at least a quarter of the 14-day range. Jae's 'know when the market will move', as a rule.",
+   "key": {
+    "oos_trades": 431,
+    "oos_expectancy_R": 0.13322137890025293,
+    "oos_expectancy_R_gross": 0.16669504475319805,
+    "oos_cost_R": 0.03347366585294512,
+    "oos_profit_factor": 1.246310200237474,
+    "oos_win_rate": 0.4361948955916473,
+    "oos_max_dd_usd": -9870.836250000051,
+    "oos_max_dd_R": -17.987914285143475,
+    "surviving_size": {
+     "risk_pct": 0.14,
+     "net_per_year_usd": 662.8782553148155,
+     "return_per_year_pct": 1.3257565106296312,
+     "max_dd_usd": -1381.9170750000121,
+     "headroom_pct": 30.9041462499994,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -148.51305000000076
+    },
+    "is_trades": 594,
+    "is_expectancy_R": 0.11545095658231164,
+    "trades_per_year": 77.73962962962963
+   },
+   "lesson": [
+    "The edge is real (+0.133R over 431 trades) but jagged: the worst stretch is 18R deep. The largest size that keeps a funded account alive is 0.14% risk per trade, and at that size it earns about 1.3% a year.",
+    "The lever is the drawdown, not the entry: a filter that removes the losing stretch (or the losing market) is the one declared fix worth trying."
+   ],
+   "fix_recommended": "filter",
+   "fixes_used": 0
+  },
+  {
+   "id": "03_swing_pullback",
+   "queue": 3,
+   "name": "Swing Pullback",
+   "family": "swing-pullback-in-trend",
+   "kind": "daily_trades",
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 18:56 UTC",
+   "data_ready": true,
+   "blocker": "",
+   "expectation": "Small positive, low drawdown: about +0.05R, 40-60 trades a year across three markets. A seat only if uncorrelated to the trend book and return/drawdown > 1. Honest odds: 1 in 4.",
+   "plain_words": "When a market is above its 150-day line and closes at a 3-day low, buy at the next close. Sell at the next close after it prints a 5-day high, after seven days, or if it closes 1.5 twenty-day ranges below the entry (the stop). Nasdaq (QQQ), gold (GLD) and Bitcoin, on the money desk's own daily closes.",
+   "key": {
+    "oos_trades": 608,
+    "oos_expectancy_R": 0.15081421865695957,
+    "oos_expectancy_R_gross": 0.21265519787543974,
+    "oos_cost_R": 0.06184097921848017,
+    "oos_profit_factor": 1.2225440662319162,
+    "oos_win_rate": 0.5115131578947368,
+    "oos_max_dd_usd": -33491.42752472838,
+    "oos_max_dd_R": -38.561082591180934,
+    "surviving_size": {
+     "risk_pct": 0.2,
+     "net_per_year_usd": 3231.2219166028294,
+     "return_per_year_pct": 3.2312219166028293,
+     "max_dd_usd": -6698.28550494567,
+     "headroom_pct": 33.0171449505433,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -1830.4432880673573
+    },
+    "is_trades": 608,
+    "is_expectancy_R": 0.19304821988480364,
+    "trades_per_year": 107.12590448625181
+   },
+   "lesson": [
+    "The edge is real (+0.151R over 608 trades) but jagged: the worst stretch is 39R deep. The largest size that keeps a funded account alive is 0.20% risk per trade, and at that size it earns about 3.2% a year.",
+    "The lever is the drawdown, not the entry: a filter that removes the losing stretch (or the losing market) is the one declared fix worth trying.",
+    "By market: works on GLD, QQQ, loses on BTC."
+   ],
+   "fix_recommended": "market",
+   "fixes_used": 1
+  },
+  {
+   "id": "04_gold_after_the_news",
+   "queue": 4,
+   "name": "Gold After the News",
+   "family": "gold-news-reaction",
+   "kind": "event_trades",
+   "status": "blocked",
+   "verdict": null,
+   "ran_at": null,
+   "data_ready": false,
+   "blocker": "no news calendar yet (calendar_pull.py on the server)",
+   "expectation": "Real but rare (about 30 trades a year): cannot reach 200 out-of-sample trades before ~2030 on 2022\u2192 data \u2014 most likely INSUFFICIENT; may only qualify as a sizing overlay.",
+   "plain_words": "On CPI, FOMC and payroll days, trade gold in the direction of the first 30 minutes after the release, stop at the other side of that 30-minute move, out after two more sessions. Micro gold futures cost.",
+   "key": null,
+   "lesson": null,
+   "fix_recommended": null,
+   "fixes_used": 0
+  },
+  {
+   "id": "05_gold_ride_the_run",
+   "queue": 5,
+   "name": "Gold Ride-the-Run",
+   "family": "gold-pyramid-overlay",
+   "kind": "overlay",
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 18:53 UTC",
+   "data_ready": true,
+   "blocker": "",
+   "expectation": "More return per unit held, but the cap means less held on average; return/drawdown probably does not improve. The uncapped variant (adds above the vol target) is expected to add return and a deeper hole \u2014 leverage. Honest odds: 1 in 5.",
+   "plain_words": "Hold gold at half its normal size; add a quarter each time gold prints a new 20-day high, up to the normal size (the vol-target cap); a 20-day low ends the run and resets to half. Compared with simply holding gold at full size.",
+   "key": {
+    "seat_ret_over_dd_candidate": 0.6593964070431338,
+    "seat_ret_over_dd_live": 0.6869121508290537,
+    "seat_cagr_candidate": 0.14176891123351387,
+    "seat_cagr_live": 0.18716625329773984,
+    "seat_maxdd_candidate": -0.21499800380962675,
+    "seat_maxdd_live": -0.2724748034691825,
+    "avg_size_held": 0.7577229113035339
+   },
+   "lesson": [
+    "Gold Ride-the-Run vs the live book out of sample: Sharpe -0.07, CAGR -4.5 pts, max drawdown +5.7 pts (positive = shallower).",
+    "Shallower hole, weaker return \u2014 it is a risk dial, not an edge; the vol target already does this job.",
+    "Average size held: overlay 0.76 of the vol target vs 1.00 \u2014 it holds less, so lower return is arithmetic, not a finding."
+   ],
+   "fix_recommended": "close",
+   "fixes_used": 0
+  },
+  {
+   "id": "06_momentum_check",
+   "queue": 6,
+   "name": "Momentum Check",
+   "family": "intraday-momentum",
+   "kind": "session_trades",
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 19:51 UTC",
+   "data_ready": true,
+   "blocker": "",
+   "expectation": "Dead after 2022 (independent rechecks put the slope near zero). Expected FAIL; it is on the list so the question is closed with a number.",
+   "plain_words": "If the first half-hour of the Nasdaq session went up, buy at 15:30 and sell at the close; if it went down, the reverse. The academic intraday-momentum effect (Gao, Han, Li, Zhou 2018), one honest test at micro-contract cost.",
+   "key": {
+    "oos_trades": 1395,
+    "oos_expectancy_R": -0.0196872720157321,
+    "oos_expectancy_R_gross": -0.011443015262815947,
+    "oos_cost_R": 0.008244256752916151,
+    "oos_profit_factor": 0.811472722705526,
+    "oos_win_rate": 0.4659498207885305,
+    "oos_max_dd_usd": -13407.247142856853,
+    "oos_max_dd_R": -30.187793906442085,
+    "surviving_size": {
+     "risk_pct": 0.1,
+     "net_per_year_usd": -222.959086744674,
+     "return_per_year_pct": -0.445918173489348,
+     "max_dd_usd": -1340.724714285716,
+     "headroom_pct": 32.963764285714205,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -50.63207142857175
+    },
+    "is_trades": 2077,
+    "is_expectancy_R": -0.03486829324856485,
+    "trades_per_year": 249.15586797066015
+   },
+   "lesson": [
+    "No signal out of sample: gross expectancy -0.011R before any cost over 1395 trades. This is the rule, not the venue.",
+    "The only honest fix is a filter (one declared condition that removes the losing trades) \u2014 or close the family."
+   ],
+   "fix_recommended": "filter",
+   "fixes_used": 0
+  },
+  {
+   "id": "07_volume_break",
+   "queue": 7,
+   "name": "Volume Break",
+   "family": "opening-breakout",
+   "kind": "session_trades",
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 19:51 UTC",
+   "data_ready": true,
+   "blocker": "",
+   "expectation": "Modest help, inside noise: a few hundredths of an R, not a verdict-changer.",
+   "plain_words": "The Opening Break taken only when the first 30 minutes traded at least 1.2 times the usual volume for that half hour.",
+   "key": {
+    "oos_trades": 358,
+    "oos_expectancy_R": 0.08868489968076276,
+    "oos_expectancy_R_gross": 0.12762526590573267,
+    "oos_cost_R": 0.03894036622496991,
+    "oos_profit_factor": 1.159235938156947,
+    "oos_win_rate": 0.3659217877094972,
+    "oos_max_dd_usd": -15069.74410714276,
+    "oos_max_dd_R": -32.9485280705754,
+    "surviving_size": {
+     "risk_pct": 0.09,
+     "net_per_year_usd": 265.14180471391177,
+     "return_per_year_pct": 0.5302836094278235,
+     "max_dd_usd": -1356.2769696428513,
+     "headroom_pct": 32.18615151785743,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -90.77231250000024
+    },
+    "is_trades": 614,
+    "is_expectancy_R": -0.014498555963876001,
+    "trades_per_year": 65.28182725911134
+   },
+   "lesson": [
+    "It works on ES and not on NQ \u2014 a market fix (drop the losers) is the declared next step."
+   ],
+   "fix_recommended": "market",
+   "fixes_used": 0
+  },
+  {
+   "id": "08_two_speed_trend",
+   "queue": 8,
+   "name": "Two-Speed Trend",
+   "family": "trend-horizon-blend",
+   "kind": "book",
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 18:53 UTC",
+   "data_ready": true,
+   "blocker": "",
+   "expectation": "Fails on turnover \u2014 the 20-day line flips far more often than the 150-day; Sharpe about the same, costs higher. Expected FAIL.",
+   "plain_words": "The live book with its 150-day line replaced by two lines: a 20-day and a 250-day. Half a position when one says up, full when both do, none when neither. Gold stays always held. Same weights, vol targets, costs and rails as the money desk.",
+   "key": {
+    "oos_sharpe_candidate": 1.0455657345566616,
+    "oos_sharpe_live": 1.2428827688073367,
+    "oos_cagr_candidate": 0.12339348686186402,
+    "oos_cagr_live": 0.15869979661476719,
+    "oos_maxdd_candidate": -0.18662301458779906,
+    "oos_maxdd_live": -0.15437993454974175,
+    "turnover_candidate": 13.326075637382916,
+    "turnover_live": 6.499401008226667
+   },
+   "lesson": [
+    "Two-Speed Trend vs the live book out of sample: Sharpe -0.20, CAGR -3.5 pts, max drawdown -3.2 pts (positive = shallower).",
+    "Worse on both quality and hole \u2014 the change removes nothing and adds nothing. Closed unless a declared fix names a mechanism.",
+    "Turnover out of sample: 13.3x a year vs the book's 6.5x."
+   ],
+   "fix_recommended": "close",
+   "fixes_used": 0
+  },
+  {
+   "id": "09_swing_pullback_fix1",
+   "queue": 9,
+   "name": "Swing Pullback \u2014 fix 1 (trailing-edge market filter)",
+   "family": "swing-pullback-in-trend",
+   "kind": "daily_trades",
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 18:57 UTC",
+   "data_ready": true,
+   "blocker": "",
+   "expectation": "Bitcoin drops out once its losing stretch is visible; expectancy per trade rises; but the 2021 hole came from all three markets at once, so the worst stretch probably stays deep and the return at the surviving size stays under 10%/yr. Likely still FAIL. This is fix 1 of 3 for the family.",
+   "plain_words": "The Swing Pullback, but a market is only traded while its own last three years of these trades (the ones already closed) show a profit. No market is dropped by hand \u2014 the rule drops it, in time, with no look-ahead. Answers the first test's lesson: Bitcoin lost, gold and Nasdaq worked.",
+   "key": {
+    "oos_trades": 513,
+    "oos_expectancy_R": 0.14881032757770637,
+    "oos_expectancy_R_gross": 0.19546962172026405,
+    "oos_cost_R": 0.04665929414255768,
+    "oos_profit_factor": 1.2163483843831646,
+    "oos_win_rate": 0.5087719298245614,
+    "oos_max_dd_usd": -33491.427524728395,
+    "oos_max_dd_R": -42.5387558563815,
+    "surviving_size": {
+     "risk_pct": 0.2,
+     "net_per_year_usd": 2690.118158398404,
+     "return_per_year_pct": 2.6901181583984037,
+     "max_dd_usd": -6698.285504945685,
+     "headroom_pct": 33.017144950543155,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -1830.4432880673573
+    },
+    "is_trades": 438,
+    "is_expectancy_R": 0.22084537474847682,
+    "trades_per_year": 90.38748191027497
+   },
+   "lesson": [
+    "The edge is real (+0.149R over 513 trades) but jagged: the worst stretch is 43R deep. The largest size that keeps a funded account alive is 0.20% risk per trade, and at that size it earns about 2.7% a year.",
+    "The lever is the drawdown, not the entry: a filter that removes the losing stretch (or the losing market) is the one declared fix worth trying.",
+    "By market: works on GLD, QQQ, loses on BTC."
+   ],
+   "fix_recommended": "market",
+   "fixes_used": 1
+  }
+ ],
+ "latest": {
+  "id": "07_volume_break",
+  "name": "Volume Break",
+  "verdict": "FAIL",
+  "ran_at": "2026-09-14 19:51 UTC",
+  "lesson": "It works on ES and not on NQ \u2014 a market fix (drop the losers) is the declared next step.",
+  "key": {
+   "oos_trades": 358,
+   "oos_expectancy_R": 0.08868489968076276,
+   "oos_expectancy_R_gross": 0.12762526590573267,
+   "oos_cost_R": 0.03894036622496991,
+   "oos_profit_factor": 1.159235938156947,
+   "oos_win_rate": 0.3659217877094972,
+   "oos_max_dd_usd": -15069.74410714276,
+   "oos_max_dd_R": -32.9485280705754,
+   "surviving_size": {
+    "risk_pct": 0.09,
+    "net_per_year_usd": 265.14180471391177,
+    "return_per_year_pct": 0.5302836094278235,
+    "max_dd_usd": -1356.2769696428513,
+    "headroom_pct": 32.18615151785743,
+    "daily_loss_fires_pct": 0.0,
+    "worst_day_usd": -90.77231250000024
+   },
+   "is_trades": 614,
+   "is_expectancy_R": -0.014498555963876001,
+   "trades_per_year": 65.28182725911134
+  }
+ },
+ "families": {
+  "open": [
+   "swing-pullback-in-trend",
+   "gold-pyramid-overlay",
+   "trend-horizon-blend",
+   "opening-breakout",
+   "intraday-momentum",
+   "gold-news-reaction"
+  ],
+  "closed": [],
+  "dead": 18
+ },
+ "vault": {
+  "datasets": 10,
+  "items": [
+   {
+    "name": "NQ 1-min (Databento)",
+    "first": "2010-06-06 20:00:00",
+    "last": "2026-09-13 19:59:00",
+    "rows": 4820057,
+    "size_mb": 79.5
+   },
+   {
+    "name": "ES 1-min (Databento)",
+    "first": "2010-06-06 20:00:00",
+    "last": "2026-09-13 19:59:00",
+    "rows": 4932622,
+    "size_mb": 72.7
+   },
+   {
+    "name": "MNQ 1-min (Databento)",
+    "first": "2019-05-05 20:00:00",
+    "last": "2026-09-13 19:59:00",
+    "rows": 2593927,
+    "size_mb": 44.8
+   },
+   {
+    "name": "MES 1-min (Databento)",
+    "first": "2019-05-05 20:00:00",
+    "last": "2026-09-13 19:59:00",
+    "rows": 2592299,
+    "size_mb": 40.5
+   },
+   {
+    "name": "xauusd 5-min (Dukascopy)",
+    "first": null,
+    "last": null,
+    "rows": null,
+    "size_mb": 20.5
+   },
+   {
+    "name": "usatechidxusd 5-min (Dukascopy)",
+    "first": null,
+    "last": null,
+    "rows": null,
+    "size_mb": 37.7
+   },
+   {
+    "name": "usa500idxusd 5-min (Dukascopy)",
+    "first": null,
+    "last": null,
+    "rows": null,
+    "size_mb": 36.7
+   },
+   {
+    "name": "BTCUSDT 1-min (Binance)",
+    "first": "017-08.",
+    "last": "026-08.",
+    "rows": null,
+    "size_mb": 232.9
+   },
+   {
+    "name": "daily OHLCV (Yahoo)",
+    "first": null,
+    "last": null,
+    "rows": null,
+    "size_mb": 14.7
+   },
+   {
+    "name": "daily closes (repo daily.csv)",
+    "first": "2015-01-02",
+    "last": "2026-09-13",
+    "rows": 4273,
+    "size_mb": 0.2
+   }
+  ]
+ },
+ "the_number": "9 declared / 8 run / 0 passed"
+}
