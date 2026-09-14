@@ -1,0 +1,354 @@
+<title>The Mind — QUANT_LAB</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#070b16; --bg2:#0b1224; --panel:#0f172b; --line:#1c2742; --ink:#eef2fa; --mute:#8d97b2; --dim:#334064;
+    --money:#f6b84a; --data:#4fc3ff; --pass:#3ddc97; --fail:#ff5d7a; --hold:#8fa3ff; --warn:#f6b84a;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace; --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --disp:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
+  }
+  html{color-scheme:dark}
+  body{margin:0;background:radial-gradient(1200px 700px at 30% -10%,#101a36 0%,var(--bg) 60%);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.45;padding-inline:18px;padding-block:14px 40px;min-height:100vh}
+  a{color:var(--data)}
+  /* ---- top */
+  .top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:baseline;gap:12px}
+  .wordmark{font-family:var(--disp);font-weight:700;font-size:34px;letter-spacing:.08em;text-transform:uppercase;line-height:1}
+  .wordmark small{color:var(--mute);font-size:13px;letter-spacing:.18em;margin-left:8px;font-weight:500}
+  .clock{font-family:var(--mono);font-size:12.5px;color:var(--mute);font-variant-numeric:tabular-nums}
+  .clock b{color:var(--ink);font-weight:500}
+  .src{font-family:var(--mono);font-size:11px;color:var(--mute)}
+  .src i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--dim);margin-right:6px;vertical-align:-1px}
+  .src.live i{background:var(--pass);box-shadow:0 0 8px var(--pass)}
+  /* ---- the line */
+  .line{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:16px 0}
+  .tile{background:linear-gradient(180deg,#111a32,#0d1428);border:1px solid var(--line);border-radius:8px;padding:12px 14px;min-width:0}
+  .tile .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+  .tile .v{font-family:var(--disp);font-weight:600;font-size:30px;line-height:1.05;margin-top:4px;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+  .tile .s{font-size:12px;color:var(--mute);margin-top:3px}
+  .tile.money .v{color:var(--money)} .tile.data .v{color:var(--data)} .tile.warn .v{color:var(--warn)} .tile.pass .v{color:var(--pass)}
+  /* ---- layout */
+  .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:16px}
+  @media (max-width:980px){.wrap{grid-template-columns:1fr}}
+  .brain{background:radial-gradient(ellipse at 50% 40%,#132043 0%,#0a1020 62%,#070b16 100%);border:1px solid var(--line);border-radius:10px;position:relative;overflow:hidden;min-height:420px}
+  .brain svg{width:100%;height:auto;aspect-ratio:16/11;display:block}
+  .hint{position:absolute;left:14px;top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+  .nodeg{cursor:pointer} .nodeg:focus{outline:none} .nodeg:focus .ring{stroke-width:3}
+  .nlabel{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.1em;fill:var(--ink);pointer-events:none}
+  .nval{font-family:var(--mono);font-size:11px;fill:var(--mute);pointer-events:none}
+  .ntitle{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.1em;fill:var(--ink);pointer-events:none}
+  /* ---- cards */
+  .stack{display:flex;flex-direction:column;gap:14px;min-width:0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .card h2{font-family:var(--disp);font-weight:600;font-size:20px;letter-spacing:.08em;text-transform:uppercase;margin:0;display:flex;align-items:center;gap:10px}
+  .pill{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--line);color:var(--mute);vertical-align:middle}
+  .pill.ok{color:var(--pass);border-color:rgba(61,220,151,.5);background:rgba(61,220,151,.08)} .pill.warn{color:var(--warn);border-color:rgba(246,184,74,.5);background:rgba(246,184,74,.08)} .pill.bad{color:var(--fail);border-color:rgba(255,93,122,.5);background:rgba(255,93,122,.08)} .pill.dim{color:var(--mute)}
+  .meaning{color:var(--mute);font-size:13.5px;margin:6px 0 0;max-width:60ch}
+  .big{font-family:var(--disp);font-weight:600;font-size:40px;line-height:1;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+  .big.money{color:var(--money)} .big.data{color:var(--data)} .big.warn{color:var(--warn);font-size:30px}
+  .sub{font-family:var(--mono);font-size:12px;color:var(--mute)}
+  .bars{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;align-items:center;margin-top:10px;font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+  .bar{height:8px;background:#0a1020;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pass),var(--warn));border-radius:999px;transition:width 1.2s ease}
+  .sleeves{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .sleeve{flex:1 1 110px;background:#0a1020;border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+  .sleeve .n{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute)}
+  .sleeve .st{font-family:var(--disp);font-weight:600;font-size:20px;letter-spacing:.06em}
+  .sleeve .d{font-family:var(--mono);font-size:11px;color:var(--mute)}
+  .st.long{color:var(--pass)} .st.held{color:var(--money)} .st.flat{color:var(--mute)}
+  .tests{list-style:none;padding:0;margin:10px 0 0}
+  .tests li{display:grid;grid-template-columns:14px 1fr auto;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--line)}
+  .tests li:last-child{border-bottom:0}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--dim);display:inline-block;position:relative;top:1px}
+  .dot.pass{background:var(--pass);box-shadow:0 0 8px var(--pass)} .dot.fail{background:var(--fail)} .dot.hold{background:var(--hold)} .dot.ready{background:var(--warn)} .dot.blocked{background:var(--dim)}
+  .tests .tn{font-weight:600} .tests .tv{font-family:var(--mono);font-size:11px;color:var(--mute);text-align:right;white-space:nowrap}
+  .tests .tl{grid-column:2/4;color:var(--mute);font-size:12.5px;margin-top:-2px}
+  .lesson{font-style:italic;color:var(--ink);margin-top:10px;font-size:13.5px}
+  .machines{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:10px}
+  .m{background:#0a1020;border:1px solid var(--line);border-radius:8px;padding:9px 10px}
+  .m .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+  .m .s{font-weight:600;margin-top:3px;display:flex;align-items:center;gap:7px}
+  .m .w{font-size:12px;color:var(--mute);margin-top:2px}
+  /* ---- talk */
+  .chat{display:flex;flex-direction:column;gap:8px;max-height:46vh;overflow-y:auto;padding-right:4px;margin-top:10px}
+  .msg{padding:9px 11px;border-radius:10px;white-space:pre-wrap;word-wrap:break-word;font-size:14px;line-height:1.45}
+  .msg.jae{background:#182238;border:1px solid var(--line);align-self:flex-end;margin-left:28px;border-bottom-right-radius:3px}
+  .msg.mind{background:#0a1020;border:1px solid var(--line);margin-right:16px;border-bottom-left-radius:3px}
+  .msg .who{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
+  .ask{display:flex;gap:8px;margin-top:10px;align-items:flex-end}
+  textarea,input[type=text]{width:100%;box-sizing:border-box;background:#0a1020;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-family:var(--sans);font-size:14.5px;resize:vertical}
+  textarea:focus,input:focus{outline:2px solid var(--data);outline-offset:0;border-color:var(--data)}
+  .btn{background:var(--data);color:#04101c;border:0;border-radius:8px;padding:11px 16px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;font-weight:500}
+  .btn.ghost{background:transparent;color:var(--mute);border:1px solid var(--line)}
+  .btn:disabled{opacity:.5;cursor:default} .btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin:4px 0 10px}
+  .tabs button{background:none;border:0;border-bottom:2px solid transparent;color:var(--mute);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:7px 10px;cursor:pointer}
+  .tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--data)}
+  .tabs button:focus-visible{outline:2px solid var(--data);outline-offset:2px}
+  .pane[hidden]{display:none}
+  .card p{margin:0 0 8px;max-width:62ch} .card ul{margin:0;padding-left:18px;max-width:62ch} .card li{margin:0 0 6px}
+  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:12px 0 4px}
+  .steps{list-style:none;padding:0;margin:0} .steps li{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);align-items:start}
+  .steps input{margin-top:4px;accent-color:var(--pass);width:16px;height:16px}
+  .steps .t{font-weight:600} .steps .d{color:var(--mute);font-size:12.5px;margin-top:2px} .steps .done .t{color:var(--pass);text-decoration:line-through}
+  .steps code{font-family:var(--mono);font-size:11.5px;color:var(--data);word-break:break-all}
+  .note{padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px} .note .at{font-family:var(--mono);font-size:10.5px;color:var(--mute)}
+  .muted{color:var(--mute)} .small{font-size:12.5px}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums;margin-top:8px}
+  .kv span:nth-child(odd){color:var(--mute)}
+  @media (prefers-reduced-motion:no-preference){
+    .breathe{animation:breathe 3.6s ease-in-out infinite} @keyframes breathe{0%,100%{opacity:.35}50%{opacity:.9}}
+    .fadein{animation:fadein .6s ease both} @keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  }
+  @media (prefers-reduced-motion:reduce){ .mover{display:none} }
+</style>
+
+<div class="top">
+  <div class="brand"><div class="wordmark">The Mind <small>Jae's console</small></div><div class="src" id="src"><i></i>snapshot</div></div>
+  <div class="clock" id="clock"></div>
+</div>
+
+<div class="line" id="line"></div>
+
+<div class="wrap">
+  <div class="brain">
+    <div class="hint">tap a node</div>
+    <svg id="g" viewBox="0 0 800 550" role="img" aria-label="The Mind: the money desk, the tests, the machines and the other projects as one living system"></svg>
+  </div>
+  <div class="stack" id="stack">
+    <div class="card fadein" id="focus"></div>
+    <div class="card">
+      <h2>Talk to the Mind</h2>
+      <div class="chat" id="chat"></div>
+      <div class="ask"><textarea id="ask" rows="2" placeholder="Ask about the account, a test, a machine, the plan…" aria-label="Message"></textarea><button class="btn" id="send">Send</button></div>
+      <div class="small muted" id="talkstatus" style="margin-top:6px"></div>
+    </div>
+    <div class="card">
+      <div class="tabs" role="tablist">
+        <button role="tab" id="tab-today" aria-selected="true" aria-controls="pane-today">Today</button>
+        <button role="tab" id="tab-setup" aria-selected="false" aria-controls="pane-setup">Setup</button>
+        <button role="tab" id="tab-notes" aria-selected="false" aria-controls="pane-notes">Notes</button>
+      </div>
+      <div class="pane" id="pane-today" role="tabpanel"></div>
+      <div class="pane" id="pane-setup" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-notes" role="tabpanel" hidden>
+        <div id="notes"></div>
+        <div class="ask"><input type="text" id="notein" placeholder="A decision or a note to keep" aria-label="New note"><button class="btn ghost" id="noteadd">Keep</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+window.MIND_DATA = /*__MIND_DATA__*/null;
+</script>
+<script>
+(async function(){
+  const D = Object.assign({}, window.MIND_DATA || {});
+  for (const f of ["sandbox","vault","pulse","ops","session","equity","vps"]) {
+    try { const r = await fetch(f + ".json", {cache:"no-store"}); if (r.ok) D[f] = await r.json(); } catch(e) {}
+  }
+  const esc=s=>String(s??"").replace(/[&<>]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[ch]));
+  const num=v=>(v==null||v===""||isNaN(Number(v)))?null:Number(v);
+  const fmt$=v=>num(v)==null?"—":"$"+Math.round(num(v)).toLocaleString("en-US");
+  const pct=v=>num(v)==null?"—":(num(v)>=0?"+":"")+num(v).toFixed(2)+"%";
+  let PROJECTS={}, STEPS=[], NOTES=[], CHAT=[], db=null, sample=null, FOCUS="money";
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---------- clock: the page is alive
+  const clockEl=document.getElementById("clock");
+  const tick=()=>{const d=new Date();clockEl.innerHTML=`<b>${d.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false})}</b> ${d.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})} · Puerto Rico`;};
+  tick(); setInterval(tick,1000);
+
+  // ---------- derive the view model
+  function model(){
+    const S=D.sandbox||{counts:{},queue:[]}, P=D.pulse||{}, O=D.ops||{}, SES=D.session||{}, V=D.vault||{datasets:[]}, VPS=D.vps||null;
+    const sig=P.signals||{}, book=sig.book||{}, ev=sig.eval||{}, c=S.counts||{}, hb=VPS&&VPS.heartbeat||{};
+    const hbAge = VPS&&VPS.heartbeat_age_s!=null ? VPS.heartbeat_age_s : null;
+    const trial = (VPS&&num(hb.equity)) ? {equity:num(hb.equity), armed:hb.armed==="1", age:hbAge, fresh:hbAge!=null&&hbAge<3600} : null;
+    const asOf = sig.as_of ? new Date(sig.as_of+"T00:00:00Z") : null;
+    const ageDays = asOf ? Math.floor((Date.now()-asOf)/864e5) : null;
+    const runnerFresh = S.updated ? (Date.now()-new Date(S.updated.replace(" UTC","Z").replace(" ","T")))/36e5 < 30 : false;
+    const health = ev.failed ? "bad" : (ageDays!=null&&ageDays<=4 ? (trial&&!trial.fresh ? "warn" : "ok") : "warn");
+    const q=(S.queue||[]).map(t=>({...t, st: t.status==="run"?(t.verdict==="PASS"?"pass":t.verdict==="INSUFFICIENT"?"hold":"fail"):(t.data_ready?"ready":"blocked")}));
+    const vr=SES.vault_reported;
+    return {S,P,O,SES,V,VPS,sig,book,ev,c,trial,ageDays,runnerFresh,health,q,vr,
+      machines:[
+        {id:"bot",name:"Bot · GitHub",state:sig.run?"ok":"dim",word:sig.run?("ran "+String(sig.run).slice(11,16)+" UTC"):"no run yet",why:"the twin of the EA; one close per market per day"},
+        {id:"ea",name:"EA · VPS",state:trial?(trial.fresh?"ok":"warn"):(O.mt5Txt?"warn":"dim"),word:trial?`${fmt$(trial.equity)} · ${trial.armed?"armed":"not armed"}`:(O.mt5Txt?"armed 12 Sep · unverified":"—"),why:trial?`heartbeat ${Math.round(trial.age/60)} min ago`:"needs the heartbeat (setup step 3)"},
+        {id:"vault",name:"Vault · Hetzner",state:(V.datasets||[]).length>1?"ok":(vr?"warn":"dim"),word:(V.datasets||[]).length>1?`${V.datasets.length} datasets`:(vr?"ES + NQ 2010→2026":"empty"),why:vr&&(V.datasets||[]).length<=1?"reported by you, not machine-read yet":"raw price history, private"},
+        {id:"runner",name:"Runner",state:(c.run||0)>0?(runnerFresh?"ok":"warn"):"dim",word:S.latest?`${S.latest.verdict} · ${S.latest.name.split(" —")[0]}`:"idle",why:runnerFresh?"reported in the last 30 h":"last report older than 30 h"},
+        {id:"puller",name:"Puller",state:"dim",word:"parked",why:"context feed; nothing profits from it yet"}
+      ]};
+  }
+
+  // ---------- the line (tiles)
+  function renderLine(m){
+    const t=[];
+    if(m.trial) t.push({k:"trial account",v:fmt$(m.trial.equity),s:`vs $100,000 · heartbeat ${Math.round(m.trial.age/60)} min ago`,cls:"money"});
+    else t.push({k:"trial account",v:"NOT VERIFIED",s:"MT5 on the VPS · heartbeat not installed yet",cls:"warn"});
+    t.push({k:"twin book (GitHub)",v:fmt$(m.book.equity),s:`${pct(m.ev.total_pl_pct)} from $100,000 · drawdown ${pct(m.book.dd_pct)}`,cls:"money"});
+    t.push({k:"loss budgets used",v:`${m.ev.daily_budget_used_pct??"—"}% · ${m.ev.total_budget_used_pct??"—"}%`,s:"of the 5% daily and 10% total limits",cls:(m.ev.total_budget_used_pct||0)>50?"warn":"pass"});
+    t.push({k:"tests",v:`${m.c.declared??0} · ${m.c.run??0} · ${m.c.passed??0}`,s:"declared · run · passed",cls:"data"});
+    t.push({k:"signal age",v:m.ageDays==null?"—":`${m.ageDays}d`,s:m.sig.as_of?`last close ${m.sig.as_of} · exposure ${m.ev.exposure}`:"",cls:m.ageDays!=null&&m.ageDays<=4?"pass":"warn"});
+    document.getElementById("line").innerHTML=t.map(x=>`<div class="tile ${x.cls}"><div class="k">${esc(x.k)}</div><div class="v">${esc(x.v)}</div><div class="s">${esc(x.s)}</div></div>`).join("");
+  }
+
+  // ---------- the brain (few nodes, moving light)
+  function renderBrain(m){
+    const svg=document.getElementById("g"); while(svg.firstChild) svg.removeChild(svg.firstChild);
+    const NS="http://www.w3.org/2000/svg", el=(t,a={},p=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e;};
+    const defs=el("defs"); const glow=el("filter",{id:"glow",x:"-50%",y:"-50%",width:"200%",height:"200%"},defs);
+    el("feGaussianBlur",{stdDeviation:"4",result:"b"},glow); const mg=el("feMerge",{},glow); el("feMergeNode",{in:"b"},mg); el("feMergeNode",{in:"SourceGraphic"},mg);
+    const col={money:"#f6b84a",data:"#4fc3ff",dim:"#334064",ok:"#3ddc97",warn:"#f6b84a",bad:"#ff5d7a"};
+    const cx=400,cy=270;
+    const N=[
+      {id:"mind",x:cx,y:cy,r:44,label:"MIND",color:"#eef2fa",live:true,kind:"mind"},
+      {id:"money",x:cx-215,y:cy-95,r:34,label:"MONEY DESK",color:col.money,live:!!m.book.equity,val:m.trial?fmt$(m.trial.equity):(m.book.equity?fmt$(m.book.equity)+" twin":"no number")},
+      {id:"tests",x:cx+215,y:cy-95,r:34,label:"TESTS",color:col.data,live:(m.c.run||0)>0,val:`${m.c.declared??0} · ${m.c.run??0} · ${m.c.passed??0}`},
+      {id:"machines",x:cx,y:cy+175,r:30,label:"MACHINES",color:col.data,live:true,val:`${m.machines.filter(x=>x.state==="ok").length} of ${m.machines.length} live`},
+      {id:"seed",x:cx-235,y:cy+95,r:24,label:"SEED",color:(PROJECTS.seed&&PROJECTS.seed.value)?col.data:col.dim,live:!!(PROJECTS.seed&&PROJECTS.seed.value),val:(PROJECTS.seed&&PROJECTS.seed.value)||"no number yet"},
+      {id:"life",x:cx+235,y:cy+95,r:24,label:"LIFE",color:(PROJECTS.life&&PROJECTS.life.value)?col.data:col.dim,live:!!(PROJECTS.life&&PROJECTS.life.value),val:(PROJECTS.life&&PROJECTS.life.value)||"no number yet"}
+    ];
+    const byId=Object.fromEntries(N.map(n=>[n.id,n]));
+    const L=[["mind","money"],["mind","tests"],["mind","machines"],["mind","seed"],["mind","life"],["machines","money"],["machines","tests"]];
+    L.forEach(([a,b],i)=>{
+      const A=byId[a],B=byId[b]; const live=A.live&&B.live;
+      const mx=(A.x+B.x)/2+(B.y-A.y)*0.18, my=(A.y+B.y)/2-(B.x-A.x)*0.18;
+      const id="lk"+i;
+      const p=el("path",{id,d:`M${A.x},${A.y} Q${mx},${my} ${B.x},${B.y}`,fill:"none",stroke:live?(B.color==="#334064"?A.color:B.color):col.dim,"stroke-width":live?2:1.2,"stroke-opacity":live?0.75:0.3,"stroke-linecap":"round"});
+      if(live){
+        if(!reduced){ for(let k=0;k<2;k++){ const dot=el("circle",{r:k?2.4:3.4,fill:B.color==="#334064"?A.color:B.color,"fill-opacity":k?0.7:1,class:"mover"});
+          const am=el("animateMotion",{dur:`${(3.2+i*0.6+k*1.1).toFixed(1)}s`,repeatCount:"indefinite",begin:`${(-k*1.7-i*0.4).toFixed(1)}s`},dot);
+          const mp=el("mpath",{href:"#"+id},am); mp.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href","#"+id); } } }
+    });
+    N.forEach(n=>{
+      const g=el("g",{class:"nodeg",tabindex:"0"});
+      if(n.live){ el("circle",{cx:n.x,cy:n.y,r:n.r+14,fill:n.color,"fill-opacity":0.10,filter:"url(#glow)",class:"breathe"},g); }
+      el("circle",{cx:n.x,cy:n.y,r:n.r,fill:"#0b1224",stroke:n.color,"stroke-width":n.kind==="mind"?3:2.2,class:"ring"},g);
+      if(n.kind==="mind"){ el("text",{x:n.x,y:n.y+8,"text-anchor":"middle",class:"ntitle"},g).textContent="MIND"; }
+      else { el("circle",{cx:n.x,cy:n.y,r:n.live?9:6,fill:n.color,"fill-opacity":n.live?1:.6,filter:n.live?"url(#glow)":""},g);
+        const below=n.y>cy; const ty=below?n.y+n.r+22:n.y-n.r-18;
+        el("text",{x:n.x,y:ty,"text-anchor":"middle",class:"nlabel"},g).textContent=n.label;
+        const v=el("text",{x:n.x,y:ty+15,"text-anchor":"middle",class:"nval"},g); v.textContent=n.val||""; }
+      g.addEventListener("click",()=>{FOCUS=n.id==="mind"?"money":n.id;renderFocus(model());});
+      g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();FOCUS=n.id==="mind"?"money":n.id;renderFocus(model());}});
+    });
+  }
+
+  // ---------- focus card (plain words, big numbers)
+  function renderFocus(m){
+    const f=document.getElementById("focus"); f.classList.remove("fadein"); void f.offsetWidth; f.classList.add("fadein");
+    const pill=(s,t)=>`<span class="pill ${s}">${esc(t)}</span>`;
+    if(FOCUS==="money"){
+      const sl=["QQQ","BTC","GLD"].map(k=>{const s=m.sig[k]||{};const st=(s.state||"—").toLowerCase();return `<div class="sleeve"><div class="n">${k==="QQQ"?"Nasdaq":k==="BTC"?"Bitcoin":"Gold"}</div><div class="st ${st}">${esc(s.state||"—")}</div><div class="d">${s.dist_pct!=null?(s.dist_pct>0?"+":"")+s.dist_pct+"% vs its line":""}${s.size_in_use!=null?" · size "+Number(s.size_in_use).toFixed(2):""}</div></div>`;}).join("");
+      const d=num(m.ev.daily_budget_used_pct)||0, t=num(m.ev.total_budget_used_pct)||0;
+      f.innerHTML=`<h2>Money desk ${pill(m.health,m.health==="ok"?"healthy":m.health==="warn"?"check":"stop")}</h2>
+        <p class="meaning">Your real rehearsal: the proven trend book on the FTMO trial. One decision a day per market — above its 150-day line, hold; below, out. Gold always held. Sized so a bad month is survivable.</p>
+        <div class="big ${m.trial?"money":"warn"}">${m.trial?fmt$(m.trial.equity):"NOT VERIFIED"}</div>
+        <div class="sub">${m.trial?`trial account · ${m.trial.armed?"EA armed":"EA NOT armed"} · heartbeat ${Math.round(m.trial.age/60)} min ago`:"trial account — the VPS heartbeat is not installed yet (setup step 3). The twin below is the same rule on GitHub."}</div>
+        <div class="kv"><span>twin book</span><span>${fmt$(m.book.equity)} · ${pct(m.ev.total_pl_pct)} from $100,000</span><span>exposure</span><span>${m.ev.exposure??"—"} of full size · mode ${esc(m.book.mode||"—")}</span><span>last close used</span><span>${esc(m.sig.as_of||"—")} (${m.ageDays==null?"—":m.ageDays+" days old"})</span></div>
+        <div class="bars"><span>daily loss</span><div class="bar"><i style="width:${Math.min(100,d)}%"></i></div><span>${d}% of 5%</span><span>total loss</span><div class="bar"><i style="width:${Math.min(100,t)}%"></i></div><span>${t}% of 10%</span></div>
+        <div class="sleeves">${sl}</div>`;
+    } else if(FOCUS==="tests"){
+      const items=m.q.map(t=>`<li><span class="dot ${t.st}"></span><span class="tn">${esc(t.name.replace(" — fix 1 (trailing-edge market filter)"," · fix 1"))}</span><span class="tv">${esc(t.status==="run"?t.verdict:(t.data_ready?"ready":"waiting for data"))}</span>${t.status==="run"&&t.lesson&&t.lesson[0]?`<span class="tl">${esc(short(t.lesson[0]))}</span>`:(t.status!=="run"?`<span class="tl">${esc(short(t.expectation||""))}</span>`:"")}</li>`).join("");
+      f.innerHTML=`<h2>Tests ${pill((m.c.passed||0)>0?"ok":"dim",`${m.c.passed||0} passed`)}</h2>
+        <p class="meaning">The challenger desk. Every idea is written down before it runs, judged out of sample after real costs, and gets a verdict. A failed idea can be fixed three times, then it is closed for good. Only a pass earns an account.</p>
+        <div class="big data">${m.c.declared??0} · ${m.c.run??0} · ${m.c.passed??0}</div><div class="sub">declared · run · passed</div>
+        <ul class="tests">${items}</ul>
+        ${m.S.latest&&m.S.latest.lesson?`<div class="lesson">Latest lesson — ${esc(m.S.latest.lesson)}</div>`:""}`;
+    } else if(FOCUS==="machines"){
+      f.innerHTML=`<h2>Machines ${pill("ok",`${m.machines.filter(x=>x.state==="ok").length} live`)}</h2>
+        <p class="meaning">What runs by itself and where. Green = reported by the machine itself within its window. Amber = exists but reported by a person or too long ago. Grey = no number yet.</p>
+        <div class="machines">${m.machines.map(x=>`<div class="m"><div class="n">${esc(x.name)}</div><div class="s"><span class="dot ${x.state==="ok"?"pass":x.state==="warn"?"ready":"blocked"}"></span>${esc(x.word)}</div><div class="w">${esc(x.why)}</div></div>`).join("")}</div>
+        <div class="kv"><span>nightly</span><span>bot 00:10 UTC · runner 03:30 UTC · Mind refresh 05:30 UTC · brief 12:00 UTC</span><span>weekly</span><span>review Sat 13:00 UTC · scout Sun 14:00 UTC</span></div>`;
+    } else if(FOCUS==="seed"||FOCUS==="life"){
+      const p=PROJECTS[FOCUS]||{};
+      f.innerHTML=`<h2>${FOCUS==="seed"?"Seed":"Life"} ${pill(p.value?"ok":"dim",p.value?"live":"no number yet")}</h2>
+        <p class="meaning">${esc(p.note||(FOCUS==="seed"?"The AI-run business factory. Seed #1 is clipping.":"The mentor track."))}</p>
+        <div class="big ${p.value?"data":"warn"}">${esc(p.value||"—")}</div><div class="sub">${esc(p.number||"")}</div>
+        <div class="kv"><span>status</span><span>${esc(p.status||"—")}</span><span>last</span><span>${esc(p.last||"—")}</span></div>`;
+    }
+  }
+  const short=s=>{s=String(s);return s.length>140?s.slice(0,137)+"…":s;};
+
+  // ---------- today / setup / notes
+  function renderToday(m){
+    const SES=m.SES; const li=a=>(a||[]).map(x=>`<li>${esc(x)}</li>`).join("");
+    document.getElementById("pane-today").innerHTML=`<p><b>${esc(SES.date||"")}.</b> ${esc(SES.point||"")}</p><div class="eyebrow">needed from you</div><ul>${li(SES.needed)||"<li>nothing</li>"}</ul><div class="eyebrow">watch</div><ul>${li(SES.watch)}</ul><div class="eyebrow">done today</div><ul>${li(SES.done)}</ul><div class="eyebrow">caught</div><ul>${li(SES.caught)}</ul>`;
+  }
+  function renderSetup(){
+    const pane=document.getElementById("pane-setup");
+    if(!STEPS.length){ pane.innerHTML=`<p class="muted small">The paste list appears here when the Mind's database is reachable (inside Claude).</p>`; return; }
+    pane.innerHTML=`<p class="small muted">Each step is one paste. Tick it when done — the Mind and Claude both see it.</p><ul class="steps">${STEPS.map(s=>`<li class="${s.done?"done":""}"><input type="checkbox" id="st-${esc(s.id)}" ${s.done?"checked":""} ${db?"":"disabled"} aria-label="${esc(s.title)}"><div><div class="t">${esc(s.order)}. ${esc(s.title)}</div><div class="d">${esc(s.what)}${s.where?` · <code>${esc(s.where)}</code>`:""}</div><div class="d">${esc(s.makes_fluent)}</div></div></li>`).join("")}</ul>`;
+    STEPS.forEach(s=>{const cb=document.getElementById("st-"+s.id); if(cb) cb.addEventListener("change",async()=>{ if(!db) return; try{ await db.doc("setup/"+s.id).update({done:cb.checked, when:cb.checked?new Date().toISOString():null}); }catch(e){ cb.checked=!cb.checked; } });});
+  }
+  function renderNotes(){ const box=document.getElementById("notes"); box.innerHTML = NOTES.length ? NOTES.map(n=>`<div class="note"><div class="at">${esc((n.at||"").slice(0,16).replace("T"," "))} · ${esc(n.by||"jae")}</div>${esc(n.text)}</div>`).join("") : `<p class="muted small">Nothing kept yet. Tell the Mind a decision and it lands here.</p>`; }
+  document.getElementById("noteadd").addEventListener("click",async()=>{ const inp=document.getElementById("notein"); const t=inp.value.trim(); if(!t||!db) return; await db.collection("notes").add({text:t,at:new Date().toISOString(),by:"jae"}); inp.value=""; });
+  const tabs=[...document.querySelectorAll('[role=tab]')];
+  tabs.forEach(b=>b.addEventListener("click",()=>{tabs.forEach(x=>{x.setAttribute("aria-selected",x===b);document.getElementById(x.getAttribute("aria-controls")).hidden=(x!==b);});}));
+
+  // ---------- talk
+  const chatBox=document.getElementById("chat"), askEl=document.getElementById("ask"), sendBtn=document.getElementById("send"), status=document.getElementById("talkstatus");
+  function renderChat(live){
+    const items=CHAT.slice(-40);
+    chatBox.innerHTML = items.map(x=>`<div class="msg ${x.role==="user"?"jae":"mind"}"><div class="who">${x.role==="user"?"Jae":"The Mind"}</div>${esc(x.content)}</div>`).join("") + (live!=null?`<div class="msg mind"><div class="who">The Mind</div>${esc(live)}</div>`:"");
+    if(!items.length && live==null) chatBox.innerHTML=`<div class="msg mind"><div class="who">The Mind</div>Ask me anything here — the account, a test, a machine, what to do next. I answer from what is on this page, in plain words, with the number. Tell me a decision and I keep it under Notes.</div>`;
+    chatBox.scrollTop=chatBox.scrollHeight;
+  }
+  function compact(m){
+    const q=m.q.map(t=>({name:t.name,queue:t.queue,status:t.status,verdict:t.verdict,expectation:t.expectation,key:t.key||null,lesson:(t.lesson||[]).slice(0,2),blocker:t.blocker||null}));
+    return JSON.stringify({updated:m.S.updated, money_desk:{trial:m.trial||"NOT VERIFIED (no VPS heartbeat yet)",twin_equity:m.book.equity,from_start_pct:m.ev.total_pl_pct,dd_pct:m.book.dd_pct,exposure:m.ev.exposure,mode:m.book.mode,daily_budget_used_pct:m.ev.daily_budget_used_pct,total_budget_used_pct:m.ev.total_budget_used_pct,as_of:m.sig.as_of,QQQ:m.sig.QQQ,BTC:m.sig.BTC,GLD:m.sig.GLD,official_figures:"CAGR 19.3% / Sharpe 1.39 monthly / maxDD -15.4% at full size (one start date; 19-21% across start dates)"},
+      machines:m.machines.map(x=>({name:x.name,state:x.state,word:x.word,why:x.why})), vault_reported:m.vr||null,
+      challenger:{counts:m.c,latest:m.S.latest,queue:q,families:m.S.families}, projects:PROJECTS,
+      session:{point:m.SES.point,goal:m.SES.goal,needed:m.SES.needed,watch:m.SES.watch,caught:m.SES.caught},
+      setup_steps:STEPS.map(s=>({id:s.id,title:s.title,done:!!s.done})), notes:NOTES.slice(0,12).map(n=>({at:n.at,text:n.text}))});
+  }
+  const PREAMBLE=(m)=>`You are THE MIND — the console of Jae's QUANT_LAB (his trading company), SEED (his AI-run businesses) and LIFE tracks. Answer as a steady operator: the point first, the number, plain words, short (under 10 lines unless he asks for depth). Human names only (Opening Break, the vault, the runner), never codes.
+Rails that never bend: never place or recommend a real-money trade, never change a strategy parameter, never propose a purchase; when a value is stale, missing or reported by a person say NOT VERIFIED instead of guessing; a flattering number needs a second source; rejected ideas are wins. Correct a claim with a number, without lecturing.
+If Jae states a decision, a fact about his situation, or asks you to remember something, call the tool remember with one clean sentence. If he says he finished a setup step, call done with that step's id. Otherwise just answer.
+STATE (the page's data — the only facts you have):
+${compact(m)}`;
+  async function send(){
+    const text=askEl.value.trim(); if(!text||!sample) return;
+    askEl.value=""; sendBtn.disabled=true;
+    const m=model(); const userTurn={role:"user",content:text,at:new Date().toISOString()};
+    CHAT.push(userTurn); renderChat("Thinking…");
+    if(db){ try{ await db.collection("chat").add(userTurn);}catch(e){} }
+    let hist=CHAT.slice(-12).map(x=>({role:x.role,content:x.content}));
+    if(hist[0].role!=="user") hist.unshift({role:"user",content:"(earlier)"});
+    hist[0]={role:"user",content:PREAMBLE(m)+"\n\n"+hist[0].content};
+    const turns=hist.filter((x,i)=>i===0||x.role!==hist[i-1].role);
+    if(turns[turns.length-1].role!=="user") turns.push({role:"user",content:text});
+    const tools=[
+      {name:"remember",description:"Keep a decision or fact Jae stated, one clean sentence.",inputSchema:{type:"object",properties:{text:{type:"string"}},required:["text"]},execute:async({text})=>{ if(db) await db.collection("notes").add({text,at:new Date().toISOString(),by:"mind"}); return {kept:true}; }},
+      {name:"done",description:"Mark a setup step done by its id when Jae says he finished it.",inputSchema:{type:"object",properties:{id:{type:"string"}},required:["id"]},execute:async({id})=>{ const s=STEPS.find(x=>x.id===id); if(!s) return {error:"no such step"}; if(db) await db.doc("setup/"+id).update({done:true,when:new Date().toISOString()}); return {done:id}; }}
+    ];
+    let full="";
+    try{ status.textContent="Thinking…"; const r=await sample(turns,{onText:({text})=>{full=text;renderChat(text);},tools,modelTier:"default",cache:false}); full=r.text; status.textContent=""; }
+    catch(e){ full=e&&e.text?e.text:(e&&e.code==="not_granted"?"Talking needs your OK on the Claude prompt — try again.":e&&e.code==="rate_limited"?"Too many at once — give it a minute.":"The Mind could not answer right now."); status.textContent=e&&e.code?`(${e.code})`:""; }
+    const reply={role:"assistant",content:full,at:new Date().toISOString()}; CHAT.push(reply); renderChat();
+    if(db){ try{ await db.collection("chat").add(reply);}catch(e){} }
+    sendBtn.disabled=false; askEl.focus();
+  }
+  sendBtn.addEventListener("click",send); askEl.addEventListener("keydown",e=>{ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();} });
+
+  // ---------- render all
+  function renderAll(){ const m=model(); renderLine(m); renderBrain(m); renderFocus(m); renderToday(m); }
+  renderAll(); renderSetup(); renderNotes(); renderChat();
+
+  // ---------- live data from the Mind's database (inside Claude)
+  const srcEl=document.getElementById("src");
+  if(window.claude&&window.claude.use){
+    sample=await claude.use("sample");
+    if(!sample){ askEl.placeholder="Talking works inside the Claude viewer, on your own account."; askEl.disabled=true; sendBtn.disabled=true; }
+    db=await claude.use("db");
+    if(db){
+      db.doc("state/latest").onSnapshot(snap=>{ if(snap.exists){ const s=snap.data(); for(const k of ["sandbox","vault","pulse","ops","session","equity","vps"]) if(s[k]) D[k]=s[k]; srcEl.className="src live"; srcEl.innerHTML=`<i></i>live · ${esc(s.updated||"")} · ${esc(s.source||"Claude")}`; renderAll(); } });
+      db.collection("projects").onSnapshot(qs=>{ PROJECTS={}; qs.docs.forEach(d=>{PROJECTS[d.id]=d.data();}); renderAll(); });
+      db.collection("setup").orderBy("order","asc").onSnapshot(qs=>{ STEPS=qs.docs.map(d=>Object.assign({id:d.id},d.data())); renderSetup(); });
+      db.collection("notes").orderBy("at","desc").limit(30).onSnapshot(qs=>{ NOTES=qs.docs.map(d=>d.data()); renderNotes(); });
+      db.collection("chat").orderBy("at","desc").limit(60).onSnapshot(qs=>{ CHAT=qs.docs.map(d=>d.data()).reverse(); renderChat(); });
+    } else { srcEl.innerHTML=`<i></i>snapshot (database not reachable in this view)`; }
+  }
+})();
+</script>
