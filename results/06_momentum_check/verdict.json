@@ -1,0 +1,243 @@
+{
+ "id": "06_momentum_check",
+ "name": "Momentum Check",
+ "family": "intraday-momentum",
+ "kind": "session_trades",
+ "ran_at": "2026-09-14 19:51 UTC",
+ "declared": "2026-09-14",
+ "verdict": "FAIL",
+ "key": {
+  "oos_trades": 1395,
+  "oos_expectancy_R": -0.0196872720157321,
+  "oos_expectancy_R_gross": -0.011443015262815947,
+  "oos_cost_R": 0.008244256752916151,
+  "oos_profit_factor": 0.811472722705526,
+  "oos_win_rate": 0.4659498207885305,
+  "oos_max_dd_usd": -13407.247142856853,
+  "oos_max_dd_R": -30.187793906442085,
+  "surviving_size": {
+   "risk_pct": 0.1,
+   "net_per_year_usd": -222.959086744674,
+   "return_per_year_pct": -0.445918173489348,
+   "max_dd_usd": -1340.724714285716,
+   "headroom_pct": 32.963764285714205,
+   "daily_loss_fires_pct": 0.0,
+   "worst_day_usd": -50.63207142857175
+  },
+  "is_trades": 2077,
+  "is_expectancy_R": -0.03486829324856485,
+  "trades_per_year": 249.15586797066015
+ },
+ "pass_line_table": [
+  {
+   "criterion": "OOS trades",
+   "threshold": ">= 200",
+   "value": 1395,
+   "ok": true
+  },
+  {
+   "criterion": "OOS expectancy (net)",
+   "threshold": ">= +0.05R",
+   "value": -0.02,
+   "ok": false
+  },
+  {
+   "criterion": "OOS profit factor",
+   "threshold": ">= 1.2",
+   "value": 0.81,
+   "ok": false
+  },
+  {
+   "criterion": "a size survives the firm's rules",
+   "threshold": "daily-loss fires < 1.0% of days and >= 30.0% headroom on the loss limit",
+   "value": "0.10% risk per trade",
+   "ok": true
+  },
+  {
+   "criterion": "return at the surviving size",
+   "threshold": ">= 10% of the account per year",
+   "value": -0.4,
+   "ok": false
+  },
+  {
+   "criterion": "walk-forward: OOS years positive",
+   "threshold": ">= 50%",
+   "value": "1/6",
+   "ok": false
+  },
+  {
+   "criterion": "in-sample agrees (sign)",
+   "threshold": "IS expectancy > 0",
+   "value": -0.035,
+   "ok": false
+  },
+  {
+   "criterion": "surviving-size detail",
+   "threshold": "",
+   "value": {
+    "risk_pct": 0.1,
+    "net_per_year_usd": -222.959086744674,
+    "return_per_year_pct": -0.445918173489348,
+    "max_dd_usd": -1340.724714285716,
+    "headroom_pct": 32.963764285714205,
+    "daily_loss_fires_pct": 0.0,
+    "worst_day_usd": -50.63207142857175
+   },
+   "ok": true
+  }
+ ],
+ "lesson": [
+  "No signal out of sample: gross expectancy -0.011R before any cost over 1395 trades. This is the rule, not the venue.",
+  "The only honest fix is a filter (one declared condition that removes the losing trades) \u2014 or close the family."
+ ],
+ "fix_recommended": "filter",
+ "expectation": "Dead after 2022 (independent rechecks put the slope near zero). Expected FAIL; it is on the list so the question is closed with a number.",
+ "plain_words": "If the first half-hour of the Nasdaq session went up, buy at 15:30 and sell at the close; if it went down, the reverse. The academic intraday-momentum effect (Gao, Han, Li, Zhou 2018), one honest test at micro-contract cost.",
+ "data_sha": [
+  "e8d4350a4e864753"
+ ],
+ "provenance": [
+  {
+   "NQ": {
+    "files": [
+     "/srv/vault/raw/databento/NQ_v_0_ohlcv-1m_2010-06-06_2026-09-14.parquet"
+    ],
+    "rows": 4820057,
+    "first": "2010-06-06 20:00:00",
+    "last": "2026-09-13 19:59:00",
+    "sha256": [
+     "e8d4350a4e864753"
+    ],
+    "source": "Databento GLBX.MDP3 ohlcv-1m continuous .v.0 (volume roll), unadjusted"
+   }
+  }
+ ],
+ "engine": "sandbox/runner.py + rules.py + judge.py (first run \u2014 single engine, provisional until reproduced)",
+ "detail": {
+  "fix_recommended": "filter",
+  "split_date": "2021-02-04",
+  "in_sample": {
+   "n": 2077,
+   "expectancy_R": -0.03486829324856485,
+   "expectancy_R_gross": 0.003044228182040623,
+   "cost_R": 0.03791252143060547,
+   "se_R": 0.0067625865497810645,
+   "t_stat": -5.156058705037009,
+   "sqn": -5.156058705037009,
+   "win_rate": 0.4492055849783341,
+   "profit_factor": 0.7286066006399426,
+   "max_dd_R": -75.25920818408855,
+   "avg_win_R": 0.21051158914739723,
+   "avg_loss_R": -0.23499017285995702,
+   "net_usd": -33350.75071428571,
+   "max_dd_usd": -35098.04785714255,
+   "days": 2077,
+   "worst_day_usd": -525.5792857142835,
+   "best_day_usd": 812.26,
+   "trades_per_year": 199.5329431877959,
+   "by_exit": {
+    "stop": {
+     "count": 23,
+     "mean": -1.038
+    },
+    "time": {
+     "count": 2054,
+     "mean": -0.024
+    }
+   }
+  },
+  "out_of_sample": {
+   "n": 1395,
+   "expectancy_R": -0.0196872720157321,
+   "expectancy_R_gross": -0.011443015262815947,
+   "cost_R": 0.008244256752916151,
+   "se_R": 0.007923975700245344,
+   "t_stat": -2.484519483713527,
+   "sqn": -2.484519483713527,
+   "win_rate": 0.4659498207885305,
+   "profit_factor": 0.811472722705526,
+   "max_dd_R": -30.187793906442085,
+   "avg_win_R": 0.213023309983771,
+   "avg_loss_R": -0.2227233502703321,
+   "net_usd": -12483.267142857181,
+   "max_dd_usd": -13407.247142856853,
+   "days": 1395,
+   "worst_day_usd": -506.32071428571743,
+   "best_day_usd": 633.84,
+   "trades_per_year": 249.15586797066015,
+   "by_exit": {
+    "stop": {
+     "count": 14,
+     "mean": -1.01
+    },
+    "time": {
+     "count": 1381,
+     "mean": -0.01
+    }
+   }
+  },
+  "by_market_oos": {
+   "NQ": {
+    "n": 1395,
+    "expectancy_R": -0.02,
+    "profit_factor": 0.81
+   }
+  },
+  "by_year_oos": {
+   "2021": {
+    "n": 228,
+    "expectancy_R": -0.029,
+    "sum_R": -6.65
+   },
+   "2022": {
+    "n": 250,
+    "expectancy_R": -0.016,
+    "sum_R": -4.01
+   },
+   "2023": {
+    "n": 248,
+    "expectancy_R": -0.027,
+    "sum_R": -6.59
+   },
+   "2024": {
+    "n": 248,
+    "expectancy_R": -0.033,
+    "sum_R": -8.08
+   },
+   "2025": {
+    "n": 247,
+    "expectancy_R": 0.013,
+    "sum_R": 3.28
+   },
+   "2026": {
+    "n": 174,
+    "expectancy_R": -0.031,
+    "sum_R": -5.42
+   }
+  },
+  "funded_oos": {
+   "daily_loss_fires_pct": 0.0,
+   "max_dd_usd": -13407.0,
+   "headroom_pct": -570.4,
+   "days": 1395,
+   "worst_day_usd": -506.0
+  },
+  "sensitivity": {
+   "slip 0.0 tick/side": {
+    "oos_expectancy_R": -0.015973642847751848,
+    "oos_pf": 0.8391027257948487,
+    "n": 1395
+   },
+   "slip 1.0 tick/side": {
+    "oos_expectancy_R": -0.0196872720157321,
+    "oos_pf": 0.811472722705526,
+    "n": 1395
+   },
+   "slip 2.0 tick/side": {
+    "oos_expectancy_R": -0.023400901183712346,
+    "oos_pf": 0.7847551682419088,
+    "n": 1395
+   }
+  }
+ }
+}
