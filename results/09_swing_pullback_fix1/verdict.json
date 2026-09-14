@@ -1,0 +1,265 @@
+{
+ "id": "09_swing_pullback_fix1",
+ "name": "Swing Pullback \u2014 fix 1 (trailing-edge market filter)",
+ "family": "swing-pullback-in-trend",
+ "kind": "daily_trades",
+ "ran_at": "2026-09-14 18:57 UTC",
+ "declared": "2026-09-14",
+ "verdict": "FAIL",
+ "key": {
+  "oos_trades": 513,
+  "oos_expectancy_R": 0.14881032757770637,
+  "oos_expectancy_R_gross": 0.19546962172026405,
+  "oos_cost_R": 0.04665929414255768,
+  "oos_profit_factor": 1.2163483843831646,
+  "oos_win_rate": 0.5087719298245614,
+  "oos_max_dd_usd": -33491.427524728395,
+  "oos_max_dd_R": -42.5387558563815,
+  "surviving_size": {
+   "risk_pct": 0.2,
+   "net_per_year_usd": 2690.118158398404,
+   "return_per_year_pct": 2.6901181583984037,
+   "max_dd_usd": -6698.285504945685,
+   "headroom_pct": 33.017144950543155,
+   "daily_loss_fires_pct": 0.0,
+   "worst_day_usd": -1830.4432880673573
+  },
+  "is_trades": 438,
+  "is_expectancy_R": 0.22084537474847682,
+  "trades_per_year": 90.38748191027497
+ },
+ "pass_line_table": [
+  {
+   "criterion": "OOS trades",
+   "threshold": ">= 200",
+   "value": 513,
+   "ok": true
+  },
+  {
+   "criterion": "OOS expectancy (net)",
+   "threshold": ">= +0.05R",
+   "value": 0.149,
+   "ok": true
+  },
+  {
+   "criterion": "OOS profit factor",
+   "threshold": ">= 1.2",
+   "value": 1.22,
+   "ok": true
+  },
+  {
+   "criterion": "a size survives the firm's rules",
+   "threshold": "daily-loss fires < 1.0% of days and >= 30.0% headroom on the loss limit",
+   "value": "0.20% risk per trade",
+   "ok": true
+  },
+  {
+   "criterion": "return at the surviving size",
+   "threshold": ">= 10% of the account per year",
+   "value": 2.7,
+   "ok": false
+  },
+  {
+   "criterion": "walk-forward: OOS years positive",
+   "threshold": ">= 50%",
+   "value": "3/6",
+   "ok": true
+  },
+  {
+   "criterion": "in-sample agrees (sign)",
+   "threshold": "IS expectancy > 0",
+   "value": 0.221,
+   "ok": true
+  },
+  {
+   "criterion": "surviving-size detail",
+   "threshold": "",
+   "value": {
+    "risk_pct": 0.2,
+    "net_per_year_usd": 2690.118158398404,
+    "return_per_year_pct": 2.6901181583984037,
+    "max_dd_usd": -6698.285504945685,
+    "headroom_pct": 33.017144950543155,
+    "daily_loss_fires_pct": 0.0,
+    "worst_day_usd": -1830.4432880673573
+   },
+   "ok": true
+  }
+ ],
+ "lesson": [
+  "The edge is real (+0.149R over 513 trades) but jagged: the worst stretch is 43R deep. The largest size that keeps a funded account alive is 0.20% risk per trade, and at that size it earns about 2.7% a year.",
+  "The lever is the drawdown, not the entry: a filter that removes the losing stretch (or the losing market) is the one declared fix worth trying.",
+  "By market: works on GLD, QQQ, loses on BTC."
+ ],
+ "fix_recommended": "market",
+ "expectation": "Bitcoin drops out once its losing stretch is visible; expectancy per trade rises; but the 2021 hole came from all three markets at once, so the worst stretch probably stays deep and the return at the surviving size stays under 10%/yr. Likely still FAIL. This is fix 1 of 3 for the family.",
+ "plain_words": "The Swing Pullback, but a market is only traded while its own last three years of these trades (the ones already closed) show a profit. No market is dropped by hand \u2014 the rule drops it, in time, with no look-ahead. Answers the first test's lesson: Bitcoin lost, gold and Nasdaq worked.",
+ "data_sha": [
+  "9877675cc50aa6da"
+ ],
+ "provenance": [
+  {
+   "files": [
+    "daily.csv"
+   ],
+   "rows": 4273,
+   "first": "2015-01-02 00:00:00",
+   "last": "2026-09-13 00:00:00",
+   "sha256": [
+    "9877675cc50aa6da"
+   ],
+   "source": "repo data/daily.csv (fetch.py: Yahoo QQQ/GLD, Kraken BTC)",
+   "symbols": [
+    "QQQ",
+    "BTC",
+    "GLD"
+   ]
+  }
+ ],
+ "engine": "sandbox/runner.py + rules.py + judge.py (first run \u2014 single engine, provisional until reproduced)",
+ "detail": {
+  "fix_recommended": "market",
+  "in_sample": {
+   "n": 438,
+   "expectancy_R": 0.22084537474847682,
+   "expectancy_R_gross": 0.2896771507328678,
+   "cost_R": 0.068831775984391,
+   "se_R": 0.10213071275343494,
+   "t_stat": 2.162379648535736,
+   "sqn": 2.162379648535736,
+   "win_rate": 0.5388127853881278,
+   "profit_factor": 1.3364797802585426,
+   "max_dd_R": -20.007992330002157,
+   "avg_win_R": 1.6279978858021207,
+   "avg_loss_R": -1.4231545886607313,
+   "net_usd": 96730.27413983284,
+   "max_dd_usd": -25834.257991596358,
+   "days": 401,
+   "worst_day_usd": -7325.133689839534,
+   "best_day_usd": 10592.279867986812,
+   "trades_per_year": 79.86994508237645,
+   "by_exit": {
+    "stop": {
+     "count": 111,
+     "mean": -1.88
+    },
+    "target": {
+     "count": 304,
+     "mean": 0.994
+    },
+    "time": {
+     "count": 23,
+     "mean": 0.138
+    }
+   }
+  },
+  "out_of_sample": {
+   "n": 513,
+   "expectancy_R": 0.14881032757770637,
+   "expectancy_R_gross": 0.19546962172026405,
+   "cost_R": 0.04665929414255768,
+   "se_R": 0.09095627844426256,
+   "t_stat": 1.6360643830529678,
+   "sqn": 1.6360643830529678,
+   "win_rate": 0.5087719298245614,
+   "profit_factor": 1.2163483843831646,
+   "max_dd_R": -42.5387558563815,
+   "avg_win_R": 1.6444257043947077,
+   "avg_loss_R": -1.4002198841256166,
+   "net_usd": 76339.69804736333,
+   "max_dd_usd": -33491.427524728395,
+   "days": 450,
+   "worst_day_usd": -9152.216440336786,
+   "best_day_usd": 7995.874362094071,
+   "trades_per_year": 90.38748191027497,
+   "by_exit": {
+    "stop": {
+     "count": 132,
+     "mean": -1.791
+    },
+    "target": {
+     "count": 359,
+     "mean": 0.877
+    },
+    "time": {
+     "count": 22,
+     "mean": -0.095
+    }
+   }
+  },
+  "by_market_oos": {
+   "BTC": {
+    "n": 62,
+    "expectancy_R": -0.445,
+    "profit_factor": 0.53
+   },
+   "GLD": {
+    "n": 198,
+    "expectancy_R": 0.257,
+    "profit_factor": 1.39
+   },
+   "QQQ": {
+    "n": 253,
+    "expectancy_R": 0.209,
+    "profit_factor": 1.32
+   }
+  },
+  "by_year_oos": {
+   "2021": {
+    "n": 110,
+    "expectancy_R": -0.225,
+    "sum_R": -24.71
+   },
+   "2022": {
+    "n": 35,
+    "expectancy_R": -0.11,
+    "sum_R": -3.83
+   },
+   "2023": {
+    "n": 105,
+    "expectancy_R": 0.019,
+    "sum_R": 1.96
+   },
+   "2024": {
+    "n": 106,
+    "expectancy_R": 0.506,
+    "sum_R": 53.65
+   },
+   "2025": {
+    "n": 108,
+    "expectancy_R": 0.477,
+    "sum_R": 51.46
+   },
+   "2026": {
+    "n": 49,
+    "expectancy_R": -0.045,
+    "sum_R": -2.19
+   }
+  },
+  "funded_oos": {
+   "daily_loss_fires_pct": 0.89,
+   "max_dd_usd": -33491.0,
+   "headroom_pct": -234.9,
+   "days": 450,
+   "worst_day_usd": -9152.0
+  },
+  "sensitivity": {
+   "costs x0": {
+    "oos_expectancy_R": 0.18324088571676347,
+    "oos_pf": 1.2754772265497605,
+    "n": 572
+   },
+   "costs x1": {
+    "oos_expectancy_R": 0.14881032757770637,
+    "oos_pf": 1.2163483843831646,
+    "n": 513
+   },
+   "costs x2": {
+    "oos_expectancy_R": 0.17475010422583764,
+    "oos_pf": 1.2627938473062938,
+    "n": 441
+   }
+  },
+  "corr_with_live_book_oos": 0.26028437417425443
+ }
+}
