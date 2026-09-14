@@ -292,6 +292,45 @@
    "data_sha": [
     "9877675cc50aa6da"
    ]
+  },
+  "10_opening_break_fix1_range_form": {
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 23:48 UTC",
+   "name": "Opening Break \u2014 fix 1 (range form)",
+   "family": "opening-breakout",
+   "queue": 10,
+   "key": {
+    "oos_trades": 2610,
+    "oos_expectancy_R": 0.03668279004850491,
+    "oos_expectancy_R_gross": 0.061566439777579286,
+    "oos_cost_R": 0.024883649729074378,
+    "oos_profit_factor": 1.0859427133757433,
+    "oos_win_rate": 0.47088122605363986,
+    "oos_max_dd_usd": -12196.170000000187,
+    "oos_max_dd_R": -24.191135207878077,
+    "surviving_size": {
+     "risk_pct": 0.11,
+     "net_per_year_usd": 812.7279555623467,
+     "return_per_year_pct": 1.6254559111246933,
+     "max_dd_usd": -1341.5787000000055,
+     "headroom_pct": 32.92106499999973,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -129.8209
+    },
+    "is_trades": 3846,
+    "is_expectancy_R": -0.10820003233251063,
+    "trades_per_year": 466.1625916870416
+   },
+   "lesson": [
+    "The signal is there (+0.062R gross, 2610 trades) and costs eat it (0.025R per trade \u2192 +0.037R net).",
+    "The lever is cost/venue: a cheaper contract, fewer ticks of slippage, or a wider stop that makes each tick smaller in R."
+   ],
+   "fix_recommended": "cost_venue",
+   "data_sha": [
+    "60fe775c53a38ad2",
+    "e8d4350a4e864753"
+   ]
   }
  },
  "families": {
@@ -319,11 +358,12 @@
   },
   "opening-breakout": {
    "status": "open",
-   "fixes_used": 0,
+   "fixes_used": 1,
    "tests": [
     "01_opening_break",
     "02_patient_break",
-    "07_volume_break"
+    "07_volume_break",
+    "10_opening_break_fix1_range_form"
    ]
   },
   "intraday-momentum": {
@@ -334,5 +374,5 @@
    ]
   }
  },
- "updated": "2026-09-14 19:51 UTC"
+ "updated": "2026-09-14 23:48 UTC"
 }
