@@ -1,0 +1,276 @@
+{
+ "id": "01_opening_break",
+ "name": "Opening Break",
+ "family": "opening-breakout",
+ "kind": "session_trades",
+ "ran_at": "2026-09-14 19:51 UTC",
+ "declared": "2026-09-14",
+ "verdict": "FAIL",
+ "key": {
+  "oos_trades": 929,
+  "oos_expectancy_R": 0.11972943184839026,
+  "oos_expectancy_R_gross": 0.15440741550973205,
+  "oos_cost_R": 0.034677983661341796,
+  "oos_profit_factor": 1.2094872739732396,
+  "oos_win_rate": 0.4101184068891281,
+  "oos_max_dd_usd": -9322.070178571434,
+  "oos_max_dd_R": -15.346474587048181,
+  "surviving_size": {
+   "risk_pct": 0.15,
+   "net_per_year_usd": 1352.3412037405371,
+   "return_per_year_pct": 2.7046824074810742,
+   "max_dd_usd": -1398.3105267857172,
+   "headroom_pct": 30.08447366071414,
+   "daily_loss_fires_pct": 0.0,
+   "worst_day_usd": -159.1211250000008
+  },
+  "is_trades": 1262,
+  "is_expectancy_R": 0.007195482323091299,
+  "trades_per_year": 166.49521589793915
+ },
+ "pass_line_table": [
+  {
+   "criterion": "OOS trades",
+   "threshold": ">= 200",
+   "value": 929,
+   "ok": true
+  },
+  {
+   "criterion": "OOS expectancy (net)",
+   "threshold": ">= +0.05R",
+   "value": 0.12,
+   "ok": true
+  },
+  {
+   "criterion": "OOS profit factor",
+   "threshold": ">= 1.2",
+   "value": 1.21,
+   "ok": true
+  },
+  {
+   "criterion": "a size survives the firm's rules",
+   "threshold": "daily-loss fires < 1.0% of days and >= 30.0% headroom on the loss limit",
+   "value": "0.15% risk per trade",
+   "ok": true
+  },
+  {
+   "criterion": "return at the surviving size",
+   "threshold": ">= 10% of the account per year",
+   "value": 2.7,
+   "ok": false
+  },
+  {
+   "criterion": "walk-forward: OOS years positive",
+   "threshold": ">= 50%",
+   "value": "4/6",
+   "ok": true
+  },
+  {
+   "criterion": "in-sample agrees (sign)",
+   "threshold": "IS expectancy > 0",
+   "value": 0.007,
+   "ok": true
+  },
+  {
+   "criterion": "surviving-size detail",
+   "threshold": "",
+   "value": {
+    "risk_pct": 0.15,
+    "net_per_year_usd": 1352.3412037405371,
+    "return_per_year_pct": 2.7046824074810742,
+    "max_dd_usd": -1398.3105267857172,
+    "headroom_pct": 30.08447366071414,
+    "daily_loss_fires_pct": 0.0,
+    "worst_day_usd": -159.1211250000008
+   },
+   "ok": true
+  }
+ ],
+ "lesson": [
+  "The edge is real (+0.120R over 929 trades) but jagged: the worst stretch is 15R deep. The largest size that keeps a funded account alive is 0.15% risk per trade, and at that size it earns about 2.7% a year.",
+  "The lever is the drawdown, not the entry: a filter that removes the losing stretch (or the losing market) is the one declared fix worth trying."
+ ],
+ "fix_recommended": "filter",
+ "expectation": "OOS 0.00 to +0.05R net at 1 tick per side. The lab's own SPX table put OOS at +0.018R (0.25 tick) and -0.032R (0.5 tick); NQ's wider point range may carry it. Honest odds of a pass: about 1 in 3.",
+ "plain_words": "The one signal that survived the 1,492: a break away from the session open by 0.45 of the 14-day range, confirmed by a 5-minute close on the right side of the day's VWAP, taken once per day before 11:00 ET, stop 0.25 of the range, target 0.60, flat by 15:50. Re-run on Nasdaq and S&P futures at micro-contract cost.",
+ "data_sha": [
+  "60fe775c53a38ad2",
+  "e8d4350a4e864753"
+ ],
+ "provenance": [
+  {
+   "NQ": {
+    "files": [
+     "/srv/vault/raw/databento/NQ_v_0_ohlcv-1m_2010-06-06_2026-09-14.parquet"
+    ],
+    "rows": 4820057,
+    "first": "2010-06-06 20:00:00",
+    "last": "2026-09-13 19:59:00",
+    "sha256": [
+     "e8d4350a4e864753"
+    ],
+    "source": "Databento GLBX.MDP3 ohlcv-1m continuous .v.0 (volume roll), unadjusted"
+   }
+  },
+  {
+   "ES": {
+    "files": [
+     "/srv/vault/raw/databento/ES_v_0_ohlcv-1m_2010-06-06_2026-09-14.parquet"
+    ],
+    "rows": 4932622,
+    "first": "2010-06-06 20:00:00",
+    "last": "2026-09-13 19:59:00",
+    "sha256": [
+     "60fe775c53a38ad2"
+    ],
+    "source": "Databento GLBX.MDP3 ohlcv-1m continuous .v.0 (volume roll), unadjusted"
+   }
+  }
+ ],
+ "engine": "sandbox/runner.py + rules.py + judge.py (first run \u2014 single engine, provisional until reproduced)",
+ "detail": {
+  "fix_recommended": "filter",
+  "split_date": "2021-02-04",
+  "in_sample": {
+   "n": 1262,
+   "expectancy_R": 0.007195482323091299,
+   "expectancy_R_gross": 0.12329403979395634,
+   "cost_R": 0.11609855747086505,
+   "se_R": 0.04123781346031147,
+   "t_stat": 0.17448748416344748,
+   "sqn": 0.17448748416344748,
+   "win_rate": 0.37797147385103014,
+   "profit_factor": 1.0351075037403545,
+   "max_dd_R": -69.98041966352733,
+   "avg_win_R": 1.7850099195477696,
+   "avg_loss_R": -1.0730815706147068,
+   "net_usd": 12543.75660714297,
+   "max_dd_usd": -20338.98267857146,
+   "days": 830,
+   "worst_day_usd": -1101.7082142857191,
+   "best_day_usd": 2310.257142857155,
+   "trades_per_year": 123.94339876310835,
+   "by_exit": {
+    "stop": {
+     "count": 740,
+     "mean": -1.118
+    },
+    "target": {
+     "count": 296,
+     "mean": 2.282
+    },
+    "time": {
+     "count": 226,
+     "mean": 0.71
+    }
+   }
+  },
+  "out_of_sample": {
+   "n": 929,
+   "expectancy_R": 0.11972943184839026,
+   "expectancy_R_gross": 0.15440741550973205,
+   "cost_R": 0.034677983661341796,
+   "se_R": 0.047137597440769625,
+   "t_stat": 2.53999860724415,
+   "sqn": 2.53999860724415,
+   "win_rate": 0.4101184068891281,
+   "profit_factor": 1.2094872739732396,
+   "max_dd_R": -15.346474587048181,
+   "avg_win_R": 1.7128942277807415,
+   "avg_loss_R": -0.9879271142286643,
+   "net_usd": 50304.747857142866,
+   "max_dd_usd": -9322.070178571434,
+   "days": 611,
+   "worst_day_usd": -1060.8075000000053,
+   "best_day_usd": 2340.0985714285853,
+   "trades_per_year": 166.49521589793915,
+   "by_exit": {
+    "stop": {
+     "count": 510,
+     "mean": -1.035
+    },
+    "target": {
+     "count": 213,
+     "mean": 2.363
+    },
+    "time": {
+     "count": 206,
+     "mean": 0.659
+    }
+   }
+  },
+  "by_market_oos": {
+   "ES": {
+    "n": 416,
+    "expectancy_R": 0.1,
+    "profit_factor": 1.17
+   },
+   "NQ": {
+    "n": 513,
+    "expectancy_R": 0.136,
+    "profit_factor": 1.25
+   }
+  },
+  "by_year_oos": {
+   "2021": {
+    "n": 162,
+    "expectancy_R": 0.255,
+    "sum_R": 41.37
+   },
+   "2022": {
+    "n": 156,
+    "expectancy_R": 0.159,
+    "sum_R": 24.81
+   },
+   "2023": {
+    "n": 152,
+    "expectancy_R": -0.086,
+    "sum_R": -13.05
+   },
+   "2024": {
+    "n": 162,
+    "expectancy_R": 0.184,
+    "sum_R": 29.84
+   },
+   "2025": {
+    "n": 164,
+    "expectancy_R": 0.212,
+    "sum_R": 34.72
+   },
+   "2026": {
+    "n": 133,
+    "expectancy_R": -0.049,
+    "sum_R": -6.46
+   }
+  },
+  "funded_oos": {
+   "daily_loss_fires_pct": 2.29,
+   "max_dd_usd": -9322.0,
+   "headroom_pct": -366.1,
+   "days": 611,
+   "worst_day_usd": -1061.0
+  },
+  "sensitivity": {
+   "slip 0.0 tick/side": {
+    "oos_expectancy_R": 0.14094122544962595,
+    "oos_pf": 1.2529331428216166,
+    "n": 929
+   },
+   "slip 0.5 tick/side": {
+    "oos_expectancy_R": 0.1303353286490081,
+    "oos_pf": 1.2309642007460289,
+    "n": 929
+   },
+   "slip 1.0 tick/side": {
+    "oos_expectancy_R": 0.11972943184839026,
+    "oos_pf": 1.2094872739732396,
+    "n": 929
+   },
+   "slip 2.0 tick/side": {
+    "oos_expectancy_R": 0.09851763824715457,
+    "oos_pf": 1.1679228373182675,
+    "n": 929
+   }
+  }
+ }
+}
