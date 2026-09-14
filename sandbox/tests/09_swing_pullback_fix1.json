@@ -1,0 +1,84 @@
+{
+ "id": "09_swing_pullback_fix1",
+ "name": "Swing Pullback \u2014 fix 1 (trailing-edge market filter)",
+ "family": "swing-pullback-in-trend",
+ "queue": 9,
+ "kind": "daily_trades",
+ "rule": "swing_pullback",
+ "declared": "2026-09-14",
+ "plain_words": "The Swing Pullback, but a market is only traded while its own last three years of these trades (the ones already closed) show a profit. No market is dropped by hand \u2014 the rule drops it, in time, with no look-ahead. Answers the first test's lesson: Bitcoin lost, gold and Nasdaq worked.",
+ "related": "FAST_TRADES_REPORT killed 2-5 day dip buys AS THE BOOK'S TIMING SIGNAL (a replacement for the 150-day line). This is a different thing: a separate trade with its own stop, target and time exit, judged in R. Declared as such.",
+ "markets": [
+  "QQQ",
+  "GLD",
+  "BTC"
+ ],
+ "data": {
+  "needs": [
+   "daily_closes"
+  ],
+  "source": "repo data/daily.csv (fetch.py: Yahoo QQQ/GLD, Kraken BTC)"
+ },
+ "params": {
+  "sma": 150,
+  "low_days": 3,
+  "high_days": 5,
+  "max_days": 7,
+  "stop_atr": 1.5
+ },
+ "costs_bps": {
+  "QQQ": 2.0,
+  "GLD": 3.0,
+  "BTC": 40.0,
+  "note": "round trip in basis points of notional: QQQ as MNQ ($1.22 + 2 ticks), gold as MGC, Bitcoin as Kraken spot taker 0.20% per side"
+ },
+ "sizing": {
+  "account": 100000,
+  "risk_pct": 1.0
+ },
+ "firm": {
+  "name": "FTMO US Swing $100k (holds overnight and over weekends)",
+  "account": 100000,
+  "daily_loss": 5000,
+  "max_loss": 10000,
+  "note": "swing holds cannot run on a flat-by-close futures firm; the venue for 1-7 day holds is the Swing account"
+ },
+ "windows": {
+  "select": [
+   "2015-01-01",
+   "2020-12-31"
+  ],
+  "judge": [
+   "2021-01-01",
+   "2026-12-31"
+  ]
+ },
+ "pass_line": {
+  "min_trades": 200,
+  "min_expectancy_R": 0.05,
+  "min_profit_factor": 1.2,
+  "max_daily_loss_fires_pct": 1.0,
+  "min_headroom_pct": 30.0,
+  "min_positive_years_frac": 0.5,
+  "min_return_at_surviving_size_pct": 10.0,
+  "note": "tightened 2026-09-14 before any verdict was adopted: 'sized so the firm's rules hold' is evaluated as the LARGEST risk per trade at which they hold, and the strategy must earn >= 10%/yr of the account at that size \u2014 an edge that only survives at a size that earns nothing is not a pass"
+ },
+ "sensitivity": {
+  "costs_x": [
+   0.0,
+   1.0,
+   2.0
+  ]
+ },
+ "expectation": "Bitcoin drops out once its losing stretch is visible; expectancy per trade rises; but the 2021 hole came from all three markets at once, so the worst stretch probably stays deep and the return at the surviving size stays under 10%/yr. Likely still FAIL. This is fix 1 of 3 for the family.",
+ "fixes": [],
+ "fixes_used": 1,
+ "fix_type": "market",
+ "fix_of": "03_swing_pullback",
+ "post_filter": {
+  "trailing_edge": {
+   "years": 3,
+   "min_trades": 30
+  }
+ }
+}
