@@ -1,0 +1,75 @@
+{
+ "id": "07_volume_break",
+ "name": "Volume Break",
+ "family": "opening-breakout",
+ "queue": 7,
+ "kind": "session_trades",
+ "rule": "vol_band_break",
+ "declared": "2026-09-14",
+ "plain_words": "The Opening Break taken only when the first 30 minutes traded at least 1.2 times the usual volume for that half hour.",
+ "markets": {
+  "NQ": "MNQ",
+  "ES": "MES"
+ },
+ "data": {
+  "needs": [
+   "databento:NQ",
+   "databento:ES"
+  ],
+  "bars": "5-min regular hours with volume from Databento 1-min"
+ },
+ "params": {
+  "k": 0.45,
+  "stop_mult": 0.25,
+  "target_mult": 0.6,
+  "cut_min": 660,
+  "exit_min": 950,
+  "min_hold": 2,
+  "use_vwap": true,
+  "filters": {
+   "relvol_min": 1.2
+  }
+ },
+ "cost": {
+  "commission_rt": 1.22,
+  "slip_ticks": 1.0,
+  "note": "$1.22 per round turn per micro contract + 1 tick slippage per side (2 ticks round trip)"
+ },
+ "sizing": {
+  "account": 50000,
+  "risk_pct": 1.0,
+  "max_contracts": 20
+ },
+ "firm": {
+  "name": "futures prop account (Topstep-style 50K)",
+  "account": 50000,
+  "daily_loss": 1000,
+  "max_loss": 2000,
+  "note": "daily loss = self-imposed $1,000; max loss = $2,000 trailing end-of-day; flat before 16:10 ET"
+ },
+ "windows": {
+  "select": "first 60% of sessions",
+  "judge": "last 40% of sessions"
+ },
+ "pass_line": {
+  "min_trades": 200,
+  "min_expectancy_R": 0.05,
+  "min_profit_factor": 1.2,
+  "max_daily_loss_fires_pct": 1.0,
+  "min_headroom_pct": 30.0,
+  "min_positive_years_frac": 0.5,
+  "min_return_at_surviving_size_pct": 10.0,
+  "note": "tightened 2026-09-14 before any verdict was adopted: 'sized so the firm's rules hold' is evaluated as the LARGEST risk per trade at which they hold, and the strategy must earn >= 10%/yr of the account at that size \u2014 an edge that only survives at a size that earns nothing is not a pass"
+ },
+ "sensitivity": {
+  "slip_ticks": [
+   0.0,
+   0.5,
+   1.0,
+   2.0
+  ]
+ },
+ "expectation": "Modest help, inside noise: a few hundredths of an R, not a verdict-changer.",
+ "fixes": [],
+ "fixes_used": 0
+}
