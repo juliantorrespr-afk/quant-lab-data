@@ -1,0 +1,185 @@
+{
+ "id": "08_two_speed_trend",
+ "name": "Two-Speed Trend",
+ "family": "trend-horizon-blend",
+ "kind": "book",
+ "ran_at": "2026-09-14 18:53 UTC",
+ "declared": "2026-09-14",
+ "verdict": "FAIL",
+ "key": {
+  "oos_sharpe_candidate": 1.0455657345566616,
+  "oos_sharpe_live": 1.2428827688073367,
+  "oos_cagr_candidate": 0.12339348686186402,
+  "oos_cagr_live": 0.15869979661476719,
+  "oos_maxdd_candidate": -0.18662301458779906,
+  "oos_maxdd_live": -0.15437993454974175,
+  "turnover_candidate": 13.326075637382916,
+  "turnover_live": 6.499401008226667
+ },
+ "pass_line_table": [
+  {
+   "criterion": "OOS Sharpe vs live book (monthly)",
+   "threshold": ">= live +0.10",
+   "value": -0.197,
+   "ok": false
+  },
+  {
+   "criterion": "OOS max drawdown vs live book",
+   "threshold": "no deeper than 1.0 pp",
+   "value": 3.22,
+   "ok": false
+  },
+  {
+   "criterion": "turnover vs live book",
+   "threshold": "<= 1.5x",
+   "value": 2.05,
+   "ok": false
+  }
+ ],
+ "lesson": [
+  "Two-Speed Trend vs the live book out of sample: Sharpe -0.20, CAGR -3.5 pts, max drawdown -3.2 pts (positive = shallower).",
+  "Worse on both quality and hole \u2014 the change removes nothing and adds nothing. Closed unless a declared fix names a mechanism.",
+  "Turnover out of sample: 13.3x a year vs the book's 6.5x."
+ ],
+ "fix_recommended": "close",
+ "expectation": "Fails on turnover \u2014 the 20-day line flips far more often than the 150-day; Sharpe about the same, costs higher. Expected FAIL.",
+ "plain_words": "The live book with its 150-day line replaced by two lines: a 20-day and a 250-day. Half a position when one says up, full when both do, none when neither. Gold stays always held. Same weights, vol targets, costs and rails as the money desk.",
+ "data_sha": [
+  "9877675cc50aa6da"
+ ],
+ "provenance": [
+  {
+   "files": [
+    "daily.csv"
+   ],
+   "rows": 4273,
+   "first": "2015-01-02 00:00:00",
+   "last": "2026-09-13 00:00:00",
+   "sha256": [
+    "9877675cc50aa6da"
+   ],
+   "source": "repo data/daily.csv (fetch.py: Yahoo QQQ/GLD, Kraken BTC)",
+   "symbols": [
+    "QQQ",
+    "BTC",
+    "GLD"
+   ]
+  }
+ ],
+ "engine": "sandbox/runner.py + rules.py + judge.py (first run \u2014 single engine, provisional until reproduced)",
+ "detail": {
+  "fix_recommended": "close",
+  "baseline": {
+   "full": {
+    "cagr": 0.20726247390884,
+    "sharpe_daily252": 1.3515310784539845,
+    "sharpe_monthly": 1.4914771696545952,
+    "max_dd": -0.15437993454974175,
+    "ret_over_dd": 1.3425480099686098,
+    "years": 11.008898015058179,
+    "worst_year": -0.06072764423497756
+   },
+   "is": {
+    "cagr": 0.2612879272436408,
+    "sharpe_daily252": 1.665407771595356,
+    "sharpe_monthly": 1.725682801444904,
+    "max_dd": -0.11864310677749468,
+    "ret_over_dd": 2.202301796881168,
+    "years": 5.308692676249144,
+    "worst_year": -0.047028947771406426
+   },
+   "oos": {
+    "cagr": 0.15869979661476719,
+    "sharpe_daily252": 1.0612217893317237,
+    "sharpe_monthly": 1.2428827688073367,
+    "max_dd": -0.15437993454974175,
+    "ret_over_dd": 1.0279820177254548,
+    "years": 5.6974674880219025,
+    "worst_year": -0.06072764423497756
+   }
+  },
+  "candidate": {
+   "full": {
+    "cagr": 0.20461489496191532,
+    "sharpe_daily252": 1.4170012381208454,
+    "sharpe_monthly": 1.55964472540621,
+    "max_dd": -0.18662301458779906,
+    "ret_over_dd": 1.09640761839506,
+    "years": 11.008898015058179,
+    "worst_year": -0.1112033186387722
+   },
+   "is": {
+    "cagr": 0.29795909112988905,
+    "sharpe_daily252": 1.9776484858726675,
+    "sharpe_monthly": 2.109326811158063,
+    "max_dd": -0.07465808676174401,
+    "ret_over_dd": 3.9909821434450152,
+    "years": 5.308692676249144,
+    "worst_year": -0.01966949363881909
+   },
+   "oos": {
+    "cagr": 0.12339348686186402,
+    "sharpe_daily252": 0.8992478758101499,
+    "sharpe_monthly": 1.0455657345566616,
+    "max_dd": -0.18662301458779906,
+    "ret_over_dd": 0.6611911565913113,
+    "years": 5.6974674880219025,
+    "worst_year": -0.1112033186387722
+   }
+  },
+  "turnover_oos": {
+   "candidate_per_year": 13.326075637382916,
+   "baseline_per_year": 6.499401008226667
+  },
+  "yearly": {
+   "live_book": {
+    "2016": 18.5,
+    "2017": 73.2,
+    "2018": -4.7,
+    "2019": 8.0,
+    "2020": 44.3,
+    "2021": 4.7,
+    "2022": -6.1,
+    "2023": 35.6,
+    "2024": 32.4,
+    "2025": 27.6,
+    "2026": 2.9
+   },
+   "candidate": {
+    "2016": 20.2,
+    "2017": 60.5,
+    "2018": -2.0,
+    "2019": 26.8,
+    "2020": 50.0,
+    "2021": 4.8,
+    "2022": -11.1,
+    "2023": 29.6,
+    "2024": 28.6,
+    "2025": 21.6,
+    "2026": 2.9
+   }
+  },
+  "sensitivity": {
+   "slow 500": {
+    "oos": {
+     "cagr": 0.12305339152660366,
+     "sharpe_daily252": 0.8892404479499871,
+     "sharpe_monthly": 1.0274445866220012,
+     "max_dd": -0.21561975538314515,
+     "ret_over_dd": 0.5706962764517757,
+     "years": 5.6974674880219025,
+     "worst_year": -0.14929433411624915
+    },
+    "baseline_oos_same_span": {
+     "cagr": 0.15869979661476719,
+     "sharpe_daily252": 1.0612217893317237,
+     "sharpe_monthly": 1.2428827688073367,
+     "max_dd": -0.15437993454974175,
+     "ret_over_dd": 1.0279820177254548,
+     "years": 5.6974674880219025,
+     "worst_year": -0.06072764423497756
+    }
+   }
+  }
+ }
+}
