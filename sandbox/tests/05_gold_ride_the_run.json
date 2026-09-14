@@ -1,0 +1,60 @@
+{
+ "id": "05_gold_ride_the_run",
+ "name": "Gold Ride-the-Run",
+ "family": "gold-pyramid-overlay",
+ "queue": 5,
+ "kind": "overlay",
+ "rule": "ride_the_run",
+ "declared": "2026-09-14",
+ "plain_words": "Hold gold at half its normal size; add a quarter each time gold prints a new 20-day high, up to the normal size (the vol-target cap); a 20-day low ends the run and resets to half. Compared with simply holding gold at full size.",
+ "related": "Adds were tested once as 'leverage in a costume' (2026-09-09, off switch). This is the declared re-test WITH the cap.",
+ "markets": [
+  "GLD"
+ ],
+ "data": {
+  "needs": [
+   "daily_closes"
+  ],
+  "source": "repo data/daily.csv"
+ },
+ "params": {
+  "base": 0.5,
+  "step": 0.25,
+  "cap": 1.0,
+  "high_days": 20,
+  "low_days": 20,
+  "vol_target": 0.15,
+  "cost": 0.0005
+ },
+ "windows": {
+  "select": [
+   "2015-01-01",
+   "2020-12-31"
+  ],
+  "judge": [
+   "2021-01-01",
+   "2026-12-31"
+  ],
+  "seat": [
+   "2022-01-01",
+   "2026-12-31"
+  ],
+  "ugly_years": [
+   2021
+  ]
+ },
+ "pass_line": {
+  "ret_over_dd_must_improve": true,
+  "dd_must_not_worsen": true
+ },
+ "sensitivity": {
+  "uncapped_variant": {
+   "base": 1.0,
+   "step": 0.25,
+   "cap": 1.5
+  }
+ },
+ "expectation": "More return per unit held, but the cap means less held on average; return/drawdown probably does not improve. The uncapped variant (adds above the vol target) is expected to add return and a deeper hole \u2014 leverage. Honest odds: 1 in 5.",
+ "fixes": [],
+ "fixes_used": 0
+}
