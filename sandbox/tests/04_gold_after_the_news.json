@@ -1,0 +1,70 @@
+{
+ "id": "04_gold_after_the_news",
+ "name": "Gold After the News",
+ "family": "gold-news-reaction",
+ "queue": 4,
+ "kind": "event_trades",
+ "rule": "news_reaction",
+ "declared": "2026-09-14",
+ "plain_words": "On CPI, FOMC and payroll days, trade gold in the direction of the first 30 minutes after the release, stop at the other side of that 30-minute move, out after two more sessions. Micro gold futures cost.",
+ "markets": {
+  "XAUUSD": "MGC"
+ },
+ "data": {
+  "needs": [
+   "dukascopy:xauusd",
+   "calendar"
+  ],
+  "bars": "Dukascopy XAUUSD 5-min (2022\u2192 in the vault; 2012-22 lives in the lab's golddata/)"
+ },
+ "params": {
+  "window_min": 30,
+  "hold_days": 2,
+  "events": [
+   "CPI",
+   "FOMC",
+   "NFP"
+  ]
+ },
+ "cost": {
+  "commission_rt": 1.92,
+  "slip_ticks": 1.0,
+  "note": "MGC $1.92 round turn + 1 tick ($1.00) per side"
+ },
+ "sizing": {
+  "account": 50000,
+  "risk_pct": 1.0,
+  "max_contracts": 20
+ },
+ "firm": {
+  "name": "futures prop account (Topstep-style 50K)",
+  "account": 50000,
+  "daily_loss": 1000,
+  "max_loss": 2000,
+  "note": "daily loss = self-imposed $1,000; max loss = $2,000 trailing end-of-day; flat before 16:10 ET"
+ },
+ "windows": {
+  "select": "first 60% of events",
+  "judge": "last 40% of events"
+ },
+ "pass_line": {
+  "min_trades": 200,
+  "min_expectancy_R": 0.05,
+  "min_profit_factor": 1.2,
+  "max_daily_loss_fires_pct": 1.0,
+  "min_headroom_pct": 30.0,
+  "min_positive_years_frac": 0.5,
+  "min_return_at_surviving_size_pct": 10.0,
+  "note": "tightened 2026-09-14 before any verdict was adopted: 'sized so the firm's rules hold' is evaluated as the LARGEST risk per trade at which they hold, and the strategy must earn >= 10%/yr of the account at that size \u2014 an edge that only survives at a size that earns nothing is not a pass"
+ },
+ "sensitivity": {
+  "slip_ticks": [
+   0.0,
+   1.0,
+   2.0
+  ]
+ },
+ "expectation": "Real but rare (about 30 trades a year): cannot reach 200 out-of-sample trades before ~2030 on 2022\u2192 data \u2014 most likely INSUFFICIENT; may only qualify as a sizing overlay.",
+ "fixes": [],
+ "fixes_used": 0
+}
