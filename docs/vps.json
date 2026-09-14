@@ -1,10 +1,10 @@
 {
-    "updated":  "2026-09-14 21:12 UTC",
+    "updated":  "2026-09-14 21:22 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  150842,
+    "heartbeat_age_s":  1,
     "heartbeat":  {
-                      "gmt":  "2026.09.13",
+                      "gmt":  "2026.09.14",
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "100000.00",
@@ -15,32 +15,29 @@
                       "unverified":  "0"
                   },
     "sleeves":  [
-                    "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
-                    "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
-                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0"
+                    "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=1409",
+                    "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=6",
+                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=1409"
                 ],
     "experts_tail":  [
-                         "OO\t0\t02:12:27.974\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] Init OK. Exposure 0.55  LiveTrading=TRUE  ImmediateFlips=true  Magic 773003  InitialBalance 100000.00  MarginMode HEDGING",
-                         "IR\t0\t02:12:57.983\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New server day 2026.09.12  day-start equity 100000.00  (daily halt at 96000.00)",
-                         "IP\t0\t02:12:58.942\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] US100.sim bar 2026.09.10 | close 29112.10 sma 27802.51 -\u003e LONG | vol 11.3% scalar 1.000 (in use 1.000) | target 0.70 lots (~22000) held 0.00 | HOLD",
-                         "HG\t0\t02:12:58.942\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math US100.sim: notional/lot 29371.10 (contract 1 x bid 29371.10 = 29371.10) step 0.10 min 0.10",
-                         "EM\t0\t02:13:00.285\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.10 | close 77241.00 sma 69980.69 -\u003e LONG | vol 56.7% scalar 0.705 (in use 0.705) | target 0.10 lots (~7760) held 0.00 | HOLD",
-                         "QH\t0\t02:13:00.285\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math BTCUSD.sim: notional/lot 77314.00 (contract 1 x bid 77314.00 = 77314.00) step 0.01 min 0.01",
-                         "IH\t0\t02:13:00.567\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] XAUUSD.sim bar 2026.09.10 | close 4316.59 sma 4517.37 -\u003e LONG | vol 28.4% scalar 0.529 (in use 0.529) | target 0.02 lots (~11628) held 0.00 | HOLD",
-                         "ON\t0\t02:13:00.567\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 434825.00 (contract 100 x bid 4348.25 = 434825.00) step 0.01 min 0.01",
-                         "II\t0\t04:39:57.136\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] v1.02 loaded. Exposure 0.55  LiveTrading=TRUE  ImmediateFlips=true  Magic 773003  MarginMode HEDGING  -\u003e waiting for a live connection to arm",
-                         "EL\t0\t04:39:57.198\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.12 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00",
-                         "RR\t0\t04:39:57.198\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] Init OK (armed). InitialBalance 100000.00  static halt 92000.00  daily floor 96000.00  FTMO day 2026.09.12  CET offset +2",
-                         "HG\t0\t22:00:27.887\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.13 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00"
+                         "QP\t0\t21:20:58.123\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] v1.02 loaded. Exposure 0.55  LiveTrading=TRUE  ImmediateFlips=true  Magic 773003  MarginMode HEDGING  -\u003e waiting for a live connection to arm",
+                         "KE\t0\t21:20:58.167\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.14 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00",
+                         "HE\t0\t21:20:58.167\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] Init OK (armed). InitialBalance 100000.00  static halt 92000.00  daily floor 96000.00  FTMO day 2026.09.14  CET offset +2",
+                         "JN\t0\t21:21:28.317\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] US100.sim bar 2026.09.11 | close 29371.10 sma 27833.52 -\u003e LONG | vol 11.9% scalar 1.000 (in use 1.000) | target 0.70 lots (~22000) held 0.00 | HOLD",
+                         "FI\t0\t21:21:28.317\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math US100.sim: notional/lot 29182.50 (contract 1 x bid 29182.50 = 29182.50) step 0.10 min 0.10",
+                         "LK\t0\t21:21:28.472\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.11 | close 77314.00 sma 70037.40 -\u003e LONG | vol 56.3% scalar 0.711 (in use 0.705) | target 0.09 lots (~7760) held 0.00 | HOLD",
+                         "PN\t0\t21:21:28.472\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math BTCUSD.sim: notional/lot 78961.00 (contract 1 x bid 78961.00 = 78961.00) step 0.01 min 0.01",
+                         "KR\t0\t21:21:28.505\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] XAUUSD.sim bar 2026.09.11 | close 4348.25 sma 4513.55 -\u003e LONG | vol 28.4% scalar 0.528 (in use 0.529) | target 0.02 lots (~11628) held 0.00 | HOLD",
+                         "MP\t0\t21:21:28.505\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 429856.00 (contract 100 x bid 4298.56 = 429856.00) step 0.01 min 0.01"
                      ],
     "journal_tail":  [
-                         "DO\t0\t20:31:39.383\tMCP\tstarted on 127.0.0.1:22346",
-                         "MD\t0\t20:31:53.855\tNetwork\t\u0027112523242\u0027: authorized on MetaQuotes-Demo through Access Point US 1 (ping: 87.25 ms, build 6194)",
-                         "JH\t0\t20:31:53.882\tNetwork\t\u0027112523242\u0027: previous successful authorization performed from 44.222.86.150 on 2026.09.12 07:37:20",
-                         "RJ\t0\t20:31:57.505\tNetwork\t\u0027112523242\u0027: terminal synchronized with MetaQuotes Ltd.: 0 positions, 0 orders, 12388 symbols, 0 spreads",
-                         "DD\t0\t20:31:57.505\tNetwork\t\u0027112523242\u0027: trading has been enabled, demo account - hedging mode",
-                         "HH\t0\t20:31:57.507\tNetwork\t\u0027112523242\u0027: balance management has been disabled - demo account",
-                         "MS\t0\t20:31:59.495\tNetwork\t\u0027112523242\u0027: scanning network for access points",
-                         "DG\t0\t20:33:07.871\tNetwork\t\u0027112523242\u0027: scanning network finished"
+                         "LG\t0\t21:20:55.357\tExperts\texpert P7VT3 (XAUUSD.sim,Daily) loaded successfully",
+                         "LL\t0\t21:20:56.213\tNetwork\t\u00271600189053\u0027: authorized on OANDA-Demo-1 through Access Server 2 - NY (ping: 6.70 ms, build 5830)",
+                         "FS\t0\t21:20:56.217\tNetwork\t\u00271600189053\u0027: previous successful authorization performed from 44.222.86.150 on 2026.09.13 05:10:16",
+                         "ML\t0\t21:20:57.681\tNetwork\t\u00271600189053\u0027: terminal synchronized with OANDA Corporation: 0 positions, 0 orders, 49 symbols, 0 spreads",
+                         "GL\t0\t21:20:57.681\tNetwork\t\u00271600189053\u0027: trading has been enabled, demo account - hedging mode",
+                         "FP\t0\t21:20:57.682\tNetwork\t\u00271600189053\u0027: balance management has been disabled - demo account",
+                         "LH\t0\t21:20:58.848\tNetwork\t\u00271600189053\u0027: scanning network for access points",
+                         "PM\t0\t21:21:02.532\tNetwork\t\u00271600189053\u0027: scanning network finished"
                      ]
 }
