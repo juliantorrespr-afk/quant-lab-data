@@ -1,10 +1,10 @@
 {
- "updated": "2026-09-14 19:51 UTC",
+ "updated": "2026-09-14 23:48 UTC",
  "counts": {
-  "declared": 9,
-  "run": 8,
+  "declared": 10,
+  "run": 9,
   "passed": 0,
-  "failed": 8,
+  "failed": 9,
   "insufficient": 0,
   "blocked": 1
  },
@@ -49,7 +49,7 @@
     "The lever is the drawdown, not the entry: a filter that removes the losing stretch (or the losing market) is the one declared fix worth trying."
    ],
    "fix_recommended": "filter",
-   "fixes_used": 0
+   "fixes_used": 1
   },
   {
    "id": "02_patient_break",
@@ -91,7 +91,7 @@
     "The lever is the drawdown, not the entry: a filter that removes the losing stretch (or the losing market) is the one declared fix worth trying."
    ],
    "fix_recommended": "filter",
-   "fixes_used": 0
+   "fixes_used": 1
   },
   {
    "id": "03_swing_pullback",
@@ -265,7 +265,7 @@
     "It works on ES and not on NQ \u2014 a market fix (drop the losers) is the declared next step."
    ],
    "fix_recommended": "market",
-   "fixes_used": 0
+   "fixes_used": 1
   },
   {
    "id": "08_two_speed_trend",
@@ -340,35 +340,77 @@
    ],
    "fix_recommended": "market",
    "fixes_used": 1
+  },
+  {
+   "id": "10_opening_break_fix1_range_form",
+   "queue": 10,
+   "name": "Opening Break \u2014 fix 1 (range form)",
+   "family": "opening-breakout",
+   "kind": "session_trades",
+   "status": "run",
+   "verdict": "FAIL",
+   "ran_at": "2026-09-14 23:48 UTC",
+   "data_ready": true,
+   "blocker": "",
+   "expectation": "Cost per trade falls to about 0.01\u20130.02R. The signal itself is untested here (the literature's ORB results are modest and unreplicated with slippage). Worst stretch probably still deeper than 10R. Honest odds: 1 in 4. If it fails on the signal (gross \u2264 +0.05R), the family's cost lever is closed and only a market fix remains.",
+   "plain_words": "The first 30 minutes set a range. After 10:00, a 5-minute close above the range buys, below it sells; the stop is the other side of the range; one attempt per day, no entries after 12:00, flat by 15:55. The stop is 5\u201310 times wider than the proven form's, so each tick of cost is a much smaller slice of R \u2014 the cost lever, declared as fix 1 of the opening-breakout family.",
+   "key": {
+    "oos_trades": 2610,
+    "oos_expectancy_R": 0.03668279004850491,
+    "oos_expectancy_R_gross": 0.061566439777579286,
+    "oos_cost_R": 0.024883649729074378,
+    "oos_profit_factor": 1.0859427133757433,
+    "oos_win_rate": 0.47088122605363986,
+    "oos_max_dd_usd": -12196.170000000187,
+    "oos_max_dd_R": -24.191135207878077,
+    "surviving_size": {
+     "risk_pct": 0.11,
+     "net_per_year_usd": 812.7279555623467,
+     "return_per_year_pct": 1.6254559111246933,
+     "max_dd_usd": -1341.5787000000055,
+     "headroom_pct": 32.92106499999973,
+     "daily_loss_fires_pct": 0.0,
+     "worst_day_usd": -129.8209
+    },
+    "is_trades": 3846,
+    "is_expectancy_R": -0.10820003233251063,
+    "trades_per_year": 466.1625916870416
+   },
+   "lesson": [
+    "The signal is there (+0.062R gross, 2610 trades) and costs eat it (0.025R per trade \u2192 +0.037R net).",
+    "The lever is cost/venue: a cheaper contract, fewer ticks of slippage, or a wider stop that makes each tick smaller in R."
+   ],
+   "fix_recommended": "cost_venue",
+   "fixes_used": 1
   }
  ],
  "latest": {
-  "id": "07_volume_break",
-  "name": "Volume Break",
+  "id": "10_opening_break_fix1_range_form",
+  "name": "Opening Break \u2014 fix 1 (range form)",
   "verdict": "FAIL",
-  "ran_at": "2026-09-14 19:51 UTC",
-  "lesson": "It works on ES and not on NQ \u2014 a market fix (drop the losers) is the declared next step.",
+  "ran_at": "2026-09-14 23:48 UTC",
+  "lesson": "The signal is there (+0.062R gross, 2610 trades) and costs eat it (0.025R per trade \u2192 +0.037R net).",
   "key": {
-   "oos_trades": 358,
-   "oos_expectancy_R": 0.08868489968076276,
-   "oos_expectancy_R_gross": 0.12762526590573267,
-   "oos_cost_R": 0.03894036622496991,
-   "oos_profit_factor": 1.159235938156947,
-   "oos_win_rate": 0.3659217877094972,
-   "oos_max_dd_usd": -15069.74410714276,
-   "oos_max_dd_R": -32.9485280705754,
+   "oos_trades": 2610,
+   "oos_expectancy_R": 0.03668279004850491,
+   "oos_expectancy_R_gross": 0.061566439777579286,
+   "oos_cost_R": 0.024883649729074378,
+   "oos_profit_factor": 1.0859427133757433,
+   "oos_win_rate": 0.47088122605363986,
+   "oos_max_dd_usd": -12196.170000000187,
+   "oos_max_dd_R": -24.191135207878077,
    "surviving_size": {
-    "risk_pct": 0.09,
-    "net_per_year_usd": 265.14180471391177,
-    "return_per_year_pct": 0.5302836094278235,
-    "max_dd_usd": -1356.2769696428513,
-    "headroom_pct": 32.18615151785743,
+    "risk_pct": 0.11,
+    "net_per_year_usd": 812.7279555623467,
+    "return_per_year_pct": 1.6254559111246933,
+    "max_dd_usd": -1341.5787000000055,
+    "headroom_pct": 32.92106499999973,
     "daily_loss_fires_pct": 0.0,
-    "worst_day_usd": -90.77231250000024
+    "worst_day_usd": -129.8209
    },
-   "is_trades": 614,
-   "is_expectancy_R": -0.014498555963876001,
-   "trades_per_year": 65.28182725911134
+   "is_trades": 3846,
+   "is_expectancy_R": -0.10820003233251063,
+   "trades_per_year": 466.1625916870416
   }
  },
  "families": {
@@ -458,5 +500,5 @@
    }
   ]
  },
- "the_number": "9 declared / 8 run / 0 passed"
+ "the_number": "10 declared / 9 run / 0 passed"
 }
