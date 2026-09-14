@@ -1,0 +1,200 @@
+{
+ "id": "05_gold_ride_the_run",
+ "name": "Gold Ride-the-Run",
+ "family": "gold-pyramid-overlay",
+ "kind": "overlay",
+ "ran_at": "2026-09-14 18:53 UTC",
+ "declared": "2026-09-14",
+ "verdict": "FAIL",
+ "key": {
+  "seat_ret_over_dd_candidate": 0.6593964070431338,
+  "seat_ret_over_dd_live": 0.6869121508290537,
+  "seat_cagr_candidate": 0.14176891123351387,
+  "seat_cagr_live": 0.18716625329773984,
+  "seat_maxdd_candidate": -0.21499800380962675,
+  "seat_maxdd_live": -0.2724748034691825,
+  "avg_size_held": 0.7577229113035339
+ },
+ "pass_line_table": [
+  {
+   "criterion": "return / drawdown improves (OOS)",
+   "threshold": "candidate > baseline",
+   "value": "0.66 vs 0.69",
+   "ok": false
+  },
+  {
+   "criterion": "max drawdown not worse (OOS)",
+   "threshold": "candidate >= baseline",
+   "value": "-21.5% vs -27.2%",
+   "ok": true
+  }
+ ],
+ "lesson": [
+  "Gold Ride-the-Run vs the live book out of sample: Sharpe -0.07, CAGR -4.5 pts, max drawdown +5.7 pts (positive = shallower).",
+  "Shallower hole, weaker return \u2014 it is a risk dial, not an edge; the vol target already does this job.",
+  "Average size held: overlay 0.76 of the vol target vs 1.00 \u2014 it holds less, so lower return is arithmetic, not a finding."
+ ],
+ "fix_recommended": "close",
+ "expectation": "More return per unit held, but the cap means less held on average; return/drawdown probably does not improve. The uncapped variant (adds above the vol target) is expected to add return and a deeper hole \u2014 leverage. Honest odds: 1 in 5.",
+ "plain_words": "Hold gold at half its normal size; add a quarter each time gold prints a new 20-day high, up to the normal size (the vol-target cap); a 20-day low ends the run and resets to half. Compared with simply holding gold at full size.",
+ "data_sha": [
+  "9877675cc50aa6da"
+ ],
+ "provenance": [
+  {
+   "files": [
+    "daily.csv"
+   ],
+   "rows": 4273,
+   "first": "2015-01-02 00:00:00",
+   "last": "2026-09-13 00:00:00",
+   "sha256": [
+    "9877675cc50aa6da"
+   ],
+   "source": "repo data/daily.csv (fetch.py: Yahoo QQQ/GLD, Kraken BTC)",
+   "symbols": [
+    "QQQ",
+    "BTC",
+    "GLD"
+   ]
+  }
+ ],
+ "engine": "sandbox/runner.py + rules.py + judge.py (first run \u2014 single engine, provisional until reproduced)",
+ "detail": {
+  "fix_recommended": "close",
+  "baseline": {
+   "select": {
+    "cagr": 0.07645240040742762,
+    "sharpe_daily252": 0.5240581701882884,
+    "sharpe_monthly": 0.6051214630279701,
+    "max_dd": -0.1760379264189118,
+    "ret_over_dd": 0.43429505199633117,
+    "years": 5.587953456536619,
+    "worst_year": -0.01941181835998118
+   },
+   "judge": {
+    "cagr": 0.14328668478050322,
+    "sharpe_daily252": 0.7643307601796424,
+    "sharpe_monthly": 0.9713886262621597,
+    "max_dd": -0.2724748034691825,
+    "ret_over_dd": 0.5258713207832784,
+    "years": 5.6974674880219025,
+    "worst_year": -0.031271985150534753
+   },
+   "seat": {
+    "cagr": 0.18716625329773984,
+    "sharpe_daily252": 0.9381220766111921,
+    "sharpe_monthly": 1.1911199165988624,
+    "max_dd": -0.2724748034691825,
+    "ret_over_dd": 0.6869121508290537,
+    "years": 4.698151950718686,
+    "worst_year": -0.031271985150534753
+   },
+   "full": {
+    "cagr": 0.10966261542789635,
+    "sharpe_daily252": 0.6541024481066436,
+    "sharpe_monthly": 0.7763636989406753,
+    "max_dd": -0.2724748034691825,
+    "ret_over_dd": 0.40246883026121505,
+    "years": 11.288158795345653,
+    "worst_year": -0.04220955299170359
+   }
+  },
+  "candidate": {
+   "select": {
+    "cagr": 0.06375706911156875,
+    "sharpe_daily252": 0.5136661615508835,
+    "sharpe_monthly": 0.5838703959277037,
+    "max_dd": -0.12714989597321724,
+    "ret_over_dd": 0.501432334046097,
+    "years": 5.587953456536619,
+    "worst_year": -0.0027441042908478153
+   },
+   "judge": {
+    "cagr": 0.1088519990081982,
+    "sharpe_daily252": 0.7049486411472017,
+    "sharpe_monthly": 0.9021495152826768,
+    "max_dd": -0.21499800380962675,
+    "ret_over_dd": 0.5062930682118465,
+    "years": 5.6974674880219025,
+    "worst_year": -0.003397770267202449
+   },
+   "seat": {
+    "cagr": 0.14176891123351387,
+    "sharpe_daily252": 0.8597799354065396,
+    "sharpe_monthly": 1.123177774635864,
+    "max_dd": -0.21499800380962675,
+    "ret_over_dd": 0.6593964070431338,
+    "years": 4.698151950718686,
+    "worst_year": 0.013205990537176415
+   },
+   "full": {
+    "cagr": 0.08626751085927009,
+    "sharpe_daily252": 0.6164259017620546,
+    "sharpe_monthly": 0.725721366900885,
+    "max_dd": -0.21499800380962675,
+    "ret_over_dd": 0.4012479619841353,
+    "years": 11.288158795345653,
+    "worst_year": -0.03360519221448355
+   }
+  },
+  "ugly_years": {
+   "2021": {
+    "live_sleeve_pct": -4.2,
+    "overlay_pct": -3.4
+   }
+  },
+  "avg_size_held": 0.7577229113035339,
+  "sensitivity": {
+   "uncapped (adds above the vol target)": {
+    "seat": {
+     "cagr": 0.23436037753138006,
+     "sharpe_daily252": 0.8990922107457077,
+     "sharpe_monthly": 1.1505275948771132,
+     "max_dd": -0.3329241041953819,
+     "ret_over_dd": 0.7039453574495221,
+     "years": 4.698151950718686,
+     "worst_year": -0.012305309434935685
+    },
+    "judge": {
+     "cagr": 0.1770285284700115,
+     "sharpe_daily252": 0.7351747018501174,
+     "sharpe_monthly": 0.9307406287403798,
+     "max_dd": -0.3329241041953819,
+     "ret_over_dd": 0.5317383939437423,
+     "years": 5.6974674880219025,
+     "worst_year": -0.012305309434935685
+    },
+    "avg_size": 1.2577229113035338
+   }
+  },
+  "yearly": {
+   "gold_full_size": {
+    "2016": 6.2,
+    "2017": 12.8,
+    "2018": -1.9,
+    "2019": 17.7,
+    "2020": 22.6,
+    "2021": -4.2,
+    "2022": -0.1,
+    "2023": 12.3,
+    "2024": 26.1,
+    "2025": 63.3,
+    "2026": -3.1
+   },
+   "ride_the_run": {
+    "2016": 6.5,
+    "2017": 9.9,
+    "2018": -0.3,
+    "2019": 13.6,
+    "2020": 15.4,
+    "2021": -3.4,
+    "2022": -0.3,
+    "2023": 7.7,
+    "2024": 21.3,
+    "2025": 41.3,
+    "2026": 1.3
+   }
+  }
+ }
+}
