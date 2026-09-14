@@ -1,0 +1,48 @@
+{
+ "date": "2026-09-14",
+ "updated": "2026-09-14 19:42 UTC",
+ "title": "The Mind, version zero \u2014 the learning loop is running",
+ "opening_line": {
+  "trial_equity": "NOT VERIFIED from the cloud (MT5 on the VPS; needs the heartbeat)",
+  "twin_equity": 100315.13,
+  "twin_change_pct": 0.32,
+  "daily_budget_used_pct": 0,
+  "total_budget_used_pct": 0,
+  "exposure": 0.55,
+  "book_equals_broker": "n/a by design since 12 Sep (Alpaca retired; the EA on the FTMO trial is the rehearsal)",
+  "sandbox": "9 declared / 4 run / 0 passed",
+  "vault": "ES + NQ 1-minute 2010\u21922026 in the vault (Jae's paste 18:41 UTC); gold futures downloading; Dukascopy gold next"
+ },
+ "point": "The system that learns exists and produced its first four verdicts today. All four are honest FAILs \u2014 each with the reason, the number, and the one fix worth declaring next.",
+ "goal": "A challenger desk that runs every declared test on real data without anyone at a keyboard, never retries a dead idea, and hands the money desk only what clears the line.",
+ "done": [
+  "The runner: declared test \u2192 real data \u2192 in-sample / out-of-sample \u2192 costs \u2192 pass-line table \u2192 verdict \u2192 lesson \u2192 ledger. 27 known-answer checks pass, including reproducing the money desk's official figures (19.3% / 1.39 / \u221215.4%) to the decimal.",
+  "Nine tests written down with their expectations before anything ran; 18 dead families registered so they can never come back under a new name; 'three fixes then close' enforced by the code.",
+  "Four verdicts on the repo's own daily closes: Swing Pullback FAIL (real edge, +0.15R, but a 39R hole \u2014 survives FTMO's rules only at 0.2% risk \u2248 3%/yr) \u00b7 its fix 1 FAIL (trailing-edge market filter, 2.7%/yr) \u00b7 Gold Ride-the-Run FAIL (a risk dial, not an edge) \u00b7 Two-Speed Trend FAIL (Sharpe \u22120.20, turnover 2\u00d7).",
+  "The MIND page (this) draws every machine, desk and test from the JSON each one writes. Solid ring = machine-read now, dotted = reported by a person, dim = no number yet."
+ ],
+ "needed": [
+  "Step 1 \u2014 the GitHub token on the server (2 minutes; the exact clicks are in the Setup tab).",
+  "Step 2 \u2014 paste BLOCK_C_runner_install.sh into `ssh entrada` (one paste; runs the Opening Break family on your ES/NQ bars and pushes everything).",
+  "Step 3 \u2014 the VPS heartbeat (three lines in an admin PowerShell) so the trial equity shows here every 15 minutes.",
+  "Step 4 \u2014 paste the three project prompts (v1.1 / v2.1) so SEED and LIFE report to the Mind too."
+ ],
+ "watch": [
+  "First Opening Break verdict \u2014 expected within an hour of the paste. Honest odds 1 in 3.",
+  "The trial's first Monday fills vs the engine (MT5 Journal) \u2014 still the money desk's job for today; unverifiable from the cloud until the VPS heartbeat exists."
+ ],
+ "caught": [
+  "SANDBOX_PROMPT_v2 called the proven signal a '30-minute range break'; the proven rule is the volatility-band break (CHALLENGE_BACKTEST_V2). Declared exactly; the range form is its first fix candidate.",
+  "The written pass line let an un-sizeable edge through \u2014 tightened before any verdict was adopted: the firm's rules are checked at the LARGEST size that survives, and the strategy must earn \u226510%/yr at that size.",
+  "The official 19.3% / 1.39 is one start date. Shifting the engine's first day by 1\u201320 days gives 19.2\u201321.0% CAGR, Sharpe 1.39\u20131.48, maxDD \u221215.4 to \u221216.0. The headline is at the low end of its own range; nothing changes, but quote it as '\u224819\u201321%'."
+ ],
+ "vault_reported": {
+  "source": "pasted by Jae from `ls /srv/vault/raw/databento`, 2026-09-14 18:41 UTC",
+  "items": [
+   "ES 1-min 2010-06-06 \u2192 2026-09-14 (72.7 MB)",
+   "NQ 1-min 2010-06-06 \u2192 2026-09-14 (79.5 MB)",
+   "GC 1-min 2010\u2192 downloading ($20.44)",
+   "Dukascopy gold: not yet"
+  ]
+ }
+}
