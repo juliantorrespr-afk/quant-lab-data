@@ -1,0 +1,50 @@
+{
+ "id": "08_two_speed_trend",
+ "name": "Two-Speed Trend",
+ "family": "trend-horizon-blend",
+ "queue": 8,
+ "kind": "book",
+ "rule": "two_speed",
+ "declared": "2026-09-14",
+ "plain_words": "The live book with its 150-day line replaced by two lines: a 20-day and a 250-day. Half a position when one says up, full when both do, none when neither. Gold stays always held. Same weights, vol targets, costs and rails as the money desk.",
+ "markets": [
+  "QQQ",
+  "BTC",
+  "GLD"
+ ],
+ "data": {
+  "needs": [
+   "daily_closes"
+  ],
+  "source": "repo data/daily.csv"
+ },
+ "params": {
+  "fast": 20,
+  "slow": 250
+ },
+ "baseline": "live book: SMA150, 40/20/40, vol targets 15/40/15, weekly sizing, disaster stop -15% (recon.py variant E)",
+ "windows": {
+  "select": [
+   "2015-01-01",
+   "2020-12-31"
+  ],
+  "judge": [
+   "2021-01-01",
+   "2026-12-31"
+  ]
+ },
+ "pass_line": {
+  "min_sharpe_gain": 0.1,
+  "max_dd_worse_pp": 1.0,
+  "max_turnover_ratio": 1.5
+ },
+ "sensitivity": {
+  "slow": [
+   250,
+   500
+  ]
+ },
+ "expectation": "Fails on turnover \u2014 the 20-day line flips far more often than the 150-day; Sharpe about the same, costs higher. Expected FAIL.",
+ "fixes": [],
+ "fixes_used": 0
+}
