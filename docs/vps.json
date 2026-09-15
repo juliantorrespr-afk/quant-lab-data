@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-09-15 19:10 UTC",
+    "updated":  "2026-09-15 19:25 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  26,
+    "heartbeat_age_s":  29,
     "heartbeat":  {
                       "gmt":  "2026.09.15",
                       "connected":  "1",
@@ -17,7 +17,7 @@
     "sleeves":  [
                     "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
                     "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
-                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0"
+                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=1"
                 ],
     "experts_tail":  [
                          "FI\t0\t21:21:28.317\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math US100.sim: notional/lot 29182.50 (contract 1 x bid 29182.50 = 29182.50) step 0.10 min 0.10",
