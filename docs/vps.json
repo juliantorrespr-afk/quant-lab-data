@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-09-15 20:55 UTC",
+    "updated":  "2026-09-15 21:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  30,
+    "heartbeat_age_s":  28,
     "heartbeat":  {
                       "gmt":  "2026.09.15",
                       "connected":  "1",
@@ -15,23 +15,13 @@
                       "unverified":  "0"
                   },
     "sleeves":  [
-                    "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=2",
+                    "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=689",
                     "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=1",
-                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0"
+                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=689"
                 ],
     "experts_tail":  [
-                         "FI\t0\t21:21:28.317\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math US100.sim: notional/lot 29182.50 (contract 1 x bid 29182.50 = 29182.50) step 0.10 min 0.10",
-                         "LK\t0\t21:21:28.472\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.11 | close 77314.00 sma 70037.40 -\u003e LONG | vol 56.3% scalar 0.711 (in use 0.705) | target 0.09 lots (~7760) held 0.00 | HOLD",
-                         "PN\t0\t21:21:28.472\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math BTCUSD.sim: notional/lot 78961.00 (contract 1 x bid 78961.00 = 78961.00) step 0.01 min 0.01",
-                         "KR\t0\t21:21:28.505\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] XAUUSD.sim bar 2026.09.11 | close 4348.25 sma 4513.55 -\u003e LONG | vol 28.4% scalar 0.528 (in use 0.529) | target 0.02 lots (~11628) held 0.00 | HOLD",
-                         "MP\t0\t21:21:28.505\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 429856.00 (contract 100 x bid 4298.56 = 429856.00) step 0.01 min 0.01",
-                         "OL\t0\t21:21:58.663\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.14 | close 79074.00 sma 70105.43 -\u003e LONG | vol 56.2% scalar 0.711 (in use 0.705) | target 0.09 lots (~7760) held 0.00 | HOLD",
-                         "JF\t0\t21:21:58.663\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math BTCUSD.sim: notional/lot 78948.00 (contract 1 x bid 78948.00 = 78948.00) step 0.01 min 0.01",
-                         "JJ\t0\t22:00:28.165\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.15 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00",
-                         "EL\t0\t22:01:28.177\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] US100.sim bar 2026.09.14 | close 29182.50 sma 27863.56 -\u003e LONG | vol 12.0% scalar 1.000 (in use 1.000) | target 0.70 lots (~22000) held 0.00 | HOLD",
-                         "PK\t0\t22:01:28.177\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math US100.sim: notional/lot 29162.40 (contract 1 x bid 29162.40 = 29162.40) step 0.10 min 0.10",
-                         "RK\t0\t22:05:28.162\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] XAUUSD.sim bar 2026.09.14 | close 4298.56 sma 4508.60 -\u003e LONG | vol 28.5% scalar 0.527 (in use 0.529) | target 0.02 lots (~11628) held 0.00 | HOLD",
-                         "MN\t0\t22:05:28.162\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 429883.00 (contract 100 x bid 4298.83 = 429883.00) step 0.01 min 0.01"
+                         "DO\t0\t21:05:29.026\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.15 | close 75887.00 sma 70160.37 -\u003e LONG | vol 60.3% scalar 0.664 (in use 0.705) | target 0.10 lots (~7760) held 0.00 | HOLD",
+                         "OJ\t0\t21:05:29.030\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math BTCUSD.sim: notional/lot 75755.00 (contract 1 x bid 75755.00 = 75755.00) step 0.01 min 0.01"
                      ],
     "journal_tail":  [
                          "OG\t0\t15:21:05.236\tNetwork\t\u00271600189053\u0027: scanning network finished",
