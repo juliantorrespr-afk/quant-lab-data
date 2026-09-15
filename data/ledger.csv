@@ -11,3 +11,5 @@ as_of,symbol,side,dollars,price,reason,mode,broker_id
 2026-09-09,BTC,sell,5562.96,78288.6,drift-correction,ALPACA,224b133a-73f4-488b-b2a7-812fd9f0823e
 2026-09-09,GLD,sell,6802.36,403.35,drift-correction,ALPACA,bd680983-fb3c-4fe1-a986-6f9b7285bc8e
 2026-09-11,QQQ,sell,6120.0,714.88,drift-correction,DRY,
+2026-09-14,BTC,sell,2907.68,78193.1,resize,DRY,
+2026-09-14,GLD,sell,3233.0,392.84,resize,DRY,
