@@ -154,9 +154,12 @@ def load_dukascopy(instrument="xauusd", tf="m5"):
     parts = []
     for f in files:
         d = pd.read_csv(f)
+        d.columns = [c.strip().lower() for c in d.columns]
         ts = d["timestamp"]
         unit = "ms" if ts.iloc[0] > 1e11 else "s"
         d.index = pd.to_datetime(ts, unit=unit, utc=True)
+        if "volume" not in d.columns:
+            d["volume"] = 0.0            # dukascopy-node writes volume only when asked (-v); CFD bars carry none
         parts.append(d[["open", "high", "low", "close", "volume"]])
     df = pd.concat(parts).sort_index()
     df = df[~df.index.duplicated(keep="last")]
