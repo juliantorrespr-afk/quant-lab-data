@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-09-16 09:10 UTC",
+    "updated":  "2026-09-16 09:25 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
     "heartbeat_age_s":  28,
@@ -17,7 +17,7 @@
     "sleeves":  [
                     "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
                     "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
-                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=1"
+                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0"
                 ],
     "experts_tail":  [
                          "DO\t0\t21:05:29.026\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.15 | close 75887.00 sma 70160.37 -\u003e LONG | vol 60.3% scalar 0.664 (in use 0.705) | target 0.10 lots (~7760) held 0.00 | HOLD",
@@ -30,6 +30,8 @@
                      ],
     "journal_tail":  [
                          "IM\t0\t03:21:02.694\tNetwork\t\u00271600189053\u0027: scanning network for access points",
-                         "FK\t0\t03:21:06.213\tNetwork\t\u00271600189053\u0027: scanning network finished"
+                         "FK\t0\t03:21:06.213\tNetwork\t\u00271600189053\u0027: scanning network finished",
+                         "MO\t0\t09:21:02.780\tNetwork\t\u00271600189053\u0027: scanning network for access points",
+                         "KI\t0\t09:21:06.311\tNetwork\t\u00271600189053\u0027: scanning network finished"
                      ]
 }
