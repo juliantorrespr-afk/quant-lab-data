@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-16 03:30 UTC",
+ "generated": "2026-09-16 17:27 UTC",
  "vault": "/srv/vault",
  "datasets": [
   {
@@ -46,31 +46,31 @@
    "name": "xauusd 5-min (Dukascopy)",
    "files": 1,
    "size_mb": 20.5,
-   "first": null,
-   "last": null,
-   "rows": null,
+   "first": "2022-01-01 19:00:00",
+   "last": "2026-09-13 19:55:00",
+   "rows": 410180,
    "public_ok": false,
-   "note": "unreadable: \"['volume'] not in index\""
+   "note": "CFD/spot basis, private"
   },
   {
    "name": "usatechidxusd 5-min (Dukascopy)",
    "files": 1,
    "size_mb": 37.7,
-   "first": null,
-   "last": null,
-   "rows": null,
+   "first": "2018-01-01 19:00:00",
+   "last": "2026-09-13 19:55:00",
+   "rows": 728536,
    "public_ok": false,
-   "note": "unreadable: \"['volume'] not in index\""
+   "note": "CFD/spot basis, private"
   },
   {
    "name": "usa500idxusd 5-min (Dukascopy)",
    "files": 1,
    "size_mb": 36.7,
-   "first": null,
-   "last": null,
-   "rows": null,
+   "first": "2018-01-01 19:00:00",
+   "last": "2026-09-13 19:55:00",
+   "rows": 746588,
    "public_ok": false,
-   "note": "unreadable: \"['volume'] not in index\""
+   "note": "CFD/spot basis, private"
   },
   {
    "name": "BTCUSDT 1-min (Binance)",
