@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-09-16 15:10 UTC",
+    "updated":  "2026-09-16 15:25 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  27,
+    "heartbeat_age_s":  28,
     "heartbeat":  {
                       "gmt":  "2026.09.16",
                       "connected":  "1",
@@ -29,9 +29,13 @@
                          "PS\t0\t22:05:29.058\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 429515.00 (contract 100 x bid 4295.15 = 429515.00) step 0.01 min 0.01"
                      ],
     "journal_tail":  [
-                         "IM\t0\t03:21:02.694\tNetwork\t\u00271600189053\u0027: scanning network for access points",
-                         "FK\t0\t03:21:06.213\tNetwork\t\u00271600189053\u0027: scanning network finished",
-                         "MO\t0\t09:21:02.780\tNetwork\t\u00271600189053\u0027: scanning network for access points",
-                         "KI\t0\t09:21:06.311\tNetwork\t\u00271600189053\u0027: scanning network finished"
+                         "OG\t0\t15:21:05.788\tNetwork\t\u00271600189053\u0027: scanning network finished",
+                         "PO\t0\t15:21:05.789\tNetwork\t\u00271600189053\u0027: auto connecting to a better access point with 99 % quality (previous: 98 %)",
+                         "CN\t1\t15:21:05.810\tNetwork\t\u00271600189053\u0027: connection to OANDA-Demo-1 lost",
+                         "PF\t0\t15:21:08.595\tNetwork\t\u00271600189053\u0027: authorized on OANDA-Demo-1 through Access Server - NY (ping: 6.81 ms, build 5830)",
+                         "PJ\t0\t15:21:08.596\tNetwork\t\u00271600189053\u0027: previous successful authorization performed from 44.222.86.150 on 2026.09.16 00:21:08",
+                         "RE\t0\t15:21:09.744\tNetwork\t\u00271600189053\u0027: terminal synchronized with OANDA Corporation: 0 positions, 0 orders, 49 symbols, 0 spreads",
+                         "DG\t0\t15:21:09.744\tNetwork\t\u00271600189053\u0027: trading has been enabled, demo account - hedging mode",
+                         "JK\t0\t15:21:09.746\tNetwork\t\u00271600189053\u0027: balance management has been disabled - demo account"
                      ]
 }
