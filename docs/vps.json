@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-09-16 02:55 UTC",
+    "updated":  "2026-09-16 03:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  26,
+    "heartbeat_age_s":  24,
     "heartbeat":  {
                       "gmt":  "2026.09.16",
                       "connected":  "1",
@@ -16,7 +16,7 @@
                   },
     "sleeves":  [
                     "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
-                    "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=4",
+                    "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=2",
                     "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0"
                 ],
     "experts_tail":  [
