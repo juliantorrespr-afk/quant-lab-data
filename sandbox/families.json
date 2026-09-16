@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-14",
+ "updated": "2026-09-16",
  "rule": "A family here is dead: it is never retried under a new name. A test whose family is dead is refused by the runner. An open family may spawn up to three declared fixes (one filter, one cost/venue, one market) after a FAIL, then closes.",
  "dead": {
   "vol-band-breakout-cfd": {
@@ -91,14 +91,19 @@
    "why": "lowers Sharpe on all three sleeves out of sample; context only",
    "doc": "COT_STUDY.md",
    "when": "2026-09-11"
+  },
+  "opening-breakout": {
+   "why": "the signal is real (+0.15R, t 2.5) but return per unit of worst stretch is ~1.24/yr against the ~2.5/yr a funded account needs; fix 1 spent, fixes 2 and 3 left unspent on purpose \u2014 entry rules do not move that number",
+   "doc": "CHALLENGER_STATUS.md",
+   "when": "2026-09-16"
+  },
+  "intraday-momentum": {
+   "why": "first half-hour -> last half-hour on NQ: gross -0.011R over 1,395 trades, PF 0.81, 1 of 6 years positive, in-sample -0.035R. No signal in or out of sample",
+   "doc": "CHALLENGER_STATUS.md",
+   "when": "2026-09-16"
   }
  },
  "open": {
-  "opening-breakout": {
-   "since": "2026-09-14",
-   "fixes_used": 0,
-   "note": "the one open door: the proven vol-band break at micro-futures cost"
-  },
   "swing-pullback-in-trend": {
    "since": "2026-09-14",
    "fixes_used": 0
@@ -108,10 +113,6 @@
    "fixes_used": 0
   },
   "gold-pyramid-overlay": {
-   "since": "2026-09-14",
-   "fixes_used": 0
-  },
-  "intraday-momentum": {
    "since": "2026-09-14",
    "fixes_used": 0
   },
