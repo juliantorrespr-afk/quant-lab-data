@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-09-17 15:10 UTC",
+    "updated":  "2026-09-17 15:25 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  28,
+    "heartbeat_age_s":  27,
     "heartbeat":  {
                       "gmt":  "2026.09.17",
                       "connected":  "1",
@@ -16,7 +16,7 @@
                   },
     "sleeves":  [
                     "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
-                    "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=2",
+                    "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
                     "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0"
                 ],
     "experts_tail":  [
@@ -32,6 +32,8 @@
                          "KM\t0\t03:21:03.370\tNetwork\t\u00271600189053\u0027: scanning network for access points",
                          "NK\t0\t03:21:07.669\tNetwork\t\u00271600189053\u0027: scanning network finished",
                          "MO\t0\t09:21:03.781\tNetwork\t\u00271600189053\u0027: scanning network for access points",
-                         "LI\t0\t09:21:07.289\tNetwork\t\u00271600189053\u0027: scanning network finished"
+                         "LI\t0\t09:21:07.289\tNetwork\t\u00271600189053\u0027: scanning network finished",
+                         "PN\t0\t15:21:04.287\tNetwork\t\u00271600189053\u0027: scanning network for access points",
+                         "DG\t0\t15:21:07.855\tNetwork\t\u00271600189053\u0027: scanning network finished"
                      ]
 }
