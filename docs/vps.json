@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-09-17 20:55 UTC",
+    "updated":  "2026-09-17 21:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  28,
+    "heartbeat_age_s":  27,
     "heartbeat":  {
                       "gmt":  "2026.09.17",
                       "connected":  "1",
@@ -15,18 +15,13 @@
                       "unverified":  "0"
                   },
     "sleeves":  [
-                    "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
-                    "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
-                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0"
+                    "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=691",
+                    "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=2",
+                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=695"
                 ],
     "experts_tail":  [
-                         "CO\t0\t21:05:29.951\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.16 | close 76122.00 sma 70225.67 -\u003e LONG | vol 53.5% scalar 0.748 (in use 0.705) | target 0.10 lots (~7760) held 0.00 | HOLD",
-                         "NJ\t0\t21:05:29.956\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math BTCUSD.sim: notional/lot 76093.00 (contract 1 x bid 76093.00 = 76093.00) step 0.01 min 0.01",
-                         "HF\t0\t22:00:29.986\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.17 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00",
-                         "QI\t0\t22:01:29.984\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] US100.sim bar 2026.09.16 | close 29012.50 sma 27919.72 -\u003e LONG | vol 10.7% scalar 1.000 (in use 1.000) | target 0.70 lots (~22000) held 0.00 | HOLD",
-                         "GO\t0\t22:01:29.984\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math US100.sim: notional/lot 29015.50 (contract 1 x bid 29015.50 = 29015.50) step 0.10 min 0.10",
-                         "DG\t0\t22:05:00.172\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] XAUUSD.sim bar 2026.09.16 | close 4263.96 sma 4499.86 -\u003e LONG | vol 22.4% scalar 0.669 (in use 0.529) | target 0.02 lots (~11628) held 0.00 | HOLD",
-                         "NS\t0\t22:05:00.173\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 425976.00 (contract 100 x bid 4259.76 = 425976.00) step 0.01 min 0.01"
+                         "QO\t0\t21:05:30.951\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.17 | close 76484.00 sma 70289.52 -\u003e LONG | vol 49.3% scalar 0.811 (in use 0.705) | target 0.10 lots (~7760) held 0.00 | HOLD",
+                         "KJ\t0\t21:05:30.956\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math BTCUSD.sim: notional/lot 76405.00 (contract 1 x bid 76405.00 = 76405.00) step 0.01 min 0.01"
                      ],
     "journal_tail":  [
                          "KM\t0\t03:21:03.370\tNetwork\t\u00271600189053\u0027: scanning network for access points",
