@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-09-18 11:55 UTC",
+    "updated":  "2026-09-18 12:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
     "heartbeat_age_s":  26,
@@ -17,7 +17,7 @@
     "sleeves":  [
                     "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
                     "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
-                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0"
+                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=1"
                 ],
     "experts_tail":  [
                          "QO\t0\t21:05:30.951\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.17 | close 76484.00 sma 70289.52 -\u003e LONG | vol 49.3% scalar 0.811 (in use 0.705) | target 0.10 lots (~7760) held 0.00 | HOLD",
