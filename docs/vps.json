@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-09-18 21:55 UTC",
+    "updated":  "2026-09-18 22:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
     "heartbeat_age_s":  27,
@@ -20,13 +20,7 @@
                     "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0"
                 ],
     "experts_tail":  [
-                         "QO\t0\t21:05:30.951\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.17 | close 76484.00 sma 70289.52 -\u003e LONG | vol 49.3% scalar 0.811 (in use 0.705) | target 0.10 lots (~7760) held 0.00 | HOLD",
-                         "KJ\t0\t21:05:30.956\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math BTCUSD.sim: notional/lot 76405.00 (contract 1 x bid 76405.00 = 76405.00) step 0.01 min 0.01",
-                         "FF\t0\t22:00:00.984\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.18 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00",
-                         "DI\t0\t22:01:00.993\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] US100.sim bar 2026.09.17 | close 29465.80 sma 27950.95 -\u003e LONG | vol 11.8% scalar 1.000 (in use 1.000) | target 0.70 lots (~22000) held 0.00 | HOLD",
-                         "DO\t0\t22:01:00.994\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math US100.sim: notional/lot 29459.60 (contract 1 x bid 29459.60 = 29459.60) step 0.10 min 0.10",
-                         "OG\t0\t22:05:00.984\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] XAUUSD.sim bar 2026.09.17 | close 4341.69 sma 4495.62 -\u003e LONG | vol 23.6% scalar 0.635 (in use 0.529) | target 0.02 lots (~11628) held 0.00 | HOLD",
-                         "NS\t0\t22:05:00.984\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 434293.00 (contract 100 x bid 4342.93 = 434293.00) step 0.01 min 0.01"
+                         "OM\t0\t22:00:02.027\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.19 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00"
                      ],
     "journal_tail":  [
                          "HM\t0\t21:53:08.591\tNetwork\t\u00271600189053\u0027: scanning network finished",
