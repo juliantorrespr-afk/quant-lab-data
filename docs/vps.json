@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-09-19 03:40 UTC",
+    "updated":  "2026-09-19 03:55 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
     "heartbeat_age_s":  26,
@@ -23,13 +23,7 @@
                          "OM\t0\t22:00:02.027\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.19 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00"
                      ],
     "journal_tail":  [
-                         "HM\t0\t21:53:08.591\tNetwork\t\u00271600189053\u0027: scanning network finished",
-                         "RR\t0\t21:53:08.591\tNetwork\t\u00271600189053\u0027: auto connecting to a better access point with 98 % quality (previous: 82 %)",
-                         "HD\t1\t21:53:08.593\tNetwork\t\u00271600189053\u0027: connection to OANDA-Demo-1 lost",
-                         "PL\t0\t21:53:17.176\tNetwork\t\u00271600189053\u0027: authorized on OANDA-Demo-1 through Access Server - NY (ping: 7.09 ms, build 5830)",
-                         "DN\t0\t21:53:17.176\tNetwork\t\u00271600189053\u0027: previous successful authorization performed from 2600:1f18:bed:b500:55:2c44:fd0f:c0e6 on 2026.09.19 00:53:03",
-                         "PH\t0\t21:53:17.695\tNetwork\t\u00271600189053\u0027: terminal synchronized with OANDA Corporation: 0 positions, 0 orders, 49 symbols, 0 spreads",
-                         "FH\t0\t21:53:17.695\tNetwork\t\u00271600189053\u0027: trading has been enabled, demo account - hedging mode",
-                         "CL\t0\t21:53:17.696\tNetwork\t\u00271600189053\u0027: balance management has been disabled - demo account"
+                         "GM\t0\t03:53:06.910\tNetwork\t\u00271600189053\u0027: scanning network for access points",
+                         "EK\t0\t03:53:10.434\tNetwork\t\u00271600189053\u0027: scanning network finished"
                      ]
 }
