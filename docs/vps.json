@@ -1,11 +1,11 @@
 {
-    "updated":  "2026-09-20 00:55 UTC",
+    "updated":  "2026-09-20 01:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  25,
+    "heartbeat_age_s":  24,
     "heartbeat":  {
                       "gmt":  "2026.09.20",
-                      "connected":  "1",
+                      "connected":  "0",
                       "armed":  "1",
                       "balance":  "100000.00",
                       "equity":  "100000.00",
@@ -23,13 +23,7 @@
                          "DM\t0\t22:00:03.012\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.20 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00"
                      ],
     "journal_tail":  [
-                         "OE\t0\t09:53:14.220\tNetwork\t\u00271600189053\u0027: previous successful authorization performed from 44.222.86.150 on 2026.09.19 00:53:17",
-                         "HJ\t0\t09:53:15.363\tNetwork\t\u00271600189053\u0027: terminal synchronized with OANDA Corporation: 0 positions, 0 orders, 49 symbols, 0 spreads",
-                         "NI\t0\t09:53:15.363\tNetwork\t\u00271600189053\u0027: trading has been enabled, demo account - hedging mode",
-                         "PM\t0\t09:53:15.365\tNetwork\t\u00271600189053\u0027: balance management has been disabled - demo account",
-                         "ON\t0\t15:53:07.237\tNetwork\t\u00271600189053\u0027: scanning network for access points",
-                         "FF\t0\t15:53:11.488\tNetwork\t\u00271600189053\u0027: scanning network finished",
-                         "CP\t0\t21:53:08.110\tNetwork\t\u00271600189053\u0027: scanning network for access points",
-                         "FD\t0\t21:53:11.634\tNetwork\t\u00271600189053\u0027: scanning network finished"
+                         "PR\t1\t00:57:38.694\tNetwork\t\u00271600189053\u0027: connection to OANDA-Demo-1 lost",
+                         "FG\t2\t00:58:18.279\tNetwork\t\u00271600189053\u0027: authorization on OANDA-Demo-1 failed (Invalid account)"
                      ]
 }
