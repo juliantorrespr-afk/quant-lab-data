@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-20 20:20 UTC",
+ "generated": "2026-09-20 22:57 UTC",
  "quotes": {
   "QQQ": {
    "price": 721.45,
@@ -29,18 +29,18 @@
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 81116.1,
-   "chg": -0.15,
+   "price": 81202.3,
+   "chg": -0.04,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 4424.9,
-   "chg": 2.13,
+   "price": 4413.4,
+   "chg": 1.86,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 29917.25,
-   "chg": 3.32,
+   "price": 30012.5,
+   "chg": 3.65,
    "src": "yahoo"
   }
  },
@@ -459,14 +459,14 @@
    }
   ]
  },
- "live_equity": 101119.59,
+ "live_equity": 101131.72,
  "start_equity": 100000.0,
  "pnl": {
-  "since_start_usd": 1119.59,
-  "since_start_pct": 1.12,
-  "today_pct": 0.033,
-  "from_hwm_pct": 0.033,
-  "marked_at": "20:20 UTC"
+  "since_start_usd": 1131.72,
+  "since_start_pct": 1.132,
+  "today_pct": 0.045,
+  "from_hwm_pct": 0.045,
+  "marked_at": "22:57 UTC"
  },
  "health": {
   "signal_age_days": 2,
