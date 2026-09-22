@@ -13,3 +13,4 @@ as_of,symbol,side,dollars,price,reason,mode,broker_id
 2026-09-11,QQQ,sell,6120.0,714.88,drift-correction,DRY,
 2026-09-14,BTC,sell,2907.68,78193.1,resize,DRY,
 2026-09-14,GLD,sell,3233.0,392.84,resize,DRY,
+2026-09-21,GLD,buy,2814.95,398.38,resize,DRY,
