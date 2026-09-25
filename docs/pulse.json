@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-25 05:46 UTC",
+ "generated": "2026-09-25 11:06 UTC",
  "quotes": {
   "QQQ": {
    "price": 741.1,
@@ -29,18 +29,18 @@
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 84267.9,
-   "chg": -0.13,
+   "price": 84850.0,
+   "chg": 0.56,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 4300.5,
-   "chg": -1.9,
+   "price": 4346.3,
+   "chg": -0.86,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 30847.5,
-   "chg": 0.2,
+   "price": 30917.25,
+   "chg": 0.43,
    "src": "yahoo"
   }
  },
@@ -396,8 +396,8 @@
     "dist_pct": "19.71",
     "confidence": "HIGH",
     "close": "84384.6",
-    "next_close": 84380.0,
-    "next_ret_pct": -0.005,
+    "next_close": "84380.0",
+    "next_ret_pct": "-0.005",
     "result": "WRONG",
     "scored_on": "2026-09-24",
     "source": "LIVE"
@@ -409,8 +409,8 @@
     "dist_pct": "-4.82",
     "confidence": "MEDIUM",
     "close": "392.88",
-    "next_close": 391.69,
-    "next_ret_pct": -0.303,
+    "next_close": "391.69",
+    "next_ret_pct": "-0.303",
     "result": "WRONG",
     "scored_on": "2026-09-24",
     "source": "LIVE"
@@ -422,8 +422,8 @@
     "dist_pct": "9.09",
     "confidence": "HIGH",
     "close": "741.21",
-    "next_close": 741.1,
-    "next_ret_pct": -0.015,
+    "next_close": "741.1",
+    "next_ret_pct": "-0.015",
     "result": "WRONG",
     "scored_on": "2026-09-24",
     "source": "LIVE"
@@ -432,9 +432,9 @@
     "as_of": "2026-09-24",
     "sleeve": "BTC",
     "call": "LONG",
-    "dist_pct": 19.63,
+    "dist_pct": "19.63",
     "confidence": "HIGH",
-    "close": 84380.0,
+    "close": "84380.0",
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -445,9 +445,9 @@
     "as_of": "2026-09-24",
     "sleeve": "GLD",
     "call": "HELD",
-    "dist_pct": -5.01,
+    "dist_pct": "-5.01",
     "confidence": "HIGH",
-    "close": 391.69,
+    "close": "391.69",
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -458,9 +458,9 @@
     "as_of": "2026-09-24",
     "sleeve": "QQQ",
     "call": "LONG",
-    "dist_pct": 8.93,
+    "dist_pct": "8.93",
     "confidence": "HIGH",
-    "close": 741.1,
+    "close": "741.1",
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -469,14 +469,14 @@
    }
   ]
  },
- "live_equity": 101832.01,
+ "live_equity": 101913.97,
  "start_equity": 100000.0,
  "pnl": {
-  "since_start_usd": 1832.01,
-  "since_start_pct": 1.832,
-  "today_pct": -0.015,
-  "from_hwm_pct": -0.578,
-  "marked_at": "05:46 UTC"
+  "since_start_usd": 1913.97,
+  "since_start_pct": 1.914,
+  "today_pct": 0.065,
+  "from_hwm_pct": -0.498,
+  "marked_at": "11:06 UTC"
  },
  "health": {
   "signal_age_days": 1,
