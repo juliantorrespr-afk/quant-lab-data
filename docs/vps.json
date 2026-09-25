@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-09-25 20:25 UTC",
+    "updated":  "2026-09-25 20:40 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  16,
+    "heartbeat_age_s":  22,
     "heartbeat":  {
                       "gmt":  "2026.09.25",
                       "connected":  "0",
@@ -23,7 +23,12 @@
                          "DM\t0\t22:00:03.012\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.20 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00"
                      ],
     "journal_tail":  [
-                         "PR\t1\t00:57:38.694\tNetwork\t\u00271600189053\u0027: connection to OANDA-Demo-1 lost",
-                         "FG\t2\t00:58:18.279\tNetwork\t\u00271600189053\u0027: authorization on OANDA-Demo-1 failed (Invalid account)"
+                         "ON\t0\t20:32:41.293\tLiveUpdate\tnew version build 6230 (IDE: 6230, Tester: 6230) is available",
+                         "RG\t0\t20:32:42.711\tLiveUpdate\t\u0027mt5clw64\u0027 downloaded (59505 kb)",
+                         "MP\t0\t20:32:46.847\tLiveUpdate\t\u0027mt5clwide64\u0027 downloaded and updated (46117 kb)",
+                         "CG\t0\t20:32:47.508\tLiveUpdate\t\u0027mt5clwtst64\u0027 downloaded and updated (11348 kb)",
+                         "ML\t0\t20:32:51.699\tLiveUpdate\t\u0027mt5onnx64\u0027 downloaded and updated (71373 kb)",
+                         "OR\t0\t20:32:51.719\tLiveUpdate\tdownloaded successfully",
+                         "GP\t0\t20:32:51.750\tLiveUpdate\t\u0027C:\\Users\\Administrator\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\liveupdate\\mt5clw64.6230\u0027 saved"
                      ]
 }
