@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-09-27 00:55 UTC",
+    "updated":  "2026-09-27 01:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  29,
+    "heartbeat_age_s":  28,
     "heartbeat":  {
                       "gmt":  "2026.09.27",
                       "connected":  "1",
@@ -34,13 +34,13 @@
                          "RL\t0\t22:00:00.643\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.27 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00"
                      ],
     "journal_tail":  [
-                         "KF\t0\t19:53:53.492\tMCP\tstarted on 127.0.0.1:22346",
-                         "CP\t0\t19:53:58.825\tMQL5\t8 inputs read from expert \u0027P7VT3\u0027 set file \"C:\\Program Files\\MetaTrader 5\\MQL5\\Presets\\P7VT3.set\"",
-                         "QP\t0\t19:53:58.837\tExperts\texpert P7VT3 (XAUUSD.sim,Daily) loaded successfully",
-                         "OG\t0\t19:53:59.092\tNetwork\t\u00271600195432\u0027: authorized on OANDA-Demo-1 through Access Server 2 - NY (ping: 6.69 ms, build 5830)",
-                         "PK\t0\t19:53:59.092\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 44.222.86.150 on 2026.09.26 22:42:26",
-                         "RD\t0\t19:54:00.215\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 0 positions, 0 orders, 49 symbols, 0 spreads",
-                         "DG\t0\t19:54:00.215\tNetwork\t\u00271600195432\u0027: trading has been enabled, demo account - hedging mode",
-                         "HK\t0\t19:54:00.215\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account"
+                         "NF\t0\t00:58:27.053\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "HN\t0\t00:58:27.053\tNetwork\t\u00271600195432\u0027: auto connecting to a better access point with 98 % quality (previous: 82 %)",
+                         "QQ\t1\t00:58:27.054\tNetwork\t\u00271600195432\u0027: connection to OANDA-Demo-1 lost",
+                         "KG\t0\t00:58:27.613\tNetwork\t\u00271600195432\u0027: authorized on OANDA-Demo-1 through Access Server - NY (ping: 7.16 ms, build 5830)",
+                         "NJ\t0\t00:58:27.613\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 2600:1f18:bed:b500:55:2c44:fd0f:c0e6 on 2026.09.27 03:58:21",
+                         "NG\t0\t00:58:28.330\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 0 positions, 0 orders, 49 symbols, 0 spreads",
+                         "HE\t0\t00:58:28.330\tNetwork\t\u00271600195432\u0027: trading has been enabled, demo account - hedging mode",
+                         "LH\t0\t00:58:28.330\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account"
                      ]
 }
