@@ -1,46 +1,37 @@
 {
-    "updated":  "2026-09-27 20:55 UTC",
+    "updated":  "2026-09-27 21:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  27,
+    "heartbeat_age_s":  26,
     "heartbeat":  {
                       "gmt":  "2026.09.27",
                       "connected":  "1",
                       "armed":  "1",
-                      "balance":  "100000.00",
-                      "equity":  "100000.00",
+                      "balance":  "99997.52",
+                      "equity":  "99994.46",
                       "floor":  "96000.00",
                       "permhalt":  "0",
                       "dayhalt":  "0",
                       "unverified":  "0"
                   },
     "sleeves":  [
-                    "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
-                    "BTCUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0",
-                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=0"
+                    "US100.sim held=0.00 pending=0 target=0.00 quote_age_s=173492",
+                    "BTCUSD.sim held=0.09 pending=0 target=0.09 quote_age_s=5",
+                    "XAUUSD.sim held=0.00 pending=0 target=0.00 quote_age_s=173492"
                 ],
     "experts_tail":  [
-                         "DO\t0\t19:42:29.149\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.26 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00  [UNVERIFIED]",
-                         "JF\t0\t19:42:29.149\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] Init OK (armed). InitialBalance 100000.00  static halt 92000.00  daily floor 96000.00  FTMO day 2026.09.26  CET offset +2",
-                         "RJ\t0\t19:42:59.328\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.24 | close 84342.00 sma 70889.88 -\u003e LONG | vol 56.8% scalar 0.705 (in use 0.705) | target 0.09 lots (~7760) held 0.00 | HOLD",
-                         "FL\t0\t19:42:59.328\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math BTCUSD.sim: notional/lot 83873.00 (contract 1 x bid 83873.00 = 83873.00) step 0.01 min 0.01",
-                         "OD\t0\t19:42:59.354\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] XAUUSD.sim bar 2026.09.24 | close 4273.76 sma 4468.97 -\u003e LONG | vol 22.4% scalar 0.669 (in use 0.529) | target 0.02 lots (~11628) held 0.00 | HOLD",
-                         "CQ\t0\t19:42:59.354\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 428398.00 (contract 100 x bid 4283.98 = 428398.00) step 0.01 min 0.01",
-                         "RS\t0\t19:43:29.414\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] US100.sim bar 2026.09.24 | close 30488.00 sma 28129.70 -\u003e LONG | vol 15.3% scalar 0.981 (in use 1.000) | target 0.70 lots (~22000) held 0.00 | HOLD",
-                         "OF\t0\t19:43:29.414\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math US100.sim: notional/lot 30672.20 (contract 1 x bid 30672.20 = 30672.20) step 0.10 min 0.10",
-                         "NQ\t0\t19:54:00.552\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] v1.02 loaded. Exposure 0.55  LiveTrading=TRUE  ImmediateFlips=true  Magic 773003  MarginMode HEDGING  -\u003e waiting for a live connection to arm",
-                         "KH\t0\t19:54:00.591\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] Restart within FTMO day 2026.09.26: keeping day-start anchors bal 100000.00 eq 100000.00 (floor 96000.00)",
-                         "MJ\t0\t19:54:00.591\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] Init OK (armed). InitialBalance 100000.00  static halt 92000.00  daily floor 96000.00  FTMO day 2026.09.26  CET offset +2",
-                         "RL\t0\t22:00:00.643\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.09.27 (CE(S)T)  day-start balance 100000.00 equity 100000.00  -\u003e daily floor 96000.00"
+                         "OR\t0\t21:05:31.470\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.25 | close 83873.00 sma 71012.19 -\u003e LONG | vol 54.5% scalar 0.735 (in use 0.735) | target 0.09 lots (~8080) held 0.00 | MONDAY_RESIZE",
+                         "QK\t0\t21:05:31.474\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math BTCUSD.sim: notional/lot 84576.00 (contract 1 x bid 84576.00 = 84576.00) step 0.01 min 0.01",
+                         "IJ\t0\t21:05:31.659\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] LIVE BUY BTCUSD.sim 0.09 lots (~7612) SL 71955.05 [MONDAY_RESIZE] -\u003e retcode 10009 done at 0.00"
                      ],
     "journal_tail":  [
-                         "OE\t0\t02:10:03.594\tNetwork\t\u00271600195432\u0027: trading has been enabled, demo account - hedging mode",
-                         "OI\t0\t02:10:03.594\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account",
-                         "OS\t0\t06:58:24.491\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "DR\t0\t06:58:27.945\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "OE\t0\t12:58:24.496\tNetwork\t\u00271600195432\u0027: scanning network for access points",
                          "CP\t0\t12:58:28.735\tNetwork\t\u00271600195432\u0027: scanning network finished",
                          "LG\t0\t18:58:25.366\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "HN\t0\t18:58:28.899\tNetwork\t\u00271600195432\u0027: scanning network finished"
+                         "HN\t0\t18:58:28.899\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "OE\t0\t21:05:31.522\tTrades\t\u00271600195432\u0027: market buy 0.09 BTCUSD.sim sl: 71955.05",
+                         "KM\t0\t21:05:31.536\tTrades\t\u00271600195432\u0027: accepted market buy 0.09 BTCUSD.sim sl: 71955.05",
+                         "PS\t0\t21:05:31.536\tTrades\t\u00271600195432\u0027: market buy 0.09 BTCUSD.sim sl: 71955.05 placed for execution",
+                         "MK\t0\t21:05:31.657\tTrades\t\u00271600195432\u0027: order #42719887 buy 0.09 / 0.09 BTCUSD.sim at market done in 147.177 ms",
+                         "LG\t0\t21:05:31.657\tTrades\t\u00271600195432\u0027: deal #43421403 buy 0.09 BTCUSD.sim at 84653.00 done (based on order #42719887)"
                      ]
 }
