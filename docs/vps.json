@@ -1,23 +1,23 @@
 {
-    "updated":  "2026-09-28 13:55 UTC",
+    "updated":  "2026-09-28 14:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  26,
+    "heartbeat_age_s":  24,
     "heartbeat":  {
                       "gmt":  "2026.09.28",
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.43",
-                      "equity":  "99447.79",
+                      "equity":  "99289.84",
                       "floor":  "95999.86",
                       "permhalt":  "0",
                       "dayhalt":  "0",
                       "unverified":  "0"
                   },
     "sleeves":  [
-                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=1",
+                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=0",
                     "BTCUSD.sim held=0.09 pending=0 target=0.09 quote_age_s=1",
-                    "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=0"
+                    "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=1"
                 ],
     "experts_tail":  [
                          "OR\t0\t21:05:31.470\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.09.25 | close 83873.00 sma 71012.19 -\u003e LONG | vol 54.5% scalar 0.735 (in use 0.735) | target 0.09 lots (~8080) held 0.00 | MONDAY_RESIZE",
