@@ -1,14 +1,14 @@
 {
-    "updated":  "2026-09-28 00:55 UTC",
+    "updated":  "2026-09-28 01:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  24,
+    "heartbeat_age_s":  26,
     "heartbeat":  {
                       "gmt":  "2026.09.28",
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.43",
-                      "equity":  "99844.89",
+                      "equity":  "99776.24",
                       "floor":  "95999.86",
                       "permhalt":  "0",
                       "dayhalt":  "0",
@@ -32,13 +32,7 @@
                          "HH\t0\t22:05:01.672\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] LIVE BUY XAUUSD.sim 0.03 lots (~12818) SL 3632.09 [MONDAY_RESIZE] -\u003e retcode 10009 done at 0.000"
                      ],
     "journal_tail":  [
-                         "QG\t0\t22:01:01.723\tTrades\t\u00271600195432\u0027: market buy 0.7 US100.sim sl: 26004.7 placed for execution",
-                         "KD\t0\t22:01:01.853\tTrades\t\u00271600195432\u0027: order #42720128 buy 0.7 / 0.7 US100.sim at market done in 168.943 ms",
-                         "DH\t0\t22:01:01.854\tTrades\t\u00271600195432\u0027: deal #43421636 buy 0.7 US100.sim at 30594.8 done (based on order #42720128)",
-                         "NO\t0\t22:05:01.524\tTrades\t\u00271600195432\u0027: market buy 0.03 XAUUSD.sim sl: 3632.093",
-                         "NS\t0\t22:05:01.534\tTrades\t\u00271600195432\u0027: accepted market buy 0.03 XAUUSD.sim sl: 3632.093",
-                         "EF\t0\t22:05:01.534\tTrades\t\u00271600195432\u0027: market buy 0.03 XAUUSD.sim sl: 3632.093 placed for execution",
-                         "FE\t0\t22:05:01.672\tTrades\t\u00271600195432\u0027: order #42720324 buy 0.03 / 0.03 XAUUSD.sim at market done in 147.716 ms",
-                         "KM\t0\t22:05:01.672\tTrades\t\u00271600195432\u0027: deal #43421807 buy 0.03 XAUUSD.sim at 4273.140 done (based on order #42720324)"
+                         "OM\t0\t00:58:25.153\tNetwork\t\u00271600195432\u0027: scanning network for access points",
+                         "PK\t0\t00:58:28.661\tNetwork\t\u00271600195432\u0027: scanning network finished"
                      ]
 }
