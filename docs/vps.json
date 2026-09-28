@@ -1,14 +1,14 @@
 {
-    "updated":  "2026-09-28 06:55 UTC",
+    "updated":  "2026-09-28 07:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  26,
+    "heartbeat_age_s":  28,
     "heartbeat":  {
                       "gmt":  "2026.09.28",
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.43",
-                      "equity":  "99385.92",
+                      "equity":  "99374.26",
                       "floor":  "95999.86",
                       "permhalt":  "0",
                       "dayhalt":  "0",
@@ -32,7 +32,13 @@
                          "HH\t0\t22:05:01.672\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] LIVE BUY XAUUSD.sim 0.03 lots (~12818) SL 3632.09 [MONDAY_RESIZE] -\u003e retcode 10009 done at 0.000"
                      ],
     "journal_tail":  [
-                         "OM\t0\t00:58:25.153\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "PK\t0\t00:58:28.661\tNetwork\t\u00271600195432\u0027: scanning network finished"
+                         "II\t0\t06:58:30.272\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "NQ\t0\t06:58:30.272\tNetwork\t\u00271600195432\u0027: auto connecting to a better access point with 98 % quality (previous: 98 %)",
+                         "RP\t1\t06:58:30.297\tNetwork\t\u00271600195432\u0027: connection to OANDA-Demo-1 lost",
+                         "JI\t0\t06:58:33.294\tNetwork\t\u00271600195432\u0027: authorized on OANDA-Demo-1 through Access Server 2 - NY (ping: 6.78 ms, build 5830)",
+                         "IE\t0\t06:58:33.295\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 44.222.86.150 on 2026.09.27 05:10:02",
+                         "HJ\t0\t06:58:34.158\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 3 positions, 0 orders, 49 symbols, 0 spreads",
+                         "KI\t0\t06:58:34.158\tNetwork\t\u00271600195432\u0027: trading has been enabled, demo account - hedging mode",
+                         "LM\t0\t06:58:34.159\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account"
                      ]
 }
