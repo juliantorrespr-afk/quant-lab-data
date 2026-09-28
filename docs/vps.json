@@ -1,14 +1,14 @@
 {
-    "updated":  "2026-09-28 05:55 UTC",
+    "updated":  "2026-09-28 06:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  27,
+    "heartbeat_age_s":  26,
     "heartbeat":  {
                       "gmt":  "2026.09.28",
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.43",
-                      "equity":  "99444.76",
+                      "equity":  "99464.39",
                       "floor":  "95999.86",
                       "permhalt":  "0",
                       "dayhalt":  "0",
