@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-09-30 18:55 UTC",
+    "updated":  "2026-09-30 19:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
     "heartbeat_age_s":  22,
@@ -8,15 +8,15 @@
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.43",
-                      "equity":  "99516.94",
+                      "equity":  "99539.26",
                       "floor":  "95997.43",
                       "permhalt":  "0",
                       "dayhalt":  "0",
                       "unverified":  "0"
                   },
     "sleeves":  [
-                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=0",
-                    "BTCUSD.sim held=0.09 pending=0 target=0.09 quote_age_s=0",
+                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=1",
+                    "BTCUSD.sim held=0.09 pending=0 target=0.09 quote_age_s=1",
                     "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=0"
                 ],
     "experts_tail":  [
@@ -34,6 +34,8 @@
                          "JO\t0\t06:58:31.793\tNetwork\t\u00271600195432\u0027: scanning network for access points",
                          "PI\t0\t06:58:35.283\tNetwork\t\u00271600195432\u0027: scanning network finished",
                          "DN\t0\t12:58:31.303\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "FG\t0\t12:58:35.279\tNetwork\t\u00271600195432\u0027: scanning network finished"
+                         "FG\t0\t12:58:35.279\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "EP\t0\t18:58:31.795\tNetwork\t\u00271600195432\u0027: scanning network for access points",
+                         "GE\t0\t18:58:36.123\tNetwork\t\u00271600195432\u0027: scanning network finished"
                      ]
 }
