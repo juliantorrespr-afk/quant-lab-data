@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-09-30 06:55 UTC",
+    "updated":  "2026-09-30 07:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
     "heartbeat_age_s":  24,
@@ -8,7 +8,7 @@
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.43",
-                      "equity":  "99428.83",
+                      "equity":  "99441.73",
                       "floor":  "95997.43",
                       "permhalt":  "0",
                       "dayhalt":  "0",
@@ -30,6 +30,8 @@
                      ],
     "journal_tail":  [
                          "GM\t0\t00:58:30.193\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "LK\t0\t00:58:33.708\tNetwork\t\u00271600195432\u0027: scanning network finished"
+                         "LK\t0\t00:58:33.708\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "JO\t0\t06:58:31.793\tNetwork\t\u00271600195432\u0027: scanning network for access points",
+                         "PI\t0\t06:58:35.283\tNetwork\t\u00271600195432\u0027: scanning network finished"
                      ]
 }
