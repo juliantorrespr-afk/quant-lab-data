@@ -1,14 +1,14 @@
 {
-    "updated":  "2026-10-01 00:55 UTC",
+    "updated":  "2026-10-01 01:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  23,
+    "heartbeat_age_s":  24,
     "heartbeat":  {
                       "gmt":  "2026.10.01",
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.43",
-                      "equity":  "99414.83",
+                      "equity":  "99505.76",
                       "floor":  "95997.43",
                       "permhalt":  "0",
                       "dayhalt":  "0",
@@ -16,7 +16,7 @@
                   },
     "sleeves":  [
                     "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=0",
-                    "BTCUSD.sim held=0.09 pending=0 target=0.09 quote_age_s=1",
+                    "BTCUSD.sim held=0.09 pending=0 target=0.09 quote_age_s=2",
                     "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=0"
                 ],
     "experts_tail":  [
@@ -29,13 +29,7 @@
                          "HR\t0\t22:05:04.130\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 415956.00 (contract 100 x bid 4159.56 = 415956.00) step 0.01 min 0.01"
                      ],
     "journal_tail":  [
-                         "GM\t0\t00:58:30.193\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "LK\t0\t00:58:33.708\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "JO\t0\t06:58:31.793\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "PI\t0\t06:58:35.283\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "DN\t0\t12:58:31.303\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "FG\t0\t12:58:35.279\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "EP\t0\t18:58:31.795\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "GE\t0\t18:58:36.123\tNetwork\t\u00271600195432\u0027: scanning network finished"
+                         "RM\t0\t00:58:32.435\tNetwork\t\u00271600195432\u0027: scanning network for access points",
+                         "GK\t0\t00:58:36.711\tNetwork\t\u00271600195432\u0027: scanning network finished"
                      ]
 }
