@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-02 18:55 UTC",
+    "updated":  "2026-10-02 19:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
     "heartbeat_age_s":  23,
@@ -8,7 +8,7 @@
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.43",
-                      "equity":  "99670.58",
+                      "equity":  "99668.73",
                       "floor":  "95997.43",
                       "permhalt":  "0",
                       "dayhalt":  "0",
@@ -29,13 +29,13 @@
                          "IR\t0\t22:05:05.095\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 417501.00 (contract 100 x bid 4175.01 = 417501.00) step 0.01 min 0.01"
                      ],
     "journal_tail":  [
-                         "PG\t0\t00:58:41.978\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 44.222.86.150 on 2026.10.01 21:58:42",
-                         "GH\t0\t00:58:42.950\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 3 positions, 0 orders, 49 symbols, 0 spreads",
                          "LK\t0\t00:58:42.950\tNetwork\t\u00271600195432\u0027: trading has been enabled, demo account - hedging mode",
                          "PO\t0\t00:58:42.950\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account",
                          "PL\t0\t06:58:35.799\tNetwork\t\u00271600195432\u0027: scanning network for access points",
                          "EH\t0\t06:58:40.011\tNetwork\t\u00271600195432\u0027: scanning network finished",
                          "FN\t0\t12:58:35.785\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "RF\t0\t12:58:39.347\tNetwork\t\u00271600195432\u0027: scanning network finished"
+                         "RF\t0\t12:58:39.347\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "MP\t0\t18:58:36.549\tNetwork\t\u00271600195432\u0027: scanning network for access points",
+                         "ID\t0\t18:58:40.843\tNetwork\t\u00271600195432\u0027: scanning network finished"
                      ]
 }
