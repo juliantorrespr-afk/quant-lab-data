@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-10-03 00:55 UTC",
+    "updated":  "2026-10-03 01:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  19,
+    "heartbeat_age_s":  24,
     "heartbeat":  {
                       "gmt":  "2026.10.03",
                       "connected":  "1",
@@ -23,13 +23,13 @@
                          "RM\t0\t22:00:06.059\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.10.03 (CE(S)T)  day-start balance 99997.43 equity 99679.24  -\u003e daily floor 95997.43"
                      ],
     "journal_tail":  [
-                         "LK\t0\t00:58:42.950\tNetwork\t\u00271600195432\u0027: trading has been enabled, demo account - hedging mode",
-                         "PO\t0\t00:58:42.950\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account",
-                         "PL\t0\t06:58:35.799\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "EH\t0\t06:58:40.011\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "FN\t0\t12:58:35.785\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "RF\t0\t12:58:39.347\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "MP\t0\t18:58:36.549\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "ID\t0\t18:58:40.843\tNetwork\t\u00271600195432\u0027: scanning network finished"
+                         "OK\t0\t00:58:41.384\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "OP\t0\t00:58:41.384\tNetwork\t\u00271600195432\u0027: auto connecting to a better access point with 99 % quality (previous: 98 %)",
+                         "GR\t1\t00:58:41.410\tNetwork\t\u00271600195432\u0027: connection to OANDA-Demo-1 lost",
+                         "RJ\t0\t00:58:44.074\tNetwork\t\u00271600195432\u0027: authorized on OANDA-Demo-1 through Access Server - NY (ping: 6.81 ms, build 5830)",
+                         "KG\t0\t00:58:44.075\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 44.222.86.150 on 2026.10.02 03:58:41",
+                         "KH\t0\t00:58:44.983\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 3 positions, 0 orders, 49 symbols, 0 spreads",
+                         "HK\t0\t00:58:44.983\tNetwork\t\u00271600195432\u0027: trading has been enabled, demo account - hedging mode",
+                         "LO\t0\t00:58:44.983\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account"
                      ]
 }
