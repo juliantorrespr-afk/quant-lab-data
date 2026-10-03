@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-10-03 21:55 UTC",
+    "updated":  "2026-10-03 22:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  21,
+    "heartbeat_age_s":  22,
     "heartbeat":  {
                       "gmt":  "2026.10.03",
                       "connected":  "1",
@@ -20,7 +20,7 @@
                     "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=0"
                 ],
     "experts_tail":  [
-                         "RM\t0\t22:00:06.059\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.10.03 (CE(S)T)  day-start balance 99997.43 equity 99679.24  -\u003e daily floor 95997.43"
+                         "PM\t0\t22:00:06.933\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.10.04 (CE(S)T)  day-start balance 99997.43 equity 99679.24  -\u003e daily floor 95997.43"
                      ],
     "journal_tail":  [
                          "LD\t0\t06:58:42.035\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 44.222.86.150 on 2026.10.03 03:58:43",
