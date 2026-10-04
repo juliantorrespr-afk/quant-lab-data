@@ -1,35 +1,37 @@
 {
-    "updated":  "2026-10-04 20:55 UTC",
+    "updated":  "2026-10-04 21:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  21,
+    "heartbeat_age_s":  20,
     "heartbeat":  {
                       "gmt":  "2026.10.04",
                       "connected":  "1",
                       "armed":  "1",
-                      "balance":  "99997.43",
-                      "equity":  "99679.24",
+                      "balance":  "99997.15",
+                      "equity":  "99808.87",
                       "floor":  "95997.43",
                       "permhalt":  "0",
                       "dayhalt":  "0",
                       "unverified":  "0"
                   },
     "sleeves":  [
-                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=0",
-                    "BTCUSD.sim held=0.09 pending=0 target=0.09 quote_age_s=0",
-                    "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=0"
+                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=173498",
+                    "BTCUSD.sim held=0.10 pending=0 target=0.10 quote_age_s=0",
+                    "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=173498"
                 ],
     "experts_tail":  [
-                         "PM\t0\t22:00:06.933\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.10.04 (CE(S)T)  day-start balance 99997.43 equity 99679.24  -\u003e daily floor 95997.43"
+                         "PR\t0\t21:05:07.774\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.10.02 | close 84442.00 sma 71475.15 -\u003e LONG | vol 47.9% scalar 0.835 (in use 0.835) | target 0.10 lots (~9165) held 0.09 | MONTH_REBAL",
+                         "KK\t0\t21:05:07.777\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math BTCUSD.sim: notional/lot 85816.85 (contract 1 x bid 85816.85 = 85816.85) step 0.01 min 0.01",
+                         "OH\t0\t21:05:07.997\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] LIVE BUY BTCUSD.sim 0.01 lots (~858) SL 72948.23 [MONTH_REBAL] -\u003e retcode 10009 done at 0.00"
                      ],
     "journal_tail":  [
-                         "DN\t0\t20:10:23.316\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "CF\t0\t20:10:23.316\tNetwork\t\u00271600195432\u0027: auto connecting to a better access point with 98 % quality (previous: 98 %)",
-                         "CI\t1\t20:10:23.340\tNetwork\t\u00271600195432\u0027: connection to OANDA-Demo-1 lost",
-                         "LN\t0\t20:10:26.380\tNetwork\t\u00271600195432\u0027: authorized on OANDA-Demo-1 through Access Server 2 - NY (ping: 6.92 ms, build 5830)",
-                         "GR\t0\t20:10:26.380\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 44.222.86.150 on 2026.10.04 05:10:17",
                          "IM\t0\t20:10:27.447\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 3 positions, 0 orders, 49 symbols, 0 spreads",
                          "NN\t0\t20:10:27.447\tNetwork\t\u00271600195432\u0027: trading has been enabled, demo account - hedging mode",
-                         "JR\t0\t20:10:27.447\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account"
+                         "JR\t0\t20:10:27.447\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account",
+                         "RE\t0\t21:05:07.855\tTrades\t\u00271600195432\u0027: market buy 0.01 BTCUSD.sim sl: 72948.23",
+                         "DM\t0\t21:05:07.869\tTrades\t\u00271600195432\u0027: accepted market buy 0.01 BTCUSD.sim sl: 72948.23",
+                         "GS\t0\t21:05:07.869\tTrades\t\u00271600195432\u0027: market buy 0.01 BTCUSD.sim sl: 72948.23 placed for execution",
+                         "HH\t0\t21:05:07.993\tTrades\t\u00271600195432\u0027: order #43123118 buy 0.01 / 0.01 BTCUSD.sim at market done in 148.659 ms",
+                         "CH\t0\t21:05:07.995\tTrades\t\u00271600195432\u0027: deal #43751411 buy 0.01 BTCUSD.sim at 85821.45 done (based on order #43123118)"
                      ]
 }
