@@ -1,14 +1,14 @@
 {
-    "updated":  "2026-10-05 01:55 UTC",
+    "updated":  "2026-10-05 02:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  17,
+    "heartbeat_age_s":  19,
     "heartbeat":  {
                       "gmt":  "2026.10.05",
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.15",
-                      "equity":  "100041.24",
+                      "equity":  "100054.03",
                       "floor":  "95997.15",
                       "permhalt":  "0",
                       "dayhalt":  "0",
@@ -30,13 +30,7 @@
                          "IM\t0\t22:05:07.804\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 414223.00 (contract 100 x bid 4142.23 = 414223.00) step 0.01 min 0.01"
                      ],
     "journal_tail":  [
-                         "IM\t0\t20:10:27.447\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 3 positions, 0 orders, 49 symbols, 0 spreads",
-                         "NN\t0\t20:10:27.447\tNetwork\t\u00271600195432\u0027: trading has been enabled, demo account - hedging mode",
-                         "JR\t0\t20:10:27.447\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account",
-                         "RE\t0\t21:05:07.855\tTrades\t\u00271600195432\u0027: market buy 0.01 BTCUSD.sim sl: 72948.23",
-                         "DM\t0\t21:05:07.869\tTrades\t\u00271600195432\u0027: accepted market buy 0.01 BTCUSD.sim sl: 72948.23",
-                         "GS\t0\t21:05:07.869\tTrades\t\u00271600195432\u0027: market buy 0.01 BTCUSD.sim sl: 72948.23 placed for execution",
-                         "HH\t0\t21:05:07.993\tTrades\t\u00271600195432\u0027: order #43123118 buy 0.01 / 0.01 BTCUSD.sim at market done in 148.659 ms",
-                         "CH\t0\t21:05:07.995\tTrades\t\u00271600195432\u0027: deal #43751411 buy 0.01 BTCUSD.sim at 85821.45 done (based on order #43123118)"
+                         "DM\t0\t02:10:19.128\tNetwork\t\u00271600195432\u0027: scanning network for access points",
+                         "RK\t0\t02:10:22.654\tNetwork\t\u00271600195432\u0027: scanning network finished"
                      ]
 }
