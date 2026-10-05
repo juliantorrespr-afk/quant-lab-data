@@ -1,23 +1,23 @@
 {
-    "updated":  "2026-10-05 07:55 UTC",
+    "updated":  "2026-10-05 08:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  19,
+    "heartbeat_age_s":  22,
     "heartbeat":  {
                       "gmt":  "2026.10.05",
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.15",
-                      "equity":  "99918.64",
+                      "equity":  "99957.63",
                       "floor":  "95997.15",
                       "permhalt":  "0",
                       "dayhalt":  "0",
                       "unverified":  "0"
                   },
     "sleeves":  [
-                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=1",
-                    "BTCUSD.sim held=0.10 pending=0 target=0.10 quote_age_s=5",
-                    "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=1"
+                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=0",
+                    "BTCUSD.sim held=0.10 pending=0 target=0.10 quote_age_s=0",
+                    "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=0"
                 ],
     "experts_tail":  [
                          "PR\t0\t21:05:07.774\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim bar 2026.10.02 | close 84442.00 sma 71475.15 -\u003e LONG | vol 47.9% scalar 0.835 (in use 0.835) | target 0.10 lots (~9165) held 0.09 | MONTH_REBAL",
@@ -31,6 +31,8 @@
                      ],
     "journal_tail":  [
                          "DM\t0\t02:10:19.128\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "RK\t0\t02:10:22.654\tNetwork\t\u00271600195432\u0027: scanning network finished"
+                         "RK\t0\t02:10:22.654\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "KO\t0\t08:10:20.505\tNetwork\t\u00271600195432\u0027: scanning network for access points",
+                         "CI\t0\t08:10:24.053\tNetwork\t\u00271600195432\u0027: scanning network finished"
                      ]
 }
