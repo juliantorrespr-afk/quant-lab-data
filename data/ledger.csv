@@ -16,3 +16,5 @@ as_of,symbol,side,dollars,price,reason,mode,broker_id
 2026-09-21,GLD,buy,2814.95,398.38,resize,DRY,
 2026-10-01,QQQ,sell,1549.42,742.03,rebalance,DRY,
 2026-10-01,BTC,sell,769.64,84849.1,rebalance,DRY,
+2026-10-05,QQQ,buy,675.61,756.2,rebalance,DRY,
+2026-10-05,GLD,buy,2133.4,379.55,rebalance,DRY,
