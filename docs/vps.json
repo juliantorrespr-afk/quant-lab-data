@@ -1,22 +1,22 @@
 {
-    "updated":  "2026-10-06 20:10 UTC",
+    "updated":  "2026-10-06 20:25 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  18,
+    "heartbeat_age_s":  16,
     "heartbeat":  {
                       "gmt":  "2026.10.06",
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.15",
-                      "equity":  "100175.82",
+                      "equity":  "100162.98",
                       "floor":  "96013.10",
                       "permhalt":  "0",
                       "dayhalt":  "0",
                       "unverified":  "0"
                   },
     "sleeves":  [
-                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=0",
-                    "BTCUSD.sim held=0.10 pending=0 target=0.10 quote_age_s=5",
+                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=1",
+                    "BTCUSD.sim held=0.10 pending=0 target=0.10 quote_age_s=0",
                     "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=0"
                 ],
     "experts_tail":  [
@@ -29,13 +29,13 @@
                          "LS\t0\t22:05:08.688\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 414364.00 (contract 100 x bid 4143.64 = 414364.00) step 0.01 min 0.01"
                      ],
     "journal_tail":  [
-                         "RG\t0\t02:10:30.159\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 44.222.86.150 on 2026.10.05 17:10:28",
-                         "HH\t0\t02:10:31.077\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 4 positions, 0 orders, 49 symbols, 0 spreads",
                          "RK\t0\t02:10:31.077\tNetwork\t\u00271600195432\u0027: trading has been enabled, demo account - hedging mode",
                          "NO\t0\t02:10:31.077\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account",
                          "CL\t0\t08:10:23.708\tNetwork\t\u00271600195432\u0027: scanning network for access points",
                          "FH\t0\t08:10:27.277\tNetwork\t\u00271600195432\u0027: scanning network finished",
                          "KN\t0\t14:10:23.185\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "KF\t0\t14:10:27.637\tNetwork\t\u00271600195432\u0027: scanning network finished"
+                         "KF\t0\t14:10:27.637\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "EP\t0\t20:10:23.267\tNetwork\t\u00271600195432\u0027: scanning network for access points",
+                         "CD\t0\t20:10:26.824\tNetwork\t\u00271600195432\u0027: scanning network finished"
                      ]
 }
