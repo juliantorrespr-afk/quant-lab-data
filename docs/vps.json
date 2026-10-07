@@ -1,14 +1,14 @@
 {
-    "updated":  "2026-10-07 07:55 UTC",
+    "updated":  "2026-10-07 08:11 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  19,
+    "heartbeat_age_s":  21,
     "heartbeat":  {
                       "gmt":  "2026.10.07",
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.15",
-                      "equity":  "99834.40",
+                      "equity":  "99844.43",
                       "floor":  "96149.51",
                       "permhalt":  "0",
                       "dayhalt":  "0",
@@ -16,7 +16,7 @@
                   },
     "sleeves":  [
                     "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=0",
-                    "BTCUSD.sim held=0.10 pending=0 target=0.10 quote_age_s=0",
+                    "BTCUSD.sim held=0.10 pending=0 target=0.10 quote_age_s=1",
                     "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=0"
                 ],
     "experts_tail":  [
@@ -29,7 +29,13 @@
                          "ES\t0\t22:05:09.067\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3]    lot math XAUUSD.sim: notional/lot 416592.00 (contract 100 x bid 4165.92 = 416592.00) step 0.01 min 0.01"
                      ],
     "journal_tail":  [
-                         "FM\t0\t02:10:24.502\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "RK\t0\t02:10:28.058\tNetwork\t\u00271600195432\u0027: scanning network finished"
+                         "PI\t0\t08:10:27.811\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "DQ\t0\t08:10:27.811\tNetwork\t\u00271600195432\u0027: auto connecting to a better access point with 99 % quality (previous: 98 %)",
+                         "MP\t1\t08:10:27.836\tNetwork\t\u00271600195432\u0027: connection to OANDA-Demo-1 lost",
+                         "MH\t0\t08:10:30.657\tNetwork\t\u00271600195432\u0027: authorized on OANDA-Demo-1 through Access Server - NY (ping: 6.82 ms, build 5830)",
+                         "OE\t0\t08:10:30.658\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 44.222.86.150 on 2026.10.06 05:10:30",
+                         "CK\t0\t08:10:31.588\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 4 positions, 0 orders, 49 symbols, 0 spreads",
+                         "MI\t0\t08:10:31.588\tNetwork\t\u00271600195432\u0027: trading has been enabled, demo account - hedging mode",
+                         "MM\t0\t08:10:31.588\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account"
                      ]
 }
