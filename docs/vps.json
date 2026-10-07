@@ -1,21 +1,21 @@
 {
-    "updated":  "2026-10-07 12:40 UTC",
+    "updated":  "2026-10-07 12:55 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  19,
+    "heartbeat_age_s":  18,
     "heartbeat":  {
                       "gmt":  "2026.10.07",
                       "connected":  "1",
                       "armed":  "1",
                       "balance":  "99997.15",
-                      "equity":  "99511.28",
+                      "equity":  "99524.26",
                       "floor":  "96149.51",
                       "permhalt":  "0",
                       "dayhalt":  "0",
                       "unverified":  "0"
                   },
     "sleeves":  [
-                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=1",
+                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=0",
                     "BTCUSD.sim held=0.10 pending=0 target=0.10 quote_age_s=0",
                     "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=0"
                 ],
