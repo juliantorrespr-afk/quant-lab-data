@@ -1,35 +1,35 @@
 {
-    "updated":  "2026-10-10 21:55 UTC",
+    "updated":  "2026-10-10 22:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  19,
+    "heartbeat_age_s":  18,
     "heartbeat":  {
                       "gmt":  "2026.10.10",
                       "connected":  "1",
                       "armed":  "1",
-                      "balance":  "99997.15",
-                      "equity":  "99627.32",
+                      "balance":  "99624.55",
+                      "equity":  "99624.55",
                       "floor":  "95997.15",
                       "permhalt":  "0",
                       "dayhalt":  "0",
                       "unverified":  "0"
                   },
     "sleeves":  [
-                    "US100.sim held=0.70 pending=0 target=0.70 quote_age_s=1",
-                    "BTCUSD.sim held=0.10 pending=0 target=0.10 quote_age_s=0",
-                    "XAUUSD.sim held=0.03 pending=0 target=0.03 quote_age_s=0"
+                    "US100.sim held=0.00 pending=0 target=0.70 quote_age_s=1",
+                    "BTCUSD.sim held=0.00 pending=0 target=0.10 quote_age_s=0",
+                    "XAUUSD.sim held=0.00 pending=0 target=0.03 quote_age_s=0"
                 ],
     "experts_tail":  [
-                         "EM\t0\t22:00:09.761\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.10.10 (CE(S)T)  day-start balance 99997.15 equity 99627.32  -\u003e daily floor 95997.15"
+                         "QM\t0\t22:00:10.005\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.10.11 (CE(S)T)  day-start balance 99997.15 equity 99627.32  -\u003e daily floor 95997.15"
                      ],
     "journal_tail":  [
-                         "DM\t0\t03:47:14.072\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "LK\t0\t03:47:17.598\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "QO\t0\t09:47:14.332\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "JI\t0\t09:47:17.828\tNetwork\t\u00271600195432\u0027: scanning network finished",
                          "IN\t0\t15:47:15.822\tNetwork\t\u00271600195432\u0027: scanning network for access points",
                          "GG\t0\t15:47:19.378\tNetwork\t\u00271600195432\u0027: scanning network finished",
                          "PP\t0\t21:47:17.037\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "CE\t0\t21:47:20.531\tNetwork\t\u00271600195432\u0027: scanning network finished"
+                         "CE\t0\t21:47:20.531\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "GS\t0\t22:06:18.789\tTrades\t\u00271600195432\u0027: deal #44031600 sell 0.09 BTCUSD.sim at 82421.00 done (based on order #43473696)",
+                         "DR\t0\t22:06:18.803\tTrades\t\u00271600195432\u0027: deal #44031601 sell 0.01 BTCUSD.sim at 82421.00 done (based on order #43473697)",
+                         "DS\t0\t22:06:18.803\tTrades\t\u00271600195432\u0027: deal #44031602 sell 0.7 US100.sim at 30926.9 done (based on order #43473698)",
+                         "JQ\t0\t22:06:18.809\tTrades\t\u00271600195432\u0027: deal #44031603 sell 0.03 XAUUSD.sim at 4194.220 done (based on order #43473699)"
                      ]
 }
