@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-10-10 03:41 UTC",
+    "updated":  "2026-10-10 03:55 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  21,
+    "heartbeat_age_s":  18,
     "heartbeat":  {
                       "gmt":  "2026.10.10",
                       "connected":  "1",
@@ -23,13 +23,7 @@
                          "EM\t0\t22:00:09.761\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.10.10 (CE(S)T)  day-start balance 99997.15 equity 99627.32  -\u003e daily floor 95997.15"
                      ],
     "journal_tail":  [
-                         "IN\t0\t21:47:16.965\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "RG\t0\t21:47:16.966\tNetwork\t\u00271600195432\u0027: auto connecting to a better access point with 98 % quality (previous: 82 %)",
-                         "II\t1\t21:47:16.967\tNetwork\t\u00271600195432\u0027: connection to OANDA-Demo-1 lost",
-                         "CN\t0\t21:47:20.876\tNetwork\t\u00271600195432\u0027: authorized on OANDA-Demo-1 through Access Server 2 - NY (ping: 7.00 ms, build 5830)",
-                         "GM\t0\t21:47:20.877\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 2600:1f18:bed:b500:55:2c44:fd0f:c0e6 on 2026.10.10 00:47:10",
-                         "GN\t0\t21:47:21.647\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 4 positions, 0 orders, 49 symbols, 0 spreads",
-                         "QM\t0\t21:47:21.647\tNetwork\t\u00271600195432\u0027: trading has been enabled, demo account - hedging mode",
-                         "QQ\t0\t21:47:21.647\tNetwork\t\u00271600195432\u0027: balance management has been disabled - demo account"
+                         "DM\t0\t03:47:14.072\tNetwork\t\u00271600195432\u0027: scanning network for access points",
+                         "LK\t0\t03:47:17.598\tNetwork\t\u00271600195432\u0027: scanning network finished"
                      ]
 }
