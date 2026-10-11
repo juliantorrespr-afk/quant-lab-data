@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-10-11 01:55 UTC",
+    "updated":  "2026-10-11 02:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  16,
+    "heartbeat_age_s":  19,
     "heartbeat":  {
                       "gmt":  "2026.10.11",
                       "connected":  "1",
@@ -23,13 +23,13 @@
                          "QM\t0\t22:00:10.005\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.10.11 (CE(S)T)  day-start balance 99997.15 equity 99627.32  -\u003e daily floor 95997.15"
                      ],
     "journal_tail":  [
-                         "GH\t0\t00:59:06.083\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "MP\t0\t00:59:06.083\tNetwork\t\u00271600195432\u0027: auto connecting to a better access point with 98 % quality (previous: 82 %)",
-                         "DS\t1\t00:59:06.084\tNetwork\t\u00271600195432\u0027: connection to OANDA-Demo-1 lost",
-                         "OI\t0\t00:59:06.630\tNetwork\t\u00271600195432\u0027: authorized on OANDA-Demo-1 through Access Server - NY (ping: 7.11 ms, build 5830)",
-                         "NH\t0\t00:59:06.630\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 2600:1f18:bed:b500:55:2c44:fd0f:c0e6 on 2026.10.11 03:58:58",
-                         "FE\t0\t00:59:07.343\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 0 positions, 0 orders, 49 symbols, 0 spreads",
                          "KI\t0\t00:59:07.344\tNetwork\t\u00271600195432\u0027: trading has been disabled - disabled on server",
-                         "QG\t0\t00:59:07.344\tNetwork\t\u00271600195432\u0027: balance management has been disabled - disabled on server"
+                         "QG\t0\t00:59:07.344\tNetwork\t\u00271600195432\u0027: balance management has been disabled - disabled on server",
+                         "MN\t1\t02:10:24.497\tNetwork\t\u00271600195432\u0027: connection to OANDA-Demo-1 lost",
+                         "RF\t0\t02:10:25.237\tNetwork\t\u00271600195432\u0027: authorized on OANDA-Demo-1 through Access Server - NY (ping: 7.11 ms, build 5830)",
+                         "LJ\t0\t02:10:25.237\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 44.222.86.150 on 2026.10.11 03:59:06",
+                         "GE\t0\t02:10:26.139\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 0 positions, 0 orders, 49 symbols, 0 spreads",
+                         "KI\t0\t02:10:26.139\tNetwork\t\u00271600195432\u0027: trading has been disabled - disabled on server",
+                         "QG\t0\t02:10:26.139\tNetwork\t\u00271600195432\u0027: balance management has been disabled - disabled on server"
                      ]
 }
