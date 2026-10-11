@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-10-11 18:56 UTC",
+    "updated":  "2026-10-11 19:11 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  9,
+    "heartbeat_age_s":  26,
     "heartbeat":  {
                       "gmt":  "2026.10.11",
                       "connected":  "1",
@@ -23,13 +23,13 @@
                          "QM\t0\t22:00:10.005\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.10.11 (CE(S)T)  day-start balance 99997.15 equity 99627.32  -\u003e daily floor 95997.15"
                      ],
     "journal_tail":  [
-                         "LJ\t0\t02:10:25.237\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 44.222.86.150 on 2026.10.11 03:59:06",
-                         "GE\t0\t02:10:26.139\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 0 positions, 0 orders, 49 symbols, 0 spreads",
-                         "KI\t0\t02:10:26.139\tNetwork\t\u00271600195432\u0027: trading has been disabled - disabled on server",
-                         "QG\t0\t02:10:26.139\tNetwork\t\u00271600195432\u0027: balance management has been disabled - disabled on server",
-                         "EQ\t0\t06:59:02.157\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "LD\t0\t06:59:06.512\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "JS\t0\t12:59:03.011\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "KR\t0\t12:59:06.527\tNetwork\t\u00271600195432\u0027: scanning network finished"
+                         "IS\t0\t18:59:07.865\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "JH\t0\t18:59:07.865\tNetwork\t\u00271600195432\u0027: auto connecting to a better access point with 98 % quality (previous: 98 %)",
+                         "OJ\t1\t18:59:07.892\tNetwork\t\u00271600195432\u0027: connection to OANDA-Demo-1 lost",
+                         "MP\t0\t18:59:09.041\tNetwork\t\u00271600195432\u0027: authorized on OANDA-Demo-1 through Access Server 2 - NY (ping: 7.15 ms, build 5830)",
+                         "RO\t0\t18:59:09.042\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 44.222.86.150 on 2026.10.11 05:10:25",
+                         "QP\t0\t18:59:10.170\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 0 positions, 0 orders, 49 symbols, 0 spreads",
+                         "CN\t0\t18:59:10.172\tNetwork\t\u00271600195432\u0027: trading has been disabled - disabled on server",
+                         "IJ\t0\t18:59:10.172\tNetwork\t\u00271600195432\u0027: balance management has been disabled - disabled on server"
                      ]
 }
