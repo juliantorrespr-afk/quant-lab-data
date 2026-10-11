@@ -1,8 +1,8 @@
 {
-    "updated":  "2026-10-11 00:55 UTC",
+    "updated":  "2026-10-11 01:11 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
-    "heartbeat_age_s":  16,
+    "heartbeat_age_s":  21,
     "heartbeat":  {
                       "gmt":  "2026.10.11",
                       "connected":  "1",
@@ -23,13 +23,13 @@
                          "QM\t0\t22:00:10.005\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] New FTMO day 2026.10.11 (CE(S)T)  day-start balance 99997.15 equity 99627.32  -\u003e daily floor 95997.15"
                      ],
     "journal_tail":  [
-                         "IN\t0\t15:47:15.822\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "GG\t0\t15:47:19.378\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "PP\t0\t21:47:17.037\tNetwork\t\u00271600195432\u0027: scanning network for access points",
-                         "CE\t0\t21:47:20.531\tNetwork\t\u00271600195432\u0027: scanning network finished",
-                         "GS\t0\t22:06:18.789\tTrades\t\u00271600195432\u0027: deal #44031600 sell 0.09 BTCUSD.sim at 82421.00 done (based on order #43473696)",
-                         "DR\t0\t22:06:18.803\tTrades\t\u00271600195432\u0027: deal #44031601 sell 0.01 BTCUSD.sim at 82421.00 done (based on order #43473697)",
-                         "DS\t0\t22:06:18.803\tTrades\t\u00271600195432\u0027: deal #44031602 sell 0.7 US100.sim at 30926.9 done (based on order #43473698)",
-                         "JQ\t0\t22:06:18.809\tTrades\t\u00271600195432\u0027: deal #44031603 sell 0.03 XAUUSD.sim at 4194.220 done (based on order #43473699)"
+                         "GH\t0\t00:59:06.083\tNetwork\t\u00271600195432\u0027: scanning network finished",
+                         "MP\t0\t00:59:06.083\tNetwork\t\u00271600195432\u0027: auto connecting to a better access point with 98 % quality (previous: 82 %)",
+                         "DS\t1\t00:59:06.084\tNetwork\t\u00271600195432\u0027: connection to OANDA-Demo-1 lost",
+                         "OI\t0\t00:59:06.630\tNetwork\t\u00271600195432\u0027: authorized on OANDA-Demo-1 through Access Server - NY (ping: 7.11 ms, build 5830)",
+                         "NH\t0\t00:59:06.630\tNetwork\t\u00271600195432\u0027: previous successful authorization performed from 2600:1f18:bed:b500:55:2c44:fd0f:c0e6 on 2026.10.11 03:58:58",
+                         "FE\t0\t00:59:07.343\tNetwork\t\u00271600195432\u0027: terminal synchronized with OANDA Corporation: 0 positions, 0 orders, 49 symbols, 0 spreads",
+                         "KI\t0\t00:59:07.344\tNetwork\t\u00271600195432\u0027: trading has been disabled - disabled on server",
+                         "QG\t0\t00:59:07.344\tNetwork\t\u00271600195432\u0027: balance management has been disabled - disabled on server"
                      ]
 }
