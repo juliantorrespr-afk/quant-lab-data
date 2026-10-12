@@ -1,5 +1,5 @@
 {
-    "updated":  "2026-10-12 14:55 UTC",
+    "updated":  "2026-10-12 15:10 UTC",
     "terminal_running":  true,
     "heartbeat_file":  "P7VT3_heartbeat.txt",
     "heartbeat_age_s":  17,
@@ -17,30 +17,30 @@
     "sleeves":  [
                     "US100.sim held=0.00 pending=1 target=0.70 quote_age_s=0",
                     "BTCUSD.sim held=0.00 pending=1 target=0.10 quote_age_s=0",
-                    "XAUUSD.sim held=0.00 pending=1 target=0.03 quote_age_s=1"
+                    "XAUUSD.sim held=0.00 pending=1 target=0.03 quote_age_s=0"
                 ],
     "experts_tail":  [
-                         "DF\t0\t14:52:40.507\tP7VT3 (XAUUSD.sim,D1)\tCTrade::OrderSend: market buy 0.03 XAUUSD.sim sl: 3539.209 [trade disabled]",
-                         "DJ\t0\t14:52:40.507\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] LIVE BUY XAUUSD.sim 0.03 lots (~12491) SL 3539.21 [MONDAY_RESIZE] -\u003e retcode 10017 trade disabled",
-                         "QJ\t0\t14:52:40.518\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] XAUUSD.sim intent [MONDAY_RESIZE] not filled (try 670) - kept for retry",
-                         "LF\t0\t14:54:10.454\tP7VT3 (XAUUSD.sim,D1)\tCTrade::OrderSend: market buy 0.70 US100.sim sl: 26098.5 [trade disabled]",
-                         "EJ\t0\t14:54:10.454\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] LIVE BUY US100.sim 0.70 lots (~21492) SL 26098.50 [MONDAY_RESIZE] -\u003e retcode 10017 trade disabled",
-                         "LI\t0\t14:54:10.474\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] US100.sim intent [MONDAY_RESIZE] not filled (try 674) - kept for retry",
-                         "HG\t0\t14:54:10.483\tP7VT3 (XAUUSD.sim,D1)\tCTrade::OrderSend: market buy 0.10 BTCUSD.sim sl: 70156.45 [trade disabled]",
-                         "MK\t0\t14:54:10.483\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] LIVE BUY BTCUSD.sim 0.10 lots (~8253) SL 70156.45 [MONDAY_RESIZE] -\u003e retcode 10017 trade disabled",
-                         "OK\t0\t14:54:10.504\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim intent [MONDAY_RESIZE] not filled (try 710) - kept for retry",
-                         "OF\t0\t14:54:10.514\tP7VT3 (XAUUSD.sim,D1)\tCTrade::OrderSend: market buy 0.03 XAUUSD.sim sl: 3538.699 [trade disabled]",
-                         "OJ\t0\t14:54:10.514\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] LIVE BUY XAUUSD.sim 0.03 lots (~12489) SL 3538.70 [MONDAY_RESIZE] -\u003e retcode 10017 trade disabled",
-                         "CJ\t0\t14:54:10.527\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] XAUUSD.sim intent [MONDAY_RESIZE] not filled (try 671) - kept for retry"
+                         "QF\t0\t15:07:40.508\tP7VT3 (XAUUSD.sim,D1)\tCTrade::OrderSend: market buy 0.03 XAUUSD.sim sl: 3541.423 [trade disabled]",
+                         "OJ\t0\t15:07:40.508\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] LIVE BUY XAUUSD.sim 0.03 lots (~12498) SL 3541.42 [MONDAY_RESIZE] -\u003e retcode 10017 trade disabled",
+                         "DJ\t0\t15:07:40.519\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] XAUUSD.sim intent [MONDAY_RESIZE] not filled (try 680) - kept for retry",
+                         "RF\t0\t15:09:10.458\tP7VT3 (XAUUSD.sim,D1)\tCTrade::OrderSend: market buy 0.70 US100.sim sl: 26105.3 [trade disabled]",
+                         "QJ\t0\t15:09:10.458\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] LIVE BUY US100.sim 0.70 lots (~21498) SL 26105.30 [MONDAY_RESIZE] -\u003e retcode 10017 trade disabled",
+                         "LI\t0\t15:09:10.472\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] US100.sim intent [MONDAY_RESIZE] not filled (try 684) - kept for retry",
+                         "RG\t0\t15:09:10.480\tP7VT3 (XAUUSD.sim,D1)\tCTrade::OrderSend: market buy 0.10 BTCUSD.sim sl: 70163.25 [trade disabled]",
+                         "JK\t0\t15:09:10.480\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] LIVE BUY BTCUSD.sim 0.10 lots (~8254) SL 70163.25 [MONDAY_RESIZE] -\u003e retcode 10017 trade disabled",
+                         "PK\t0\t15:09:10.497\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] BTCUSD.sim intent [MONDAY_RESIZE] not filled (try 720) - kept for retry",
+                         "JF\t0\t15:09:10.506\tP7VT3 (XAUUSD.sim,D1)\tCTrade::OrderSend: market buy 0.03 XAUUSD.sim sl: 3541.559 [trade disabled]",
+                         "PJ\t0\t15:09:10.506\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] LIVE BUY XAUUSD.sim 0.03 lots (~12499) SL 3541.56 [MONDAY_RESIZE] -\u003e retcode 10017 trade disabled",
+                         "MJ\t0\t15:09:10.518\tP7VT3 (XAUUSD.sim,D1)\t[P7VT3] XAUUSD.sim intent [MONDAY_RESIZE] not filled (try 681) - kept for retry"
                      ],
     "journal_tail":  [
-                         "HN\t0\t14:52:40.499\tTrades\t\u00271600195432\u0027: market buy 0.03 XAUUSD.sim sl: 3539.209",
-                         "EO\t2\t14:52:40.507\tTrades\t\u00271600195432\u0027: failed market buy 0.03 XAUUSD.sim sl: 3539.209 [Trade disabled]",
-                         "QF\t0\t14:54:10.446\tTrades\t\u00271600195432\u0027: market buy 0.7 US100.sim sl: 26098.5",
-                         "IS\t2\t14:54:10.454\tTrades\t\u00271600195432\u0027: failed market buy 0.7 US100.sim sl: 26098.5 [Trade disabled]",
-                         "CN\t0\t14:54:10.475\tTrades\t\u00271600195432\u0027: market buy 0.1 BTCUSD.sim sl: 70156.45",
-                         "IH\t2\t14:54:10.483\tTrades\t\u00271600195432\u0027: failed market buy 0.1 BTCUSD.sim sl: 70156.45 [Trade disabled]",
-                         "QJ\t0\t14:54:10.505\tTrades\t\u00271600195432\u0027: market buy 0.03 XAUUSD.sim sl: 3538.699",
-                         "KS\t2\t14:54:10.513\tTrades\t\u00271600195432\u0027: failed market buy 0.03 XAUUSD.sim sl: 3538.699 [Trade disabled]"
+                         "GF\t0\t15:07:40.500\tTrades\t\u00271600195432\u0027: market buy 0.03 XAUUSD.sim sl: 3541.423",
+                         "PG\t2\t15:07:40.508\tTrades\t\u00271600195432\u0027: failed market buy 0.03 XAUUSD.sim sl: 3541.423 [Trade disabled]",
+                         "NN\t0\t15:09:10.449\tTrades\t\u00271600195432\u0027: market buy 0.7 US100.sim sl: 26105.3",
+                         "RK\t2\t15:09:10.457\tTrades\t\u00271600195432\u0027: failed market buy 0.7 US100.sim sl: 26105.3 [Trade disabled]",
+                         "RF\t0\t15:09:10.473\tTrades\t\u00271600195432\u0027: market buy 0.1 BTCUSD.sim sl: 70163.25",
+                         "OP\t2\t15:09:10.480\tTrades\t\u00271600195432\u0027: failed market buy 0.1 BTCUSD.sim sl: 70163.25 [Trade disabled]",
+                         "FR\t0\t15:09:10.498\tTrades\t\u00271600195432\u0027: market buy 0.03 XAUUSD.sim sl: 3541.559",
+                         "GK\t2\t15:09:10.506\tTrades\t\u00271600195432\u0027: failed market buy 0.03 XAUUSD.sim sl: 3541.559 [Trade disabled]"
                      ]
 }
