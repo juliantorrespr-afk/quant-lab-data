@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-14 00:07 UTC",
+ "generated": "2026-10-14 05:47 UTC",
  "quotes": {
   "QQQ": {
    "price": 743.57,
@@ -29,59 +29,59 @@
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 83161.2,
-   "chg": 0.07,
+   "price": 83450.7,
+   "chg": 0.42,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 4178.2,
-   "chg": 0.51,
+   "price": 4184.4,
+   "chg": -0.76,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 30758.25,
-   "chg": -0.68,
+   "price": 30799.75,
+   "chg": -0.99,
    "src": "yahoo"
   }
  },
  "signals": {
-  "as_of": "2026-10-12",
-  "run": "2026-10-13T06:40+00:00",
+  "as_of": "2026-10-13",
+  "run": "2026-10-14T04:42+00:00",
   "QQQ": {
-   "close": 746.04,
-   "sma150": 691.69,
-   "dist_pct": 7.86,
+   "close": 743.57,
+   "sma150": 692.6,
+   "dist_pct": 7.36,
    "state": "LONG",
-   "vol20_pct": 14.9,
+   "vol20_pct": 14.7,
    "size": 1.0,
    "weight": 0.4,
    "size_in_use": 1.0
   },
   "BTC": {
-   "close": 81737.1,
-   "sma150": 71073.64,
-   "dist_pct": 15.0,
+   "close": 83101.2,
+   "sma150": 71106.77,
+   "dist_pct": 16.87,
    "state": "LONG",
-   "vol20_pct": 19.7,
+   "vol20_pct": 19.6,
    "size": 1.0,
    "weight": 0.2,
    "size_in_use": 1.0
   },
   "GLD": {
-   "close": 382.15,
-   "sma150": 404.86,
-   "dist_pct": -5.61,
+   "close": 381.67,
+   "sma150": 404.22,
+   "dist_pct": -5.58,
    "state": "HELD",
-   "vol20_pct": 20.3,
-   "size": 0.739,
+   "vol20_pct": 20.2,
+   "size": 0.742,
    "weight": 0.4,
    "size_in_use": 0.7390940296861529
   },
   "book": {
-   "equity": 101290.86,
-   "marked_at_close": 101290.86,
+   "equity": 101376.51,
+   "marked_at_close": 101376.51,
    "hwm": 102423.75,
-   "dd_pct": -1.11,
+   "dd_pct": -1.02,
    "mode": "DRY"
   },
   "eval": {
@@ -89,8 +89,8 @@
    "failed": false,
    "passed": false,
    "day_pl_pct": 0.0,
-   "total_pl_pct": 1.29,
-   "trailing_pl_pct": -1.11,
+   "total_pl_pct": 1.38,
+   "trailing_pl_pct": -1.02,
    "daily_budget_used_pct": 0,
    "total_budget_used_pct": 0,
    "worst_daily_pct": -0.03,
@@ -120,16 +120,16 @@
    "GLD": 0.7390940296861529
   },
   "halted": false,
-  "equity": 101290.86,
-  "as_of": "2026-10-12",
+  "equity": 101376.51,
+  "as_of": "2026-10-13",
   "entry": {
    "QQQ": 709.25,
    "BTC": 77121.650800557,
    "GLD": 397.97
   },
   "eval": {
-   "day": "2026-10-13",
-   "day_start": 101290.86267077875,
+   "day": "2026-10-14",
+   "day_start": 101376.50731215655,
    "attempt": 1,
    "days_traded": 6,
    "worst_daily": -0.00028561207388733134,
@@ -334,13 +334,13 @@
   }
  ],
  "scorecard": {
-  "n_scored": 8427,
+  "n_scored": 8430,
   "hit_rate": 53.7,
-  "n_live": 66,
-  "live_hit_rate": 56.1,
+  "n_live": 69,
+  "live_hit_rate": 55.1,
   "by_sleeve": {
    "QQQ": 55.6,
-   "BTC": 51.9,
+   "BTC": 52.0,
    "GLD": 53.6
   },
   "by_conf": {
@@ -348,48 +348,9 @@
    "MEDIUM": 51.4,
    "LOW": 54.2
   },
-  "last30": 51.1,
+  "last30": 52.2,
   "open_calls": 3,
   "live_rows": [
-   {
-    "as_of": "2026-10-07",
-    "sleeve": "BTC",
-    "call": "LONG",
-    "dist_pct": "17.29",
-    "confidence": "HIGH",
-    "close": "83276.1",
-    "next_close": "81683.8",
-    "next_ret_pct": "-1.912",
-    "result": "WRONG",
-    "scored_on": "2026-10-08",
-    "source": "LIVE"
-   },
-   {
-    "as_of": "2026-10-07",
-    "sleeve": "GLD",
-    "call": "HELD",
-    "dist_pct": "-7.56",
-    "confidence": "HIGH",
-    "close": "375.88",
-    "next_close": "378.62",
-    "next_ret_pct": "0.729",
-    "result": "RIGHT",
-    "scored_on": "2026-10-08",
-    "source": "LIVE"
-   },
-   {
-    "as_of": "2026-10-07",
-    "sleeve": "QQQ",
-    "call": "LONG",
-    "dist_pct": "10.01",
-    "confidence": "HIGH",
-    "close": "757.73",
-    "next_close": "747.58",
-    "next_ret_pct": "-1.34",
-    "result": "WRONG",
-    "scored_on": "2026-10-08",
-    "source": "LIVE"
-   },
    {
     "as_of": "2026-10-08",
     "sleeve": "BTC",
@@ -475,10 +436,10 @@
     "dist_pct": "15.0",
     "confidence": "HIGH",
     "close": "81737.1",
-    "next_close": "",
-    "next_ret_pct": "",
-    "result": "",
-    "scored_on": "",
+    "next_close": 83101.2,
+    "next_ret_pct": 1.669,
+    "result": "RIGHT",
+    "scored_on": "2026-10-13",
     "source": "LIVE"
    },
    {
@@ -488,10 +449,10 @@
     "dist_pct": "-5.61",
     "confidence": "HIGH",
     "close": "382.15",
-    "next_close": "",
-    "next_ret_pct": "",
-    "result": "",
-    "scored_on": "",
+    "next_close": 381.67,
+    "next_ret_pct": -0.126,
+    "result": "WRONG",
+    "scored_on": "2026-10-13",
     "source": "LIVE"
    },
    {
@@ -501,6 +462,45 @@
     "dist_pct": "7.86",
     "confidence": "HIGH",
     "close": "746.04",
+    "next_close": 743.57,
+    "next_ret_pct": -0.331,
+    "result": "WRONG",
+    "scored_on": "2026-10-13",
+    "source": "LIVE"
+   },
+   {
+    "as_of": "2026-10-13",
+    "sleeve": "BTC",
+    "call": "LONG",
+    "dist_pct": 16.87,
+    "confidence": "HIGH",
+    "close": 83101.2,
+    "next_close": "",
+    "next_ret_pct": "",
+    "result": "",
+    "scored_on": "",
+    "source": "LIVE"
+   },
+   {
+    "as_of": "2026-10-13",
+    "sleeve": "GLD",
+    "call": "HELD",
+    "dist_pct": -5.58,
+    "confidence": "HIGH",
+    "close": 381.67,
+    "next_close": "",
+    "next_ret_pct": "",
+    "result": "",
+    "scored_on": "",
+    "source": "LIVE"
+   },
+   {
+    "as_of": "2026-10-13",
+    "sleeve": "QQQ",
+    "call": "LONG",
+    "dist_pct": 7.36,
+    "confidence": "HIGH",
+    "close": 743.57,
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -509,19 +509,19 @@
    }
   ]
  },
- "live_equity": 101384.41,
+ "live_equity": 101422.55,
  "start_equity": 100000.0,
  "pnl": {
-  "since_start_usd": 1384.41,
-  "since_start_pct": 1.384,
-  "today_pct": 0.092,
-  "from_hwm_pct": -1.015,
-  "marked_at": "00:07 UTC"
+  "since_start_usd": 1422.55,
+  "since_start_pct": 1.423,
+  "today_pct": 0.045,
+  "from_hwm_pct": -0.978,
+  "marked_at": "05:47 UTC"
  },
  "health": {
-  "signal_age_days": 2,
+  "signal_age_days": 1,
   "signals_ok": true,
-  "bot_run": "2026-10-13T06:40+00:00",
+  "bot_run": "2026-10-14T04:42+00:00",
   "halted": false,
   "broker_match": false
  }
