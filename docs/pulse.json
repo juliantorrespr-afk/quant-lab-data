@@ -1,45 +1,45 @@
 {
- "generated": "2026-10-19 18:59 UTC",
+ "generated": "2026-10-19 22:52 UTC",
  "quotes": {
   "QQQ": {
-   "price": 719.12,
-   "chg": 1.3130459284305511,
-   "sma200": 675.4333000000003,
-   "rsi": 41.636860734888465,
+   "price": 718.36,
+   "chg": 1.2059735136658298,
+   "sma200": 675.4295000000003,
+   "rsi": 41.14715533209561,
    "high": 724.55,
    "low": 716.57,
    "src": "tradingview"
   },
   "SPY": {
-   "price": 767.44,
-   "chg": 0.5489682279724932,
-   "sma200": 725.4422000000002,
-   "rsi": 48.03803103198098,
+   "price": 766.48,
+   "chg": 0.42319030461841045,
+   "sma200": 725.4374000000003,
+   "rsi": 47.123408038780376,
    "high": 770.46,
    "low": 765.824,
    "src": "tradingview"
   },
   "GLD": {
-   "price": 379.95,
-   "chg": -0.5392528991387666,
-   "sma200": 414.8966499999998,
-   "rsi": 43.75314023897948,
+   "price": 379.69,
+   "chg": -0.6073139446611328,
+   "sma200": 414.8953499999997,
+   "rsi": 43.54182360053493,
    "high": 381.925,
    "low": 379.12,
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 81883.6,
-   "chg": -0.14,
+   "price": 81965.7,
+   "chg": -0.04,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 4168.3,
-   "chg": 1.47,
+   "price": 4156.9,
+   "chg": 1.19,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 29775.75,
+   "price": 29776.75,
    "chg": -1.35,
    "src": "yahoo"
   }
@@ -509,14 +509,14 @@
    }
   ]
  },
- "live_equity": 100416.19,
+ "live_equity": 100393.22,
  "start_equity": 100000.0,
  "pnl": {
-  "since_start_usd": 416.19,
-  "since_start_pct": 0.416,
-  "today_pct": 0.238,
-  "from_hwm_pct": -1.96,
-  "marked_at": "18:59 UTC"
+  "since_start_usd": 393.22,
+  "since_start_pct": 0.393,
+  "today_pct": 0.215,
+  "from_hwm_pct": -1.982,
+  "marked_at": "22:52 UTC"
  },
  "health": {
   "signal_age_days": 3,
