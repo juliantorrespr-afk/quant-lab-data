@@ -1,41 +1,41 @@
 {
- "as_of": "2026-10-16",
- "run": "2026-10-19T04:28+00:00",
+ "as_of": "2026-10-19",
+ "run": "2026-10-20T04:38+00:00",
  "QQQ": {
-  "close": 709.8,
-  "sma150": 695.08,
-  "dist_pct": 2.12,
+  "close": 718.36,
+  "sma150": 695.88,
+  "dist_pct": 3.23,
   "state": "LONG",
-  "vol20_pct": 17.9,
-  "size": 0.839,
+  "vol20_pct": 15.4,
+  "size": 0.976,
   "weight": 0.4,
-  "size_in_use": 1.0
+  "size_in_use": 0.9762217575381216
  },
  "BTC": {
-  "close": 81500.8,
-  "sma150": 71200.61,
-  "dist_pct": 14.47,
+  "close": 81843.7,
+  "sma150": 71298.89,
+  "dist_pct": 14.79,
   "state": "LONG",
-  "vol20_pct": 20.7,
+  "vol20_pct": 20.6,
   "size": 1.0,
   "weight": 0.2,
   "size_in_use": 1.0
  },
  "GLD": {
-  "close": 382.01,
-  "sma150": 402.47,
-  "dist_pct": -5.08,
+  "close": 379.69,
+  "sma150": 401.93,
+  "dist_pct": -5.53,
   "state": "HELD",
-  "vol20_pct": 20.6,
-  "size": 0.73,
+  "vol20_pct": 20.5,
+  "size": 0.731,
   "weight": 0.4,
-  "size_in_use": 0.7390940296861529
+  "size_in_use": 0.730551533608762
  },
  "book": {
-  "equity": 100178.17,
-  "marked_at_close": 100178.17,
+  "equity": 100377.15,
+  "marked_at_close": 100377.15,
   "hwm": 102423.75,
-  "dd_pct": -2.19,
+  "dd_pct": -2.0,
   "mode": "DRY"
  },
  "eval": {
@@ -43,8 +43,8 @@
   "failed": false,
   "passed": false,
   "day_pl_pct": 0.0,
-  "total_pl_pct": 0.18,
-  "trailing_pl_pct": -2.19,
+  "total_pl_pct": 0.38,
+  "trailing_pl_pct": -2.0,
   "daily_budget_used_pct": 0,
   "total_budget_used_pct": 0,
   "worst_daily_pct": -0.03,
