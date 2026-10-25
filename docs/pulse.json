@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-25 00:47 UTC",
+ "generated": "2026-10-25 05:39 UTC",
  "quotes": {
   "QQQ": {
    "price": 704.4,
@@ -29,24 +29,24 @@
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 80759.2,
-   "chg": -0.02,
+   "price": 80517.5,
+   "chg": -0.32,
    "src": "kraken"
   },
   "XAUUSD": {
    "price": 4007.9,
-   "chg": -3.66,
+   "chg": -3.25,
    "src": "yahoo"
   },
   "NQ1!": {
    "price": 29117.75,
-   "chg": -2.03,
+   "chg": -1.88,
    "src": "yahoo"
   }
  },
  "signals": {
   "as_of": "2026-10-23",
-  "run": "2026-10-24T04:24+00:00",
+  "run": "2026-10-25T04:28+00:00",
   "QQQ": {
    "close": 704.4,
    "sma150": 699.11,
@@ -128,7 +128,7 @@
    "GLD": 397.97
   },
   "eval": {
-   "day": "2026-10-24",
+   "day": "2026-10-25",
    "day_start": 99297.95746492011,
    "attempt": 1,
    "days_traded": 6,
@@ -334,10 +334,10 @@
   }
  ],
  "scorecard": {
-  "n_scored": 8454,
+  "n_scored": 8455,
   "hit_rate": 53.6,
-  "n_live": 93,
-  "live_hit_rate": 48.4,
+  "n_live": 94,
+  "live_hit_rate": 47.9,
   "by_sleeve": {
    "QQQ": 55.5,
    "BTC": 51.9,
@@ -348,8 +348,8 @@
    "MEDIUM": 51.3,
    "LOW": 54.1
   },
-  "last30": 50.0,
-  "open_calls": 3,
+  "last30": 48.9,
+  "open_calls": 2,
   "live_rows": [
    {
     "as_of": "2026-10-20",
@@ -475,10 +475,10 @@
     "dist_pct": "13.49",
     "confidence": "HIGH",
     "close": "81086.2",
-    "next_close": "",
-    "next_ret_pct": "",
-    "result": "",
-    "scored_on": "",
+    "next_close": 80771.9,
+    "next_ret_pct": -0.388,
+    "result": "WRONG",
+    "scored_on": "2026-10-24",
     "source": "LIVE"
    },
    {
@@ -509,19 +509,19 @@
    }
   ]
  },
- "live_equity": 99254.88,
+ "live_equity": 99223.05,
  "start_equity": 100000.0,
  "pnl": {
-  "since_start_usd": -745.12,
-  "since_start_pct": -0.745,
-  "today_pct": -0.043,
-  "from_hwm_pct": -3.094,
-  "marked_at": "00:47 UTC"
+  "since_start_usd": -776.95,
+  "since_start_pct": -0.777,
+  "today_pct": -0.075,
+  "from_hwm_pct": -3.125,
+  "marked_at": "05:39 UTC"
  },
  "health": {
   "signal_age_days": 2,
   "signals_ok": true,
-  "bot_run": "2026-10-24T04:24+00:00",
+  "bot_run": "2026-10-25T04:28+00:00",
   "halted": false,
   "broker_match": false
  }
