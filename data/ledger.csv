@@ -20,3 +20,4 @@ as_of,symbol,side,dollars,price,reason,mode,broker_id
 2026-10-05,GLD,buy,2133.4,379.55,rebalance,DRY,
 2026-10-26,QQQ,sell,3178.77,712.2,resize,DRY,
 2026-10-26,GLD,buy,3465.99,367.82,resize,DRY,
+2026-10-30,QQQ,sell,17410.26,690.49,drift-correction,DRY,
