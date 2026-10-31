@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-31 08:19 UTC",
+ "generated": "2026-10-31 15:00 UTC",
  "quotes": {
   "QQQ": {
    "price": 690.49,
@@ -29,8 +29,8 @@
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 77300.0,
-   "chg": 0.12,
+   "price": 77290.2,
+   "chg": 0.11,
    "src": "kraken"
   },
   "XAUUSD": {
@@ -466,8 +466,8 @@
     "dist_pct": "8.48",
     "confidence": "HIGH",
     "close": "77800.0",
-    "next_close": 77204.3,
-    "next_ret_pct": -0.766,
+    "next_close": "77204.3",
+    "next_ret_pct": "-0.766",
     "result": "WRONG",
     "scored_on": "2026-10-30",
     "source": "LIVE"
@@ -479,8 +479,8 @@
     "dist_pct": "-7.7",
     "confidence": "HIGH",
     "close": "368.57",
-    "next_close": 355.78,
-    "next_ret_pct": -3.47,
+    "next_close": "355.78",
+    "next_ret_pct": "-3.47",
     "result": "WRONG",
     "scored_on": "2026-10-30",
     "source": "LIVE"
@@ -492,8 +492,8 @@
     "dist_pct": "1.79",
     "confidence": "LOW",
     "close": "715.34",
-    "next_close": 690.49,
-    "next_ret_pct": -3.474,
+    "next_close": "690.49",
+    "next_ret_pct": "-3.474",
     "result": "WRONG",
     "scored_on": "2026-10-30",
     "source": "LIVE"
@@ -502,9 +502,9 @@
     "as_of": "2026-10-30",
     "sleeve": "BTC",
     "call": "LONG",
-    "dist_pct": 7.54,
+    "dist_pct": "7.54",
     "confidence": "HIGH",
-    "close": 77204.3,
+    "close": "77204.3",
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -515,9 +515,9 @@
     "as_of": "2026-10-30",
     "sleeve": "GLD",
     "call": "HELD",
-    "dist_pct": -10.81,
+    "dist_pct": "-10.81",
     "confidence": "HIGH",
-    "close": 355.78,
+    "close": "355.78",
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -528,9 +528,9 @@
     "as_of": "2026-10-30",
     "sleeve": "QQQ",
     "call": "FLAT",
-    "dist_pct": -1.86,
+    "dist_pct": "-1.86",
     "confidence": "LOW",
-    "close": 690.49,
+    "close": "690.49",
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -539,14 +539,14 @@
    }
   ]
  },
- "live_equity": 97889.92,
+ "live_equity": 97888.63,
  "start_equity": 100000.0,
  "pnl": {
-  "since_start_usd": -2110.08,
-  "since_start_pct": -2.11,
-  "today_pct": 0.013,
-  "from_hwm_pct": -4.427,
-  "marked_at": "08:19 UTC"
+  "since_start_usd": -2111.37,
+  "since_start_pct": -2.111,
+  "today_pct": 0.012,
+  "from_hwm_pct": -4.428,
+  "marked_at": "15:00 UTC"
  },
  "health": {
   "signal_age_days": 1,
