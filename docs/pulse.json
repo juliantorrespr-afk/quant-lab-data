@@ -1,46 +1,46 @@
 {
- "generated": "2026-11-06 11:47 UTC",
+ "generated": "2026-11-06 18:52 UTC",
  "quotes": {
   "QQQ": {
-   "price": 647.05,
-   "chg": -6.488908158103921,
-   "sma200": 680.7092500000003,
-   "rsi": 26.864112582375782,
-   "high": 683.65,
-   "low": 647.05,
+   "price": 658.401,
+   "chg": 1.7542693764005874,
+   "sma200": 680.8974550000004,
+   "rsi": 32.42934066346129,
+   "high": 664.52,
+   "low": 653.99,
    "src": "tradingview"
   },
   "SPY": {
-   "price": 733,
-   "chg": -4.409175675851899,
-   "sma200": 730.1510000000002,
-   "rsi": 33.50306961862374,
-   "high": 765.97,
-   "low": 732.71,
+   "price": 738.46,
+   "chg": 0.7448840381991865,
+   "sma200": 730.3984000000003,
+   "rsi": 37.20684632593576,
+   "high": 742.2104,
+   "low": 734.58,
    "src": "tradingview"
   },
   "GLD": {
-   "price": 375.49,
-   "chg": 0.8053907487449327,
-   "sma200": 411.63734999999974,
-   "rsi": 50.17295832784621,
-   "high": 378.97,
-   "low": 373.419981,
+   "price": 372.71,
+   "chg": -0.740365921862108,
+   "sma200": 411.2419499999997,
+   "rsi": 48.02696789615748,
+   "high": 372.84,
+   "low": 369.26,
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 76046.0,
-   "chg": 0.09,
+   "price": 75689.6,
+   "chg": -0.38,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 4080.3,
-   "chg": 2.79,
+   "price": 4078.9,
+   "chg": 2.75,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 27172.75,
-   "chg": -3.39,
+   "price": 27145.5,
+   "chg": -3.49,
    "src": "yahoo"
   }
  },
@@ -486,8 +486,8 @@
     "dist_pct": "11.25",
     "confidence": "HIGH",
     "close": "80440.8",
-    "next_close": 75979.9,
-    "next_ret_pct": -5.546,
+    "next_close": "75979.9",
+    "next_ret_pct": "-5.546",
     "result": "WRONG",
     "scored_on": "2026-11-05",
     "source": "LIVE"
@@ -499,8 +499,8 @@
     "dist_pct": "-6.33",
     "confidence": "HIGH",
     "close": "372.49",
-    "next_close": 375.49,
-    "next_ret_pct": 0.805,
+    "next_close": "375.49",
+    "next_ret_pct": "0.805",
     "result": "RIGHT",
     "scored_on": "2026-11-05",
     "source": "LIVE"
@@ -512,8 +512,8 @@
     "dist_pct": "-1.97",
     "confidence": "LOW",
     "close": "691.95",
-    "next_close": 647.05,
-    "next_ret_pct": -6.489,
+    "next_close": "647.05",
+    "next_ret_pct": "-6.489",
     "result": "RIGHT",
     "scored_on": "2026-11-05",
     "source": "LIVE"
@@ -522,9 +522,9 @@
     "as_of": "2026-11-05",
     "sleeve": "BTC",
     "call": "LONG",
-    "dist_pct": 4.96,
+    "dist_pct": "4.96",
     "confidence": "MEDIUM",
-    "close": 75979.9,
+    "close": "75979.9",
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -535,9 +535,9 @@
     "as_of": "2026-11-05",
     "sleeve": "GLD",
     "call": "HELD",
-    "dist_pct": -5.49,
+    "dist_pct": "-5.49",
     "confidence": "HIGH",
-    "close": 375.49,
+    "close": "375.49",
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -548,9 +548,9 @@
     "as_of": "2026-11-05",
     "sleeve": "QQQ",
     "call": "FLAT",
-    "dist_pct": -8.39,
+    "dist_pct": "-8.39",
     "confidence": "HIGH",
-    "close": 647.05,
+    "close": "647.05",
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -559,14 +559,14 @@
    }
   ]
  },
- "live_equity": 98594.98,
+ "live_equity": 98430.14,
  "start_equity": 100000.0,
  "pnl": {
-  "since_start_usd": -1405.02,
-  "since_start_pct": -1.405,
-  "today_pct": 0.009,
-  "from_hwm_pct": -3.738,
-  "marked_at": "11:47 UTC"
+  "since_start_usd": -1569.86,
+  "since_start_pct": -1.57,
+  "today_pct": -0.158,
+  "from_hwm_pct": -3.899,
+  "marked_at": "18:52 UTC"
  },
  "health": {
   "signal_age_days": 1,
