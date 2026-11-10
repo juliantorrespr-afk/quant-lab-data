@@ -1,46 +1,46 @@
 {
- "generated": "2026-11-09 07:38 UTC",
+ "generated": "2026-11-10 01:52 UTC",
  "quotes": {
   "QQQ": {
-   "price": 656.1,
-   "chg": 1.3986554362105044,
-   "sma200": 680.8859500000003,
-   "rsi": 31.37071008889781,
-   "high": 664.52,
-   "low": 653.99,
+   "price": 679.35,
+   "chg": 3.543667123914038,
+   "sma200": 681.1691000000001,
+   "rsi": 41.36661793700208,
+   "high": 682.48,
+   "low": 662.02,
    "src": "tradingview"
   },
   "SPY": {
-   "price": 735.29,
-   "chg": 0.31241473396998143,
-   "sma200": 730.3825500000004,
-   "rsi": 35.108397828600715,
-   "high": 742.2104,
-   "low": 734.58,
+   "price": 752.69,
+   "chg": 2.3664132519142234,
+   "sma200": 730.69985,
+   "rsi": 45.81269671649243,
+   "high": 755.42,
+   "low": 741.025,
    "src": "tradingview"
   },
   "GLD": {
-   "price": 372.52,
-   "chg": -0.7909664704785818,
-   "sma200": 411.2409999999997,
-   "rsi": 47.88698197985878,
-   "high": 373.76,
-   "low": 369.26,
+   "price": 379.53,
+   "chg": 1.8817781595619003,
+   "sma200": 410.84864999999996,
+   "rsi": 53.29582057439925,
+   "high": 380.18,
+   "low": 375.68,
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 74041.4,
-   "chg": -0.94,
+   "price": 75027.0,
+   "chg": -0.3,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 4108.2,
-   "chg": 0.86,
+   "price": 4141.6,
+   "chg": 1.68,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 26979.0,
-   "chg": -5.56,
+   "price": 28002.75,
+   "chg": -1.97,
    "src": "yahoo"
   }
  },
@@ -559,17 +559,17 @@
    }
   ]
  },
- "live_equity": 98190.31,
+ "live_equity": 98618.18,
  "start_equity": 100000.0,
  "pnl": {
-  "since_start_usd": -1809.69,
-  "since_start_pct": -1.81,
-  "today_pct": -0.243,
-  "from_hwm_pct": -4.133,
-  "marked_at": "07:38 UTC"
+  "since_start_usd": -1381.82,
+  "since_start_pct": -1.382,
+  "today_pct": 0.192,
+  "from_hwm_pct": -3.716,
+  "marked_at": "01:52 UTC"
  },
  "health": {
-  "signal_age_days": 3,
+  "signal_age_days": 4,
   "signals_ok": true,
   "bot_run": "2026-11-09T06:03+00:00",
   "halted": false,
