@@ -1,6 +1,6 @@
 {
  "as_of": "2026-11-13",
- "run": "2026-11-14T06:05+00:00",
+ "run": "2026-11-15T06:12+00:00",
  "QQQ": {
   "close": 679.89,
   "sma150": 709.28,
@@ -32,10 +32,10 @@
   "size_in_use": 0.5943318467088381
  },
  "book": {
-  "equity": 96842.51,
-  "marked_at_close": 96842.51,
+  "equity": 96817.54,
+  "marked_at_close": 96817.54,
   "hwm": 102423.75,
-  "dd_pct": -5.45,
+  "dd_pct": -5.47,
   "mode": "DRY"
  },
  "eval": {
@@ -43,12 +43,12 @@
   "failed": false,
   "passed": false,
   "day_pl_pct": 0.0,
-  "total_pl_pct": -3.16,
-  "trailing_pl_pct": -5.45,
+  "total_pl_pct": -3.18,
+  "trailing_pl_pct": -5.47,
   "daily_budget_used_pct": 0,
-  "total_budget_used_pct": 31.6,
+  "total_budget_used_pct": 31.8,
   "worst_daily_pct": -0.03,
-  "worst_total_pct": -3.16,
+  "worst_total_pct": -3.18,
   "days_traded": 11,
   "min_days": 4,
   "target_pct": 10.0,
