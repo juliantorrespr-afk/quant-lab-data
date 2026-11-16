@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-16 00:43 UTC",
+ "generated": "2026-11-16 07:38 UTC",
  "quotes": {
   "QQQ": {
    "price": 679.89,
@@ -29,24 +29,24 @@
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 64688.7,
-   "chg": -0.96,
+   "price": 64866.5,
+   "chg": -0.69,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 3890.1,
+   "price": 3861.3,
    "chg": -3.48,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 28167.0,
-   "chg": 1.19,
+   "price": 27765.0,
+   "chg": -2.49,
    "src": "yahoo"
   }
  },
  "signals": {
   "as_of": "2026-11-13",
-  "run": "2026-11-15T06:12+00:00",
+  "run": "2026-11-16T06:10+00:00",
   "QQQ": {
    "close": 679.89,
    "sma150": 709.28,
@@ -128,7 +128,7 @@
    "GLD": 397.97
   },
   "eval": {
-   "day": "2026-11-15",
+   "day": "2026-11-16",
    "day_start": 96817.53511320373,
    "attempt": 1,
    "days_traded": 11,
@@ -586,12 +586,12 @@
   "since_start_pct": -3.182,
   "today_pct": -0.0,
   "from_hwm_pct": -5.474,
-  "marked_at": "00:43 UTC"
+  "marked_at": "07:38 UTC"
  },
  "health": {
   "signal_age_days": 3,
   "signals_ok": true,
-  "bot_run": "2026-11-15T06:12+00:00",
+  "bot_run": "2026-11-16T06:10+00:00",
   "halted": false,
   "broker_match": false
  }
