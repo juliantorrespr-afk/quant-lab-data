@@ -12,21 +12,21 @@
   "GLD": 0.5491870610438556
  },
  "halted": false,
- "equity": 96731.89,
- "as_of": "2026-11-16",
+ "equity": 96716.6,
+ "as_of": "2026-11-17",
  "entry": {
   "QQQ": null,
   "BTC": null,
   "GLD": 397.97
  },
  "eval": {
-  "day": "2026-11-17",
-  "day_start": 96731.88987059859,
+  "day": "2026-11-18",
+  "day_start": 96716.59607727623,
   "attempt": 1,
   "days_traded": 11,
   "worst_daily": -0.00028561207388733134,
-  "worst_total": -0.032681101294014026,
-  "worst_trailing": -0.05557164707627493,
+  "worst_total": -0.03283403922723771,
+  "worst_trailing": -0.055720965900260544,
   "breaches": [],
   "failed": false,
   "passed": false,
