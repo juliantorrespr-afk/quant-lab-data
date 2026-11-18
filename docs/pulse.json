@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-18 02:05 UTC",
+ "generated": "2026-11-18 11:05 UTC",
  "quotes": {
   "QQQ": {
    "price": 656.95,
@@ -29,28 +29,28 @@
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 64291.8,
-   "chg": -0.9,
+   "price": 64218.3,
+   "chg": -1.02,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 3808.4,
-   "chg": -1.98,
+   "price": 3772.4,
+   "chg": -2.93,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 27190.5,
-   "chg": -4.21,
+   "price": 27394.75,
+   "chg": -2.28,
    "src": "yahoo"
   }
  },
  "signals": {
-  "as_of": "2026-11-16",
-  "run": "2026-11-17T07:44+00:00",
+  "as_of": "2026-11-17",
+  "run": "2026-11-18T07:10+00:00",
   "QQQ": {
-   "close": 661.75,
-   "sma150": 709.5,
-   "dist_pct": -6.73,
+   "close": 656.95,
+   "sma150": 709.64,
+   "dist_pct": -7.42,
    "state": "FLAT",
    "vol20_pct": 35.1,
    "size": 0.427,
@@ -58,19 +58,19 @@
    "size_in_use": 0.42709611818241466
   },
   "BTC": {
-   "close": 64810.6,
-   "sma150": 72925.29,
-   "dist_pct": -11.13,
+   "close": 64877.0,
+   "sma150": 72929.54,
+   "dist_pct": -11.04,
    "state": "FLAT",
-   "vol20_pct": 40.2,
-   "size": 0.996,
+   "vol20_pct": 39.9,
+   "size": 1.0,
    "weight": 0.2,
    "size_in_use": 0.9957504521694935
   },
   "GLD": {
-   "close": 352.93,
-   "sma150": 393.95,
-   "dist_pct": -10.41,
+   "close": 352.48,
+   "sma150": 393.37,
+   "dist_pct": -10.39,
    "state": "HELD",
    "vol20_pct": 27.3,
    "size": 0.549,
@@ -78,10 +78,10 @@
    "size_in_use": 0.5491870610438556
   },
   "book": {
-   "equity": 96731.89,
-   "marked_at_close": 96731.89,
+   "equity": 96716.6,
+   "marked_at_close": 96716.6,
    "hwm": 102423.75,
-   "dd_pct": -5.56,
+   "dd_pct": -5.57,
    "mode": "DRY"
   },
   "eval": {
@@ -89,12 +89,12 @@
    "failed": false,
    "passed": false,
    "day_pl_pct": 0.0,
-   "total_pl_pct": -3.27,
-   "trailing_pl_pct": -5.56,
+   "total_pl_pct": -3.28,
+   "trailing_pl_pct": -5.57,
    "daily_budget_used_pct": 0,
-   "total_budget_used_pct": 32.7,
+   "total_budget_used_pct": 32.8,
    "worst_daily_pct": -0.03,
-   "worst_total_pct": -3.27,
+   "worst_total_pct": -3.28,
    "days_traded": 11,
    "min_days": 4,
    "target_pct": 10.0,
@@ -120,21 +120,21 @@
    "GLD": 0.5491870610438556
   },
   "halted": false,
-  "equity": 96731.89,
-  "as_of": "2026-11-16",
+  "equity": 96716.6,
+  "as_of": "2026-11-17",
   "entry": {
    "QQQ": null,
    "BTC": null,
    "GLD": 397.97
   },
   "eval": {
-   "day": "2026-11-17",
-   "day_start": 96731.88987059859,
+   "day": "2026-11-18",
+   "day_start": 96716.59607727623,
    "attempt": 1,
    "days_traded": 11,
    "worst_daily": -0.00028561207388733134,
-   "worst_total": -0.032681101294014026,
-   "worst_trailing": -0.05557164707627493,
+   "worst_total": -0.03283403922723771,
+   "worst_trailing": -0.055720965900260544,
    "breaches": [],
    "failed": false,
    "passed": false,
@@ -404,10 +404,10 @@
   }
  ],
  "scorecard": {
-  "n_scored": 8499,
+  "n_scored": 8502,
   "hit_rate": 53.6,
-  "n_live": 138,
-  "live_hit_rate": 49.3,
+  "n_live": 141,
+  "live_hit_rate": 48.9,
   "by_sleeve": {
    "QQQ": 55.5,
    "BTC": 51.9,
@@ -418,48 +418,9 @@
    "MEDIUM": 51.2,
    "LOW": 54.3
   },
-  "last30": 44.4,
+  "last30": 43.3,
   "open_calls": 3,
   "live_rows": [
-   {
-    "as_of": "2026-11-10",
-    "sleeve": "BTC",
-    "call": "LONG",
-    "dist_pct": "1.24",
-    "confidence": "LOW",
-    "close": "73700.3",
-    "next_close": "73928.4",
-    "next_ret_pct": "0.309",
-    "result": "RIGHT",
-    "scored_on": "2026-11-11",
-    "source": "LIVE"
-   },
-   {
-    "as_of": "2026-11-10",
-    "sleeve": "GLD",
-    "call": "HELD",
-    "dist_pct": "-6.76",
-    "confidence": "HIGH",
-    "close": "369.36",
-    "next_close": "365.17",
-    "next_ret_pct": "-1.134",
-    "result": "WRONG",
-    "scored_on": "2026-11-11",
-    "source": "LIVE"
-   },
-   {
-    "as_of": "2026-11-10",
-    "sleeve": "QQQ",
-    "call": "FLAT",
-    "dist_pct": "-4.67",
-    "confidence": "MEDIUM",
-    "close": "674.76",
-    "next_close": "690.38",
-    "next_ret_pct": "2.315",
-    "result": "WRONG",
-    "scored_on": "2026-11-11",
-    "source": "LIVE"
-   },
    {
     "as_of": "2026-11-11",
     "sleeve": "BTC",
@@ -545,10 +506,10 @@
     "dist_pct": "-11.13",
     "confidence": "HIGH",
     "close": "64810.6",
-    "next_close": "",
-    "next_ret_pct": "",
-    "result": "",
-    "scored_on": "",
+    "next_close": 64877.0,
+    "next_ret_pct": 0.102,
+    "result": "WRONG",
+    "scored_on": "2026-11-17",
     "source": "LIVE"
    },
    {
@@ -558,10 +519,10 @@
     "dist_pct": "-10.41",
     "confidence": "HIGH",
     "close": "352.93",
-    "next_close": "",
-    "next_ret_pct": "",
-    "result": "",
-    "scored_on": "",
+    "next_close": 352.48,
+    "next_ret_pct": -0.128,
+    "result": "WRONG",
+    "scored_on": "2026-11-17",
     "source": "LIVE"
    },
    {
@@ -571,6 +532,45 @@
     "dist_pct": "-6.73",
     "confidence": "HIGH",
     "close": "661.75",
+    "next_close": 656.95,
+    "next_ret_pct": -0.725,
+    "result": "RIGHT",
+    "scored_on": "2026-11-17",
+    "source": "LIVE"
+   },
+   {
+    "as_of": "2026-11-17",
+    "sleeve": "BTC",
+    "call": "FLAT",
+    "dist_pct": -11.04,
+    "confidence": "HIGH",
+    "close": 64877.0,
+    "next_close": "",
+    "next_ret_pct": "",
+    "result": "",
+    "scored_on": "",
+    "source": "LIVE"
+   },
+   {
+    "as_of": "2026-11-17",
+    "sleeve": "GLD",
+    "call": "HELD",
+    "dist_pct": -10.39,
+    "confidence": "HIGH",
+    "close": 352.48,
+    "next_close": "",
+    "next_ret_pct": "",
+    "result": "",
+    "scored_on": "",
+    "source": "LIVE"
+   },
+   {
+    "as_of": "2026-11-17",
+    "sleeve": "QQQ",
+    "call": "FLAT",
+    "dist_pct": -7.42,
+    "confidence": "HIGH",
+    "close": 656.95,
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -584,14 +584,14 @@
  "pnl": {
   "since_start_usd": -3283.4,
   "since_start_pct": -3.283,
-  "today_pct": -0.016,
+  "today_pct": -0.0,
   "from_hwm_pct": -5.572,
-  "marked_at": "02:05 UTC"
+  "marked_at": "11:05 UTC"
  },
  "health": {
-  "signal_age_days": 2,
+  "signal_age_days": 1,
   "signals_ok": true,
-  "bot_run": "2026-11-17T07:44+00:00",
+  "bot_run": "2026-11-18T07:10+00:00",
   "halted": false,
   "broker_match": false
  }
