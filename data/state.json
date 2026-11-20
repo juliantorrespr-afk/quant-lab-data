@@ -1,10 +1,10 @@
 {
  "hwm": 102423.74614351604,
- "cash": 84737.13769891791,
+ "cash": 96122.9389410551,
  "pos": {
   "QQQ": 0.0,
   "BTC": 0.0,
-  "GLD": 33.9862073829957
+  "GLD": 0.0
  },
  "sizes": {
   "QQQ": 0.42709611818241466,
@@ -12,24 +12,24 @@
   "GLD": 0.5491870610438556
  },
  "halted": false,
- "equity": 96332.89,
- "as_of": "2026-11-18",
+ "equity": 96122.94,
+ "as_of": "2026-11-19",
  "entry": {
   "QQQ": null,
   "BTC": null,
-  "GLD": 397.97
+  "GLD": null
  },
  "eval": {
-  "day": "2026-11-19",
-  "day_start": 96332.89179592222,
+  "day": "2026-11-20",
+  "day_start": 96128.63468955041,
   "attempt": 1,
-  "days_traded": 11,
+  "days_traded": 12,
   "worst_daily": -0.00028561207388733134,
-  "worst_total": -0.03667108204077785,
-  "worst_trailing": -0.05946720928425453,
+  "worst_total": -0.038713653104495926,
+  "worst_trailing": -0.06146144513348417,
   "breaches": [],
   "failed": false,
   "passed": false,
-  "last_trade_day": "2026-11-14"
+  "last_trade_day": "2026-11-20"
  }
 }
