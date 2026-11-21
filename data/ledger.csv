@@ -26,3 +26,4 @@ as_of,symbol,side,dollars,price,reason,mode,broker_id
 2026-11-09,GLD,sell,2755.89,379.53,resize,DRY,
 2026-11-13,BTC,sell,9604.83,68235.9,drift-correction,DRY,
 2026-11-19,GLD,sell,11391.5,335.18,drift-correction,DRY,
+2026-11-20,GLD,buy,11613.68,322.87,drift-correction,DRY,
