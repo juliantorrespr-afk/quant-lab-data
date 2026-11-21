@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-21 15:58 UTC",
+ "generated": "2026-11-21 21:32 UTC",
  "quotes": {
   "QQQ": {
    "price": 608.45,
@@ -29,8 +29,8 @@
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 59769.1,
-   "chg": 1.64,
+   "price": 60261.6,
+   "chg": 2.47,
    "src": "kraken"
   },
   "XAUUSD": {
@@ -606,7 +606,7 @@
   "since_start_pct": -3.883,
   "today_pct": 0.0,
   "from_hwm_pct": -6.157,
-  "marked_at": "15:58 UTC"
+  "marked_at": "21:32 UTC"
  },
  "health": {
   "signal_age_days": 1,
