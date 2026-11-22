@@ -1,6 +1,6 @@
 {
  "as_of": "2026-11-20",
- "run": "2026-11-21T06:54+00:00",
+ "run": "2026-11-22T06:31+00:00",
  "QQQ": {
   "close": 608.45,
   "sma150": 709.5,
@@ -32,10 +32,10 @@
   "size_in_use": 0.5491870610438556
  },
  "book": {
-  "equity": 96122.94,
-  "marked_at_close": 96122.94,
+  "equity": 96117.13,
+  "marked_at_close": 96117.13,
   "hwm": 102423.75,
-  "dd_pct": -6.15,
+  "dd_pct": -6.16,
   "mode": "DRY"
  },
  "eval": {
@@ -44,7 +44,7 @@
   "passed": false,
   "day_pl_pct": 0.0,
   "total_pl_pct": -3.88,
-  "trailing_pl_pct": -6.15,
+  "trailing_pl_pct": -6.16,
   "daily_budget_used_pct": 0,
   "total_budget_used_pct": 38.8,
   "worst_daily_pct": -0.03,

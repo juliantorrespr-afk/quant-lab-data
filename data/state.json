@@ -20,13 +20,13 @@
   "GLD": 322.87
  },
  "eval": {
-  "day": "2026-11-21",
-  "day_start": 96122.9389410551,
+  "day": "2026-11-22",
+  "day_start": 96117.13209887815,
   "attempt": 1,
   "days_traded": 13,
   "worst_daily": -0.00028561207388733134,
-  "worst_total": -0.038770610589449084,
-  "worst_trailing": -0.06151705478173253,
+  "worst_total": -0.03882867901121845,
+  "worst_trailing": -0.06157374907769009,
   "breaches": [],
   "failed": false,
   "passed": false,
