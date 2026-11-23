@@ -1,52 +1,52 @@
 {
- "generated": "2026-11-23 05:42 UTC",
+ "generated": "2026-11-23 17:21 UTC",
  "quotes": {
   "QQQ": {
-   "price": 608.45,
-   "chg": -5.672516433089409,
-   "sma200": 683.0608500000001,
-   "rsi": 26.63191677190588,
-   "high": 643.28,
-   "low": 606.2293,
+   "price": 651.6475,
+   "chg": 7.099597337496916,
+   "sma200": 683.2708375000001,
+   "rsi": 42.361793272240014,
+   "high": 657.53,
+   "low": 641.9501,
    "src": "tradingview"
   },
   "SPY": {
-   "price": 689.81,
-   "chg": -3.64032575746994,
-   "sma200": 732.7553,
-   "rsi": 24.908225332986845,
-   "high": 718.29,
-   "low": 686.75,
+   "price": 723.0201,
+   "chg": 4.814383670865893,
+   "sma200": 732.9173005,
+   "rsi": 41.80143048611116,
+   "high": 727.98,
+   "low": 713.53,
    "src": "tradingview"
   },
   "GLD": {
-   "price": 322.87,
-   "chg": -3.6726534996121494,
-   "sma200": 405.82885000000005,
-   "rsi": 23.690794026701383,
-   "high": 328.6,
-   "low": 320.95,
+   "price": 335.6,
+   "chg": 3.9427633412828746,
+   "sma200": 405.22955,
+   "rsi": 34.90029984726925,
+   "high": 338,
+   "low": 335.02,
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 61510.8,
-   "chg": 0.56,
+   "price": 61835.0,
+   "chg": 1.09,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 3621.9,
-   "chg": -3.21,
+   "price": 3661.6,
+   "chg": -2.15,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 25889.0,
-   "chg": -4.77,
+   "price": 26835.25,
+   "chg": -1.29,
    "src": "yahoo"
   }
  },
  "signals": {
   "as_of": "2026-11-20",
-  "run": "2026-11-22T06:31+00:00",
+  "run": "2026-11-23T07:21+00:00",
   "QQQ": {
    "close": 608.45,
    "sma150": 709.5,
@@ -128,7 +128,7 @@
    "GLD": 322.87
   },
   "eval": {
-   "day": "2026-11-22",
+   "day": "2026-11-23",
    "day_start": 96117.13209887815,
    "attempt": 1,
    "days_traded": 13,
@@ -599,19 +599,19 @@
    }
   ]
  },
- "live_equity": 96117.13,
+ "live_equity": 96575.03,
  "start_equity": 100000.0,
  "pnl": {
-  "since_start_usd": -3882.87,
-  "since_start_pct": -3.883,
-  "today_pct": 0.0,
-  "from_hwm_pct": -6.157,
-  "marked_at": "05:42 UTC"
+  "since_start_usd": -3424.97,
+  "since_start_pct": -3.425,
+  "today_pct": 0.476,
+  "from_hwm_pct": -5.71,
+  "marked_at": "17:21 UTC"
  },
  "health": {
   "signal_age_days": 3,
   "signals_ok": true,
-  "bot_run": "2026-11-22T06:31+00:00",
+  "bot_run": "2026-11-23T07:21+00:00",
   "halted": false,
   "broker_match": false
  }
