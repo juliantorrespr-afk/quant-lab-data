@@ -1,46 +1,46 @@
 {
- "generated": "2026-11-27 11:44 UTC",
+ "generated": "2026-11-27 20:39 UTC",
  "quotes": {
   "QQQ": {
-   "price": 633.93,
-   "chg": -0.6535025858016099,
-   "sma200": 683.49895,
-   "rsi": 38.581143149628055,
-   "high": 634.89,
-   "low": 607.74,
+   "price": 650.99,
+   "chg": 2.6911488650166517,
+   "sma200": 683.68835,
+   "rsi": 44.012836533988114,
+   "high": 651.34,
+   "low": 636.72,
    "src": "tradingview"
   },
   "SPY": {
-   "price": 716.7,
-   "chg": -0.2893792259105606,
-   "sma200": 733.1607,
-   "rsi": 39.832981263603514,
-   "high": 718.43,
-   "low": 695.45,
+   "price": 728.32,
+   "chg": 1.6213199386075072,
+   "sma200": 733.3425,
+   "rsi": 45.04315437561886,
+   "high": 729.15,
+   "low": 719.61,
    "src": "tradingview"
   },
   "GLD": {
-   "price": 327.45,
-   "chg": 0.6145337225380243,
-   "sma200": 403.834,
-   "rsi": 31.711841318118147,
-   "high": 328.68,
-   "low": 313.96,
+   "price": 334.4,
+   "chg": 2.122461444495339,
+   "sma200": 403.16785,
+   "rsi": 37.453916145877,
+   "high": 334.44,
+   "low": 331.25,
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 61672.8,
-   "chg": 1.94,
+   "price": 59685.1,
+   "chg": -1.34,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 3705.2,
-   "chg": 5.4,
+   "price": 3668.5,
+   "chg": 0.47,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 26712.5,
-   "chg": 6.31,
+   "price": 26765.0,
+   "chg": -0.16,
    "src": "yahoo"
   }
  },
@@ -575,8 +575,8 @@
     "dist_pct": "-17.19",
     "confidence": "HIGH",
     "close": "60368.6",
-    "next_close": 60499.2,
-    "next_ret_pct": 0.216,
+    "next_close": "60499.2",
+    "next_ret_pct": "0.216",
     "result": "WRONG",
     "scored_on": "2026-11-26",
     "source": "LIVE"
@@ -609,14 +609,14 @@
    }
   ]
  },
- "live_equity": 96319.37,
+ "live_equity": 96521.14,
  "start_equity": 100000.0,
  "pnl": {
-  "since_start_usd": -3680.63,
-  "since_start_pct": -3.681,
-  "today_pct": 0.0,
-  "from_hwm_pct": -5.96,
-  "marked_at": "11:44 UTC"
+  "since_start_usd": -3478.86,
+  "since_start_pct": -3.479,
+  "today_pct": 0.209,
+  "from_hwm_pct": -5.763,
+  "marked_at": "20:39 UTC"
  },
  "health": {
   "signal_age_days": 2,
