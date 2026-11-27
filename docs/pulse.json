@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-27 02:43 UTC",
+ "generated": "2026-11-27 11:44 UTC",
  "quotes": {
   "QQQ": {
    "price": 633.93,
@@ -29,24 +29,24 @@
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 61440.1,
-   "chg": 1.56,
+   "price": 61672.8,
+   "chg": 1.94,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 3659.0,
-   "chg": 4.08,
+   "price": 3705.2,
+   "chg": 5.4,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 26640.5,
-   "chg": 6.03,
+   "price": 26712.5,
+   "chg": 6.31,
    "src": "yahoo"
   }
  },
  "signals": {
   "as_of": "2026-11-25",
-  "run": "2026-11-26T08:01+00:00",
+  "run": "2026-11-27T08:07+00:00",
   "QQQ": {
    "close": 633.93,
    "sma150": 709.33,
@@ -128,7 +128,7 @@
    "GLD": 322.87
   },
   "eval": {
-   "day": "2026-11-26",
+   "day": "2026-11-27",
    "day_start": 96319.37279144897,
    "attempt": 1,
    "days_traded": 14,
@@ -434,10 +434,10 @@
   }
  ],
  "scorecard": {
-  "n_scored": 8520,
+  "n_scored": 8521,
   "hit_rate": 53.6,
-  "n_live": 159,
-  "live_hit_rate": 50.3,
+  "n_live": 160,
+  "live_hit_rate": 50.0,
   "by_sleeve": {
    "QQQ": 55.5,
    "BTC": 51.9,
@@ -449,7 +449,7 @@
    "LOW": 54.3
   },
   "last30": 46.7,
-  "open_calls": 3,
+  "open_calls": 2,
   "live_rows": [
    {
     "as_of": "2026-11-20",
@@ -575,10 +575,10 @@
     "dist_pct": "-17.19",
     "confidence": "HIGH",
     "close": "60368.6",
-    "next_close": "",
-    "next_ret_pct": "",
-    "result": "",
-    "scored_on": "",
+    "next_close": 60499.2,
+    "next_ret_pct": 0.216,
+    "result": "WRONG",
+    "scored_on": "2026-11-26",
     "source": "LIVE"
    },
    {
@@ -616,12 +616,12 @@
   "since_start_pct": -3.681,
   "today_pct": 0.0,
   "from_hwm_pct": -5.96,
-  "marked_at": "02:43 UTC"
+  "marked_at": "11:44 UTC"
  },
  "health": {
   "signal_age_days": 2,
   "signals_ok": true,
-  "bot_run": "2026-11-26T08:01+00:00",
+  "bot_run": "2026-11-27T08:07+00:00",
   "halted": false,
   "broker_match": false
  }
