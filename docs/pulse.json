@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-26 19:58 UTC",
+ "generated": "2026-11-27 02:43 UTC",
  "quotes": {
   "QQQ": {
    "price": 633.93,
@@ -29,18 +29,18 @@
    "src": "tradingview"
   },
   "BTCUSD": {
-   "price": 60658.5,
-   "chg": 0.48,
+   "price": 61440.1,
+   "chg": 1.56,
    "src": "kraken"
   },
   "XAUUSD": {
-   "price": 3593.4,
-   "chg": 2.22,
+   "price": 3659.0,
+   "chg": 4.08,
    "src": "yahoo"
   },
   "NQ1!": {
-   "price": 26221.25,
-   "chg": 4.36,
+   "price": 26640.5,
+   "chg": 6.03,
    "src": "yahoo"
   }
  },
@@ -536,8 +536,8 @@
     "dist_pct": "-18.05",
     "confidence": "HIGH",
     "close": "59741.2",
-    "next_close": 60368.6,
-    "next_ret_pct": 1.05,
+    "next_close": "60368.6",
+    "next_ret_pct": "1.05",
     "result": "WRONG",
     "scored_on": "2026-11-25",
     "source": "LIVE"
@@ -549,8 +549,8 @@
     "dist_pct": "-16.51",
     "confidence": "HIGH",
     "close": "325.45",
-    "next_close": 327.45,
-    "next_ret_pct": 0.615,
+    "next_close": "327.45",
+    "next_ret_pct": "0.615",
     "result": "RIGHT",
     "scored_on": "2026-11-25",
     "source": "LIVE"
@@ -562,8 +562,8 @@
     "dist_pct": "-10.06",
     "confidence": "HIGH",
     "close": "638.1",
-    "next_close": 633.93,
-    "next_ret_pct": -0.654,
+    "next_close": "633.93",
+    "next_ret_pct": "-0.654",
     "result": "RIGHT",
     "scored_on": "2026-11-25",
     "source": "LIVE"
@@ -572,9 +572,9 @@
     "as_of": "2026-11-25",
     "sleeve": "BTC",
     "call": "FLAT",
-    "dist_pct": -17.19,
+    "dist_pct": "-17.19",
     "confidence": "HIGH",
-    "close": 60368.6,
+    "close": "60368.6",
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -585,9 +585,9 @@
     "as_of": "2026-11-25",
     "sleeve": "GLD",
     "call": "HELD",
-    "dist_pct": -15.85,
+    "dist_pct": "-15.85",
     "confidence": "HIGH",
-    "close": 327.45,
+    "close": "327.45",
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -598,9 +598,9 @@
     "as_of": "2026-11-25",
     "sleeve": "QQQ",
     "call": "FLAT",
-    "dist_pct": -10.63,
+    "dist_pct": "-10.63",
     "confidence": "HIGH",
-    "close": 633.93,
+    "close": "633.93",
     "next_close": "",
     "next_ret_pct": "",
     "result": "",
@@ -616,10 +616,10 @@
   "since_start_pct": -3.681,
   "today_pct": 0.0,
   "from_hwm_pct": -5.96,
-  "marked_at": "19:58 UTC"
+  "marked_at": "02:43 UTC"
  },
  "health": {
-  "signal_age_days": 1,
+  "signal_age_days": 2,
   "signals_ok": true,
   "bot_run": "2026-11-26T08:01+00:00",
   "halted": false,
